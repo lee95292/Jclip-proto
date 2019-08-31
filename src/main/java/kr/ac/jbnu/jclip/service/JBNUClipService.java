@@ -1,6 +1,7 @@
 package kr.ac.jbnu.jclip.service;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.jsoup.Jsoup;
@@ -17,7 +18,7 @@ public class JBNUClipService {
 	private ArticleRepository articleRepository;
 	
 	public void updateArticle() {
-		
+		//articleRepository.saveAll(getValidArticleList());
 	}
 	
 	public List<Element> getArticleList(Integer pno){
@@ -33,21 +34,34 @@ public class JBNUClipService {
 		
 	}
 	
-	public boolean getValidArticleList() {
-		int topNumber=articleRepository.findTopByArticleNumber().getArticleNumber();
+	//코드 이렇게 짜면 안된다.... 리얼서비스 짤때는 갈아엎자.
+	public List<Element> getValidArticleList() {
+		List<Element> validArticleList = new ArrayList<Element>();
+		int topNumber=articleRepository.findTopByOrderByArticleNumberDesc().getArticleNumber();
 		for(int pno=1;pno<=3;pno++) {
 			List<Element> articleList = getArticleList(pno);
-			articleList.get(articleList.size());
-		}
-		int min = 0;
-		for(Element e : articleList) {
-			if(e.getElementsByClass(".mnom")==null){
-				continue;
+			if(topNumber>getArticleNumber(articleList.get(articleList.size()))) {
+				for(Element e : articleList) {
+					if(getArticleNumber(e)>topNumber) {
+						validArticleList.add(e);
+					}else {
+						break;
+					}
+				}
+			}else {
+				validArticleList.addAll(articleList);
 			}
-			
-			Integer.parseInt(e.getElementsByClass(".mnom").text());
+		}
+		return validArticleList;
+	}
+	
+	public Integer getArticleNumber(Element e) {
+		Element row = e.getElementsByClass("mnom").get(0);
+		if(row==null) {
+			return -1;
 		}
 		
+		return Integer.parseInt(row.text());
 	}
-
 }
+

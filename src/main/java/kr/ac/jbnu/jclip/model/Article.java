@@ -18,14 +18,14 @@ import lombok.Setter;
 public class Article extends BaseEntity{
 	public static final int UNDER_LIMIT=40000;
 	@Column(name="article_number")
-	private long articleNumber;
+	private int articleNumber;
 	@CreationTimestamp
 	private LocalDate creationTime;
 	
 	
-	@Column(name="article-name")
+	@Column(name="article_name")
 	private String articleName;
-	@Column(name="article-content")
+	@Column(name="article_content")
 	private String articleContent;
 	public int getArticleNumber() {
 		// TODO Auto-generated method stub

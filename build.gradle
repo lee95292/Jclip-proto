@@ -23,6 +23,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-mail'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	compile group: 'org.jsoup', name: 'jsoup', version: '1.11.3'
+	testCompile group: 'com.h2database', name: 'h2', version: '1.3.148'
 	
 	compileOnly 'org.projectlombok:lombok'
 	runtimeOnly 'mysql:mysql-connector-java'
