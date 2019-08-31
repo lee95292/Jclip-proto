@@ -27,9 +27,5 @@ public class Article extends BaseEntity{
 	private String articleName;
 	@Column(name="article_content")
 	private String articleContent;
-	public int getArticleNumber() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 	
 }

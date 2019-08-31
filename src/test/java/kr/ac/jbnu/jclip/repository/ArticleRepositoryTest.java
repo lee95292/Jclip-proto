@@ -25,6 +25,8 @@ public class ArticleRepositoryTest {
 		a.setArticleName("asdas");
 		a.setArticleContent("asdasd");
 		articleRepository.save(a);
+		articleRepository.save(a);
+		articleRepository.save(a);
 		
 		Article article = articleRepository.findTopByOrderByArticleNumberDesc();
 	
