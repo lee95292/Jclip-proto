@@ -13,14 +13,14 @@ import kr.ac.jbnu.jclip.service.JBNUClipService;
 @Controller
 public class TestController {
 
-//	@Autowired
-//	private JBNUClipService jbnuClipService;
-//	
-//	@GetMapping("/test")
-//	@ResponseBody
-//	public List<Element> test() {
-//		List<Element> list = jbnuClipService.getValidArticleList();
-//		
-//		return list;
-//	}
+	@Autowired
+	private JBNUClipService jbnuClipService;
+	
+	@GetMapping("/test")
+	@ResponseBody
+	public List<Element> test() {
+		List<Element> list = jbnuClipService.getValidArticleList();
+		
+		return list;
+	}
 }

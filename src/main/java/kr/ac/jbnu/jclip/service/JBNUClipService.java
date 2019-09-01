@@ -16,8 +16,12 @@ import kr.ac.jbnu.jclip.repository.ArticleRepository;
 @Service
 @EnableJpaRepositories
 public class JBNUClipService {
-	@Autowired	
+	
 	private ArticleRepository articleRepository;
+	
+	public JBNUClipService(ArticleRepository articleRepository) {
+		this.articleRepository = articleRepository;
+	}
 	
 	public void updateArticle() {
 		//articleRepository.saveAll(getValidArticleList());
@@ -42,7 +46,7 @@ public class JBNUClipService {
 		int topNumber=articleRepository.findTopByOrderByArticleNumberDesc().getArticleNumber();
 		for(int pno=1;pno<=3;pno++) {
 			List<Element> articleList = getArticleList(pno);
-			if(topNumber>getArticleNumber(articleList.get(articleList.size()))) {
+			if(topNumber>getArticleNumber(articleList.get(articleList.size()-1))) {
 				for(Element e : articleList) {
 					if(getArticleNumber(e)>topNumber) {
 						validArticleList.add(e);

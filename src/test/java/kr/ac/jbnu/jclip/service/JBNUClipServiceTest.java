@@ -6,19 +6,31 @@ import org.jsoup.nodes.Element;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import kr.ac.jbnu.jclip.model.Article;
+import kr.ac.jbnu.jclip.repository.ArticleRepository;
 @RunWith( SpringJUnit4ClassRunner.class )
-//@DataJpaTest
-@WebMvcTest
+@SpringBootTest
 public class JBNUClipServiceTest {
 	private JBNUClipService clipService;
+
+	@Autowired
+	private ArticleRepository articleRepository;
 	
 	@Before
 	public void setup() {
-		clipService = new JBNUClipService();
+		clipService = new JBNUClipService(articleRepository);
+		Article e = new Article();
+		e.setArticleContent("asd");
+		e.setArticleName("asd");
+		e.setId(1);
+		e.setArticleNumber(40992);
+		articleRepository.save(e);
 	}
 	@Test
 	public void test() {
@@ -28,6 +40,5 @@ public class JBNUClipServiceTest {
 		for(Element e: articleList) {
 			System.out.println("e:"+e.text());
 		}
-		System.out.println("asdasdasdtest");
 	}
 }
