@@ -6,7 +6,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import kr.ac.jbnu.jclip.model.Article;
@@ -25,12 +24,14 @@ public class ArticleRepositoryTest {
 		a.setArticleName("asdas");
 		a.setArticleContent("asdasd");
 		articleRepository.save(a);
+		a.setArticleNumber(13);
 		articleRepository.save(a);
+		a.setArticleNumber(14);
 		articleRepository.save(a);
 		
 		Article article = articleRepository.findTopByOrderByArticleNumberDesc();
-	
-		assertEquals(11, article.getArticleNumber());
+		System.out.println("asdads");
+		assertEquals(14, article.getArticleNumber());
 	}
 
 }

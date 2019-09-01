@@ -8,11 +8,13 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.stereotype.Service;
 
 import kr.ac.jbnu.jclip.repository.ArticleRepository;
 
 @Service
+@EnableJpaRepositories
 public class JBNUClipService {
 	@Autowired	
 	private ArticleRepository articleRepository;

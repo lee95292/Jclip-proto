@@ -13,7 +13,7 @@ import lombok.Setter;
 
 @Setter
 @Getter
-@Table
+@Table(name="article")
 @Entity
 public class Article extends BaseEntity{
 	public static final int UNDER_LIMIT=40000;
