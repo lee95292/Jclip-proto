@@ -7,9 +7,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import kr.ac.jbnu.jclip.model.Article;
@@ -34,7 +32,7 @@ public class JBNUClipServiceTest {
 	}
 	@Test
 	public void test() {
-		List<Element> articleList= clipService.getValidArticleList();
+		List<Element> articleList= clipService.getValidArticleEntitiyList();
 		System.out.println(articleList.toString());
 		
 		for(Element e: articleList) {

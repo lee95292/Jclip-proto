@@ -7,5 +7,5 @@ import kr.ac.jbnu.jclip.model.Article;
 
 @Repository
 public interface ArticleRepository extends JpaRepository<Article, Integer> {
-	Article findTopByOrderByArticleNumberDesc();
+	Article findTopByhostNameOrderByArticleNumberDesc(String hostName);
 }

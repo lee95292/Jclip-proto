@@ -1,73 +1,38 @@
 package kr.ac.jbnu.jclip.service;
 
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.stereotype.Service;
 
+import kr.ac.jbnu.jclip.crawl.JBNUMainCrawlService;
+import kr.ac.jbnu.jclip.model.Article;
 import kr.ac.jbnu.jclip.repository.ArticleRepository;
 
 @Service
-@EnableJpaRepositories
+//@EnableJpaRepositories
 public class JBNUClipService {
 	
 	private ArticleRepository articleRepository;
+	private JBNUMainCrawlService jbnu_mainCrawl;
+	private int underBoundArticleNumber;
 	
-	public JBNUClipService(ArticleRepository articleRepository) {
+	public JBNUClipService(ArticleRepository articleRepository, JBNUMainCrawlService jbnuCrawl) {
 		this.articleRepository = articleRepository;
-	}
-	
-	public void updateArticle() {
-		//articleRepository.saveAll(getValidArticleList());
-	}
-	
-	public List<Element> getArticleList(Integer pno){
-		List<Element> elList=null;
-		try {
-			Document totalDocument= Jsoup.connect("https://www.jbnu.ac.kr/kor/?menuID=139&pno="+pno).get();
-			elList=totalDocument.select("table.ta_bo>tbody>tr");
-			
-		}catch (IOException e) {
-			e.printStackTrace();
-		}
-		return elList;
+		this.jbnu_mainCrawl=jbnuCrawl;
 		
+		this.underBoundArticleNumber=40000;
 	}
 	
-	//코드 이렇게 짜면 안된다.... 리얼서비스 짤때는 갈아엎자.
-	public List<Element> getValidArticleList() {
-		List<Element> validArticleList = new ArrayList<Element>();
-		int topNumber=articleRepository.findTopByOrderByArticleNumberDesc().getArticleNumber();
-		for(int pno=1;pno<=3;pno++) {
-			List<Element> articleList = getArticleList(pno);
-			if(topNumber>getArticleNumber(articleList.get(articleList.size()-1))) {
-				for(Element e : articleList) {
-					if(getArticleNumber(e)>topNumber) {
-						validArticleList.add(e);
-					}else {
-						break;
-					}
-				}
-			}else {
-				validArticleList.addAll(articleList);
-			}
-		}
-		return validArticleList;
-	}
+	//TODO - host name에 따라 크롤링할 서비스 찾기!!!@!@
+//	public List<Article> getVailidArticleList(String hostName){
+//		jbnu_mainCrawl.getArticle()
+//	}
 	
-	public Integer getArticleNumber(Element e) {
-		Element row = e.getElementsByClass("mnom").get(0);
-		if(row==null) {
-			return -1;
-		}
+	//hostname top article number return
+	int getTopArticleNumber(String hostName) {
+		Article topArticle = articleRepository.findTopByhostNameOrderByArticleNumberDesc(hostName);
 		
-		return Integer.parseInt(row.text());
+		return topArticle.getArticleNumber();
 	}
 }
 
