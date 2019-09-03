@@ -34,7 +34,7 @@ public class Article extends BaseEntity{
 	@Override
 	public String toString() {
 		
-		return "articleNumber:["+ articleNumber +"]creationTime[" + creationTime +"]hostName["+hostName +"]articleName["+ articleName +"]articleContent["+articleContent+"]";
+		return "articleNumber:["+ articleNumber +"] creationTime[" + creationTime +"] hostName["+hostName +"] articleName["+ articleName +"] articleContent["+articleContent+"]";
 	}
 	
 }

@@ -29,7 +29,7 @@ public class ArticleRepositoryTest {
 		a.setArticleNumber(14);
 		articleRepository.save(a);
 		
-		Article article = articleRepository.findTopByOrderByArticleNumberDesc();
+		Article article = articleRepository.findTopByhostNameOrderByArticleNumberDesc("jbnu_main");
 		System.out.println("asdads");
 		assertEquals(14, article.getArticleNumber());
 	}

@@ -11,7 +11,7 @@ import kr.ac.jbnu.jclip.model.Article;
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest
 public class JBNUMainCrawlServiceTest {
-
+	
 	@Autowired
 	JBNUMainCrawlService crawl;
 	
