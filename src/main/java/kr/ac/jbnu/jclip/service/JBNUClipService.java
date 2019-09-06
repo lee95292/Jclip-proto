@@ -11,7 +11,6 @@ import kr.ac.jbnu.jclip.model.Article;
 import kr.ac.jbnu.jclip.repository.ArticleRepository;
 
 @Service
-//@EnableJpaRepositories
 public class JBNUClipService {
 	
 	private ArticleRepository articleRepository;

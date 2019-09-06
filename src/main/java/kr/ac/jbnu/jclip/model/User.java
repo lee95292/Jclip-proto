@@ -1,7 +1,10 @@
 package kr.ac.jbnu.jclip.model;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import lombok.Getter;
@@ -18,5 +21,8 @@ public class User extends BaseEntity{
 	private String userEmail;
 	@Column(name="user_password")
 	private String userPassword;
+	
+	@ManyToMany
+	private List<Keyword> keywords;
 }
  

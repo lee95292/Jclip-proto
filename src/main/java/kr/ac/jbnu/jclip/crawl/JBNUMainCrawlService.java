@@ -24,6 +24,8 @@ public class JBNUMainCrawlService implements CrawlService{
 		}catch (IOException e) {
 			e.printStackTrace();
 		}
+		
+		// 삭제된 게시글
 		if(articleElement==null) {
 			Article nullArticle = new Article();
 			nullArticle.setArticleContent("##");
