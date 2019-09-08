@@ -32,8 +32,7 @@ public class KeywordRepositoryTest {
 	}
 	
 	@Test
-	public void test() {
-		
+	public void test() {		
 		Optional<Keyword> key = keywordRepository.findByHostNameAndWord("jbnu_main", "keyword3");
 		System.out.println(key.get().toString());
 	}
