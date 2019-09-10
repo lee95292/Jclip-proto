@@ -2,6 +2,7 @@ package kr.ac.jbnu.jclip.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,21 +24,17 @@ public class UserService {
 		userRepository.save(user);
 	}
 	
-	public boolean addKeyword(User user, String word) {
-		List<Keyword> keyList = null;
-		Keyword keyWord = new Keyword();
+	public void addKeyword(User user, Keyword keyword) {
+		Keyword validKeyword= getValidKeyword(keyword);
 		
-		keyWord.set
+		validKeyword.addUser(user);	
 		
-		if(user.getKeywords() == null) {
-			keyList = new ArrayList<Keyword>();
-			
-		}
-		user.setKeywords();
+		keywordRepository.save(validKeyword);
 	}
 	
-	public boolean isValidAddition(String word, String hostName) {
-		keywordRepository.fin
+	public Keyword getValidKeyword(Keyword keyword) {
+		Optional<Keyword> optionKeyword = keywordRepository.findByHostNameAndWord(keyword.getHostName(), keyword.getWord());
 		
+		return optionKeyword.orElse(keyword);
 	}
 }
