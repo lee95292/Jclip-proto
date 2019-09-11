@@ -29,9 +29,10 @@ public class Article{
 	
 	@CreationTimestamp
 	private LocalDate creationTime;
-	//jbnu_main,cse,carrer ..etc
+	//jbnu_main,cse, carrer ..etc
 	@Column(name="host_name")
 	private String hostName;
+	
 	
 	@Column(name="article_name")
 	private String articleName;
@@ -39,6 +40,9 @@ public class Article{
 	@Column(name="article_content")
 	private String articleContent;
 
+	@Column(name = "article_href")
+	private String articleHyperlink;
+	
 	@Override
 	public String toString() {
 		

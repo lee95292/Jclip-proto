@@ -1,7 +1,5 @@
 package kr.ac.jbnu.jclip.service;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,9 +22,12 @@ public class UserService {
 		userRepository.save(user);
 	}
 	
+	/*
+	 * @Args keyword - hostname, word가 설정된 키워드
+	 * 
+	 * */
 	public void addKeyword(User user, Keyword keyword) {
-		Keyword validKeyword= getValidKeyword(keyword);
-		
+		Keyword validKeyword= getValidKeyword(keyword);		
 		validKeyword.addUser(user);	
 		
 		keywordRepository.save(validKeyword);

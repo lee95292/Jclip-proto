@@ -33,6 +33,7 @@ public class User{
 	
 	@Column(name="user_password")
 	private String userPassword;
+	
 
 	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "users")
 	private List<Keyword> keywords;

@@ -18,8 +18,9 @@ public class JBNUMainCrawlService implements CrawlService{
 	@Override
 	public Article getArticle(int articleNumber) {
 		Element articleElement =null;
+		String articleURL = boardURL+articleNumber;
 		try {
-			Document totalDocument= Jsoup.connect(boardURL+articleNumber).get();
+			Document totalDocument= Jsoup.connect(articleURL).get();
 			articleElement =totalDocument.getElementById("print_area");
 		}catch (IOException e) {
 			e.printStackTrace();
@@ -32,15 +33,20 @@ public class JBNUMainCrawlService implements CrawlService{
 			return nullArticle;
 		}
 		Article article = getArticleByElement(articleElement);
+		article.setArticleHyperlink(articleURL);
 		return article;
 	}	
 	
+	
+	/*
+	 * 	@Args - element : 아티클 전체에 해당하는 HTML 
+	 * */
 	@Override
-	public Article getArticleByElement(Element row) {
+	public Article getArticleByElement(Element element) {
 		Article article = new Article();
-		String articleName = row.getElementsByClass("subject").last().text();
-		String articleContent = row.getElementsByClass("smartOutput").get(0).text();
-		
+		String articleName = element.getElementsByClass("subject").last().text();
+		String articleContent = element.getElementsByClass("smartOutput").get(0).text();
+
 		article.setArticleName(articleName);
 		article.setHostName(hostName);
 		article.setArticleContent(articleContent);
