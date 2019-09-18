@@ -8,5 +8,4 @@ public interface CrawlService {
 	public Article getArticleByElement(Element row);
 
 	public Article getArticle(int articleNumber);
-	
 }

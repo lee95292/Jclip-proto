@@ -10,18 +10,22 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @Table(name="keyword")
 @Getter
 @Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Keyword{
 	
 	@Id
@@ -35,9 +39,9 @@ public class Keyword{
 	@Column(name="host_name")
 	private String hostName;
 	
-	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinTable(name="tbl_user_keyword", joinColumns = @JoinColumn(name="KEYWORD_ID")
-										,inverseJoinColumns = @JoinColumn(name="USER_ID"))
+	//TODO cascade 위험성 체크하고 refactor 하기. 성능저하 우려
+	@Builder.Default
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "keywords")	
 	private List<User> users= new ArrayList<User>();
 	
 	@Override
