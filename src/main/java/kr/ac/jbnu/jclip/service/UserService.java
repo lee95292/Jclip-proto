@@ -38,4 +38,9 @@ public class UserService {
 		
 		return optionKeyword.orElse(keyword);
 	}
+
+	public Optional<User> LoginByEmail(String id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
