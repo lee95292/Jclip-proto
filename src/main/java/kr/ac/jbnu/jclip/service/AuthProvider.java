@@ -24,7 +24,7 @@ public class AuthProvider implements AuthenticationProvider{
 	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
 		
 		String id = authentication.getName();
-		Optional<User> user = userService.LoginByEmail(id);
+		Optional<User> user = userService.getUserByUserEmail(id);
 		
 		boolean passwordMatching=false;
 		

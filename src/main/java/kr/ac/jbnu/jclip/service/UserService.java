@@ -2,6 +2,8 @@ package kr.ac.jbnu.jclip.service;
 
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +20,8 @@ public class UserService {
 	@Autowired
 	KeywordRepository keywordRepository;
 	
+	@Autowired
+	
 	public void joinUser(User user) {
 		userRepository.save(user);
 	}
@@ -26,6 +30,7 @@ public class UserService {
 	 * @Args keyword - hostname, word가 설정된 키워드
 	 * 
 	 * */
+	@Transactional
 	public void addKeyword(User user, Keyword keyword) {
 		Keyword validKeyword= getValidKeyword(keyword);		
 		validKeyword.addUser(user);	
@@ -33,14 +38,17 @@ public class UserService {
 		keywordRepository.save(validKeyword);
 	}
 	
+	@Transactional
 	public Keyword getValidKeyword(Keyword keyword) {
 		Optional<Keyword> optionKeyword = keywordRepository.findByHostNameAndWord(keyword.getHostName(), keyword.getWord());
 		
 		return optionKeyword.orElse(keyword);
 	}
 
-	public Optional<User> LoginByEmail(String id) {
-		// TODO Auto-generated method stub
-		return null;
+	@Transactional
+	public Optional<User> getUserByUserEmail(String userEmail) {
+		return userRepository.findUserByUserEmail(userEmail);
 	}
+	
+	
 }

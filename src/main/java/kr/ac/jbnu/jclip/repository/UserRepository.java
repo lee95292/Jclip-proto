@@ -1,5 +1,7 @@
 package kr.ac.jbnu.jclip.repository;
 
+import java.util.Optional;
+
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -7,5 +9,7 @@ import kr.ac.jbnu.jclip.model.User;
 
 @Repository
 public interface UserRepository extends CrudRepository<User, Integer>{
+
+	Optional<User> findUserByUserEmail(String userEmail);
 
 }
