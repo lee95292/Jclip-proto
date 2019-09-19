@@ -2,18 +2,24 @@ package kr.ac.jbnu.jclip.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.config.annotation.authentication.configuration.EnableGlobalAuthentication;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.web.util.matcher.RequestMatcher;
 import org.springframework.util.AntPathMatcher;
 
-//@Log
-//@Configuration
-//@EnableWebSecurity
-//@EnableGlobalAuthentication
-@ComponentScan("kr.ac.jbnu.jclip")
+/*
+ * Spring Security ÂüÁ¶ 
+ * @Authow wedul ´ÔÀÇ
+ * https://github.com/weduls/wedulpos_boot
+ * */
+
+@EnableWebSecurity
+@EnableGlobalAuthentication
 public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	
 	@Autowired

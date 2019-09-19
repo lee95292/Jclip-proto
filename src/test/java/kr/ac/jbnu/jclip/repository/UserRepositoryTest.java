@@ -12,7 +12,6 @@ import kr.ac.jbnu.jclip.model.User;
 
 @SpringBootTest
 @RunWith(SpringJUnit4ClassRunner.class)
-@Commit
 public class UserRepositoryTest {
 
 	@Autowired
