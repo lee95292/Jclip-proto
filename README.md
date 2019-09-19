@@ -12,6 +12,8 @@ Jclip서비스 개인용 프로토타입
 * User별로 Clip한 Article 제공, 신규 Article 제공
 * 로그서비스 
 * 클립 로그 구현 통해 Popular Notice 제공
+* spring admin
+* spring restdocs
 
 
 ### 프론트 및 배포
@@ -19,3 +21,8 @@ Jclip서비스 개인용 프로토타입
 * 프론트 - ~~react 나 vue 둘 중하나 정하기~~ React.js, React Native 훑어보기. , React 라이브러리 spring 연동 테스트
 * jcloud / AWS 배포수단 고민, Jcloud 포워딩 및 배포테스트
 * jclip.jbnu.ac.kr 도메인 신청하기
+
+
+## 테스트
+
+* Strength Test - ngrinder
