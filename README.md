@@ -6,14 +6,17 @@ Jclip서비스 개인용 프로토타입
 
 ### 서버 개발
 
-* ~~Article - User 관계 작성~~(sep.19 2019)  알림된 공지사항 중 클립 기능 구현
-* 알림되지 않은 공지사항에 대해서도 클립기능 구현
-* 전체 공지사항 보여주기
-* User별로 Clip한 Article 제공, 신규 Article 제공
+* ~~Article - Keyword - User 관계 작성~~(sep.19 2019)  알림된 공지사항 중 클립 기능 구현
 * 로그서비스 
-* 클립 로그 구현 통해 Popular Notice 제공
 * spring admin
 * spring restdocs
+
+(기능 구현)
+* User별로 Clip한 Article 제공, 신규 Article 제공
+* 클립 로그 구현 통해 Popular Notice 제공
+* 알림되지 않은 공지사항에 대해서도 클립기능 구현
+* Custom Clip
+* 전체 공지사항 보여주기
 
 
 ### 프론트 및 배포
