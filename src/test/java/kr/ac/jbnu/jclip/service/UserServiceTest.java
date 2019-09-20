@@ -1,5 +1,7 @@
 package kr.ac.jbnu.jclip.service;
 
+import javax.transaction.Transactional;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,9 +19,10 @@ public class UserServiceTest {
 	UserService userService;
 	
 	@Test
+	@Transactional
 	public void addKeywordTest() {
 		User user = new User();
-//		userService.joinUser(user);
+		userService.joinUser(user);
 
 		
 		Keyword key = new Keyword();

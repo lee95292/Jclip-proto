@@ -2,6 +2,8 @@ package kr.ac.jbnu.jclip.repository;
 
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -22,16 +24,19 @@ public class KeywordRepositoryTest {
 	@Before
 	public void setup() {
 		Keyword keyword = null;
+		User user = new User();
 		for(int i=0;i<10;i++) {
 			keyword = new Keyword();
 			keyword.setHostName("jbnu_main");
 			keyword.setWord("key"+Integer.toString(i));
-			keyword.addUser(new User());
+			
+			user.addKeyword(keyword);
 			keywordRepository.save(keyword);
 		}
 	}
 	
 	@Test
+	@Transactional
 	public void test() {		
 		Optional<Keyword> key = keywordRepository.findByHostNameAndWord("jbnu_main", "key3");
 		key.ifPresent(keye -> System.out.println(keye.toString()));

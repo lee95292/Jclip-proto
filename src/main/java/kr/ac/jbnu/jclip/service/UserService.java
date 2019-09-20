@@ -20,7 +20,6 @@ public class UserService {
 	@Autowired
 	KeywordRepository keywordRepository;
 	
-	@Autowired
 	
 	public void joinUser(User user) {
 		userRepository.save(user);
@@ -30,6 +29,7 @@ public class UserService {
 	 * @Args keyword - hostname, word가 설정된 키워드
 	 * 
 	 * */
+
 	@Transactional
 	public void addKeyword(User user, Keyword keyword) {
 		Keyword validKeyword= getValidKeyword(keyword);		

@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 
 import kr.ac.jbnu.jclip.model.User;
 
-@Component
+@Component("authProvider")
 public class AuthProvider implements AuthenticationProvider{
 	
 	@Autowired
