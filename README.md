@@ -30,3 +30,5 @@ Jclip서비스 개인용 프로토타입
 ## 테스트
 
 * Strength Test - [ngrinder](https://github.com/naver/ngrinder)
+* Static Test & CI/CD - Jenkins
+* Security Test - OWASP zap
