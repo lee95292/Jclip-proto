@@ -14,6 +14,5 @@ public class JclipProtoApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(JclipProtoApplication.class, args);
 	}
-
 }
 
