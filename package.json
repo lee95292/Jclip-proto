@@ -1,0 +1,50 @@
+{
+  "name": "jclip-proto",
+  "version": "1.0.0",
+  "description": "jclip-proto fe app",
+  "main": "webpack.config.js",
+  "scripts": {
+    "dev": "webpack --mode development",
+    "build": "webpack --mode production",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lee95292/Jclip-proto.git"
+  },
+  "author": "lee95292 (mklee)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lee95292/Jclip-proto/issues"
+  },
+  "homepage": "https://github.com/lee95292/Jclip-proto#readme",
+  "dependencies": {
+    "react": "^16.10.1",
+    "react-dom": "^16.10.1",
+    "react-scripts": "^3.1.2"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@babel/core": "^7.6.2",
+    "@babel/preset-env": "^7.6.2",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.6",
+    "babel-preset-react": "^6.24.1",
+    "css-loader": "^3.2.0",
+    "jsx-loader": "^0.13.2",
+    "style-loader": "^1.0.0",
+    "webpack": "^4.41.0",
+    "webpack-cli": "^3.3.9"
+  }
+}
