@@ -19,13 +19,7 @@ repositories {
 	mavenCentral()
 }
 
-ext {
-	gradleVersion='5.6'
-}
 
-task wrapper(type: Wrapper){
-	gradleVersion = "$gradleVersion"
-}
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-mail'
