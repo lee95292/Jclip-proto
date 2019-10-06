@@ -2,8 +2,7 @@
 
 Jclip서비스 개인용 프로토타입
 
-![Build Status](http://203.254.143.135:1880/job/Jclip_Prototype/badge/icon?style=flat-square)
-
+[![Build Status](http://203.254.143.135:1880/buildStatus/icon?job=Jclip_Prototype)](http://203.254.143.135:1880/job/Jclip_Prototype/)
 # TODO
 ---
 
