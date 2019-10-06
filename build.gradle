@@ -20,7 +20,7 @@ repositories {
 }
 
 ext {
-	gradleVersion='5.6.2'
+	gradleVersion='5.6'
 }
 
 task wrapper(type: Wrapper){
