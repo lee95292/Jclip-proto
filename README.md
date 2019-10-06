@@ -1,5 +1,9 @@
 # Jclip-proto
+
 Jclip서비스 개인용 프로토타입
+
+[![Build Status](http://203.254.143.135:32771/job/Jclip_Prototype/badge/icon)](http://203.254.143.135:32771/job/Jclip_Prototype/)
+
 
 # TODO
 ---
@@ -7,7 +11,8 @@ Jclip서비스 개인용 프로토타입
 ### 서버 개발
 
 (back 기능 구현)
-* ~~Article - Keyword - User 관계 작성~~(sep.19 2019)  알림된 공지사항 중 클립 기능 구현
+[x] Article - Keyword - User 관계 작성(sep.19 2019)  
+[] 알림된 공지사항 중 클립 기능 구현
 * 로그서비스 
 * spring admin
 * spring restdocs & [rest authorize](https://supawer0728.github.io/2018/03/20/spring-data-rest/)
