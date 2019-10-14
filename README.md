@@ -3,17 +3,35 @@
 Jclip서비스 개인용 프로토타입
 
 [![Build Status](http://203.254.143.135:1880/buildStatus/icon?job=Jclip_Prototype)](http://203.254.143.135:1880/job/Jclip_Prototype/)
+
+# Build & Setup
+
+
 # TODO
 ---
 
-### 서버 개발
+### Prototype Version
 
-(back 기능 구현)
+(oct.14 2019, 프로토타입 기능 최소화)
+
+(Backend 기능 구현)
 - [x] Article - Keyword - User 관계 작성(sep.19 2019)  
-- [ ] 알림된 공지사항 중 클립 기능 구현
+- [ ] Email 공지사항 알림
 - [ ] 로그서비스 
-- [ ] spring admin
-- [ ] spring restdocs & [rest authorize](https://supawer0728.github.io/2018/03/20/spring-data-rest/)
+
+(Front 기능 구현)
+- [ ] 로그인 기능
+- [ ] 클립 뷰 기능
+
+### Release Version
+
+(Restructuring / Configuration / Build )
+
+- [ ] [Spring Data Rest](https://docs.spring.io/spring-data/rest/docs/3.2.0.RELEASE/reference/html/#reference) [rest authorize](https://supawer0728.github.io/2018/03/20/spring-data-rest/)
+- [ ] [Gradle Multi Module](https://jojoldu.tistory.com/123)  // Core - API - Data 
+- [ ] Spring admin
+- [ ] Route53 : Jcloud / AWS 
+- [ ] Travis ci ?
 
 (front 기능 구현)
 - [ ] User별로 Clip한 Article 제공, 신규 Article 제공
@@ -21,7 +39,6 @@ Jclip서비스 개인용 프로토타입
 - [ ] 알림되지 않은 공지사항에 대해서도 클립기능 구현
 - [ ] Custom Clip
 - [ ] 전체 공지사항 보여주기
-
 
 ### 프론트 및 배포
 
@@ -33,5 +50,5 @@ Jclip서비스 개인용 프로토타입
 ## 테스트
 
 - [ ] Strength Test - [ngrinder](https://github.com/naver/ngrinder)
-- [x] Static Test & CI/CD - Jenkins (oct 06 2019 jenkins 
+- [x] Static Test & CI/CD - Jenkins (oct 06 2019 jenkins) 
 - [ ] Security Test - OWASP zap
