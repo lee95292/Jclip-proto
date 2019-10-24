@@ -5,7 +5,7 @@ var path =require('path');
 module.exports={
     context:path.resolve(__dirname,'src/main/webapp/feapps'),
 
-    entry:'./main/mainViewApp.js',
+    entry:'./src/index.js',
     devtool:'sourcemaps',
     cache:true,
     output:{
@@ -15,16 +15,16 @@ module.exports={
     mode:'none',
     module:{
         rules:[
-            // {
-            //     test:/\.js?$/,
-            //     exclude:/(node_modules)/,
-            //     use:{
-            //         loader:'babel-loader',
-            //         options:{
-            //             presets:['@babel/preset-env','@babel/preset-react']
-            //         }
-            //     }
-            // },
+            {
+                test:/\.js?$/,
+                exclude:/(node_modules)/,
+                use:{
+                    loader:'babel-loader',
+                    options:{
+                        presets:['@babel/preset-env','@babel/preset-react']
+                    }
+                }
+            },
             {
                 test:/\.js?$/,
                 exclude:/(node_modules)/,

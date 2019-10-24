@@ -5,6 +5,7 @@
   "main": "webpack.config.js",
   "scripts": {
     "dev": "webpack --mode development",
+    "start": "react-scripts start",
     "build": "webpack --mode production",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -44,7 +45,7 @@
     "css-loader": "^3.2.0",
     "jsx-loader": "^0.13.2",
     "style-loader": "^1.0.0",
-    "webpack": "^4.41.0",
+    "webpack": "4.40.2",
     "webpack-cli": "^3.3.9"
   }
 }

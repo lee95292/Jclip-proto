@@ -32,4 +32,7 @@ out/
 .vscode/
 
 
-node_modules/
+### Customized ###
+/bin/
+/node_modules/
+/src/main/webapp/feapps/

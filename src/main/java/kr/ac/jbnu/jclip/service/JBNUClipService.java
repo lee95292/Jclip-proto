@@ -12,7 +12,7 @@ import kr.ac.jbnu.jclip.repository.ArticleRepository;
 
 @Service
 public class JBNUClipService {
-	
+	private static final int articleNumberUnderBound=4000;
 	private ArticleRepository articleRepository;
 	private JBNUMainCrawlService jbnu_mainCrawl;
 	
@@ -52,7 +52,7 @@ public class JBNUClipService {
 	
 	void initArticleDB(String hostName) {
 		Article article =new Article();
-		article.setArticleNumber(40000);
+		article.setArticleNumber(articleNumberUnderBound);
 		article.setHostName(hostName);
 		articleRepository.save(article);
 	}

@@ -8,6 +8,7 @@
 </head>
 <body>
     <div id="root"></div>
-    <script src="/static/js/react/main.bundle.js"></script>
+	
+	<script src="/static/js/react/main.bundle.js"></script>
 </body>
 </html>

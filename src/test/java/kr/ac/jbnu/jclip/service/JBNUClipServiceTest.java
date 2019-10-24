@@ -11,7 +11,6 @@ import org.springframework.test.annotation.Commit;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import kr.ac.jbnu.jclip.model.Article;
-import kr.ac.jbnu.jclip.repository.ArticleRepository;
 @RunWith( SpringJUnit4ClassRunner.class )
 @SpringBootTest
 @Commit
@@ -19,8 +18,7 @@ public class JBNUClipServiceTest {
 	@Autowired
 	private JBNUClipService clipService;
 	
-	@Autowired
-	private ArticleRepository articleRepository;
+
 	@Before
 	public void setup() {
 		clipService.initArticleDB("jbnu_main");
