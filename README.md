@@ -8,9 +8,9 @@ Jclip서비스 개인용 프로토타입
 
 * React & Webpack
 
-ProjectRoot> npm run-script build
+ProjectRoot> npm run-script build 
 
-[/webapp/feapps/] 리액트 컴포넌트들을 빌드하여, [src/main/resources/js/react/__name__.bundle.js]에 빌드.
+[or Jclip-proto-front Integration](https://github.com/lee95292/Jclip-proto-front#jclipt-proto-integrationspring)
 
 
 
