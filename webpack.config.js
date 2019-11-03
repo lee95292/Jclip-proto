@@ -14,13 +14,18 @@ module.exports={
         // path:path.resolve(__dirname,'src/main/resources/static/js/'),
         // filename:'[name].bundle.js',
         path:__dirname,
-        filename:'./src/main/resources/static/js/[name].bundle.js'
+        filename:'./src/main/resources/static/js/[name].bundle.js',
+        path:path.resolve(__dirname,'/src/main/resources/static/js'),
+        publicPath:'/static/js/'
     },
     mode:'none',
     devServer:{
-        index:path.resolve(__dirname,'src/main/webapp/WEB-INF/jsp/index.jsp'),
+        inline:true,
+        hot:true,
+        contentBase:[path.resolve(__dirname,'src/main/webapp/WEB-INF'),path.resolve(__dirname,'src/main/resources/')],
+        watchContentBase:true,
+        index:'./webapp/WEB-INF/index.html',
         host:'localhost',
-        contentBase:path.resolve(__dirname,'src/main/webapp/WEB-INF/'),
         port:9000
     },
     module:{
@@ -52,6 +57,7 @@ module.exports={
 
 log.info('outputPath:'+module.exports.output.path);
 log.info('devserver contentbase:'+module.exports.devServer.contentBase);
+log.info('devserver index:'+module.exports.devServer.index);
 log.info(module.exports.entry.path);
 
 // log.info('Jingle Bells, Batman Smells');
