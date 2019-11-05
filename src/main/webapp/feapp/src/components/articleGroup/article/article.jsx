@@ -1,7 +1,7 @@
 import React from 'react';
+import 'article.css';
 
-
-class clip extends React.Component{
+class Article extends React.Component{
     constructor(props){
 
     }
@@ -10,3 +10,5 @@ class clip extends React.Component{
         return;
     }
 }
+
+export default Article
