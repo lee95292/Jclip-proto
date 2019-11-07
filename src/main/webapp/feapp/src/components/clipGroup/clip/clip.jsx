@@ -8,7 +8,7 @@ class Clip extends React.Component{
         return(
             <div>
                 <p>{this.props.order}</p>
-                <a href={this.props.link}>{this.props.title}</a>
+                <a href={this.props.link} target="_blank">{this.props.title}</a>
                 <div className="class">
                     {this.props.snippet}
                 </div>

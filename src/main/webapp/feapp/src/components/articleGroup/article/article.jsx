@@ -5,7 +5,11 @@ class Article extends React.Component{
     render(){
         return(
             <div>
-                <p></p>
+                <p>{this.props.order}</p>
+                <a href={this.props.link}>{this.props.title}</a>
+                <div className="class">
+                    {this.props.snippet}
+                </div>
             </div>
         );
     }
