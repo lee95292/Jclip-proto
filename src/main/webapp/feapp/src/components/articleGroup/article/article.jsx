@@ -2,12 +2,12 @@ import React from 'react';
 import 'article.css';
 
 class Article extends React.Component{
-    constructor(props){
-
-    }
-
     render(){
-        return;
+        return(
+            <div>
+                <p></p>
+            </div>
+        );
     }
 }
 

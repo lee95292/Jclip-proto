@@ -7,7 +7,7 @@ const log=getLogger({name:'webpack-batman'});
 module.exports={
     // context:path.resolve(__dirname,'src/main/'),
     
-    entry:path.resolve(__dirname,'src/main/webapp/feapps/src/index.js'),
+    entry:path.resolve(__dirname,'src/main/webapp/feapp/src/index.js'),
     devtool:'sourcemaps',
     cache:true,
     output:{
@@ -15,8 +15,8 @@ module.exports={
         // filename:'[name].bundle.js',
         path:__dirname,
         filename:'./src/main/resources/static/js/[name].bundle.js',
-        path:path.resolve(__dirname,'/src/main/resources/static/js'),
-        publicPath:'/static/js/'
+        // path:path.resolve(__dirname,'/src/main/resources/static/js'),
+        // publicPath:'/static/js/'
     },
     mode:'none',
     devServer:{

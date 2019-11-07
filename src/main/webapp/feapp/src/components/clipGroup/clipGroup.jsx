@@ -11,10 +11,7 @@ const clips=[
     }
 ]
 
-class clipGroup extends React.Component{
-    constructor(props){
-
-    }
+class ClipGroup extends React.Component{
 
     render(){
         return(
@@ -27,4 +24,4 @@ class clipGroup extends React.Component{
     }
 }
 
-export default clipGroup
+export default ClipGroup
