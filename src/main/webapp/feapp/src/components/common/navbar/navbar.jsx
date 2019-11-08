@@ -1,5 +1,5 @@
 import React from 'react';
-import NavItem from './navItem.jsx';
+import {Router,Link} from 'react-router-dom';
 import './navStyle.css';
 /**
  *  props of nav-item
@@ -20,9 +20,9 @@ class Navbar extends React.Component{
     render(){
         return(
             <div className="nav-container">
-                <NavItem />
-                <NavItem />
-                <NavItem />
+                <Link to="/" component={App}><img src="" alt=""/>home</Link>
+                <Link to="/about" compoennt={About}></Link>
+                
             </div>
         );
     }

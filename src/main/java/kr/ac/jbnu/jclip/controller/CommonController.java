@@ -7,6 +7,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class CommonController {
 	@GetMapping(value = "/")
 	public String index(){
-		return "index";
+		return "NewFile";
 	}
 }
