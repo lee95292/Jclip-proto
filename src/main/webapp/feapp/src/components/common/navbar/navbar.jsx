@@ -21,7 +21,7 @@ class Navbar extends React.Component{
         return(
             <div className="nav-container">
                 <Link to="/" component={App}><img src="" alt=""/>home</Link>
-                <Link to="/about" compoennt={About}></Link>
+                <Link to="/about"></Link>
                 
             </div>
         );
