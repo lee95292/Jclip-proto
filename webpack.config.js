@@ -22,12 +22,21 @@ module.exports={
     devServer:{
         inline:true,
         hot:true,
-        contentBase:[path.resolve(__dirname,'src/main/webapp/WEB-INF'),path.resolve(__dirname,'src/main/resources/')],
+        contentBase:[path.resolve(__dirname,'src/main/resources/')],
         watchContentBase:true,
-        index:'./webapp/WEB-INF/index.html',
+        index:'./static/index.html',
         host:'localhost',
         port:9000
     },
+
+    //Absolute path import (모듈 import 시, 절대경로 루트 지정)
+    resolve:{
+        modules:[
+            path.join(__dirname,"src/main/webapp/feapp/src"),
+            "node_modules"
+        ]
+    },
+
     module:{
         rules:[
             {
