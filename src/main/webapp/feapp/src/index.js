@@ -1,11 +1,11 @@
 import React from  'react';
 import ReactDom from 'react-dom';
-import ComponentGroup from './components/componentGroup.jsx';
+import App from './App';
 
 class MainViewApp extends React.Component{
     render(){
         return (
-            <ComponentGroup />
+            <App />
         );
     }   
 }
