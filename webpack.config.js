@@ -22,10 +22,11 @@ module.exports={
     devServer:{
         inline:true,
         hot:true,
-        watchContentBase:true,
+        // watchContentBase:true,
         
-        contentBase:path.resolve(__dirname,'src/main/resources'),
-        index:path.resolve(__dirname,'src/main/resources/static/index.html'),
+        // contentBase:path.resolve(__dirname,'src/main/resources/'),
+        contentBase:[path.resolve(__dirname,'src/main/webapp/WEB-INF'),path.resolve(__dirname,'src/main/resources')],
+        // index:path.resolve(__dirname,'src/main/resources/static/index.html'),
         // index:'src/main/resources/static/index.html',
         index:'./static/index.html',
         host:'localhost',
@@ -74,7 +75,7 @@ log.info('outputPath:'+module.exports.output.path);
 log.info('devserver contentbase:'+module.exports.devServer.contentBase);
 log.info('devserver index:'+module.exports.devServer.index);
 log.info('module root path :'+module.exports.resolve.modules);
-log.info('module root path :'+module.exports.devServer.index);
+log.info('contentBase :'+module.exports.devServer.contentBase);
 
 // log.info('Jingle Bells, Batman Smells');
 // log.warn('Robin laid an egg');

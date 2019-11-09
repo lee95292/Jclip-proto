@@ -1,11 +1,13 @@
 import React from  'react';
 import ReactDom from 'react-dom';
-import App from './App';
 
+import Navbar from 'components/common/navbar/navbar.jsx';
 class MainViewApp extends React.Component{
     render(){
         return (
-            <App />
+            <>
+            <Navbar/>
+            </>
         );
     }   
 }
