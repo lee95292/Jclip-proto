@@ -1,8 +1,9 @@
 import React from 'react';
 import {BrowserRouter,Route,NavLink} from 'react-router-dom';
 import './navStyle.css';
-import About from 'ComponentRoot/contents/about.jsx'
-import App from 'ComponentRoot/App';
+// import About from '../../../components/contents/about.jsx';
+import About from 'components/contents/about.jsx';
+import App from 'App';
 // import ClipGroup from ''
 /**
  *  props of nav-item
@@ -19,6 +20,8 @@ import App from 'ComponentRoot/App';
 //         name:
 //      },
 //  ]
+
+console.log(App.path)
 class Navbar extends React.Component{
     render(){
         return(

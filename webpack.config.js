@@ -25,20 +25,22 @@ module.exports={
         watchContentBase:true,
         
         contentBase:path.resolve(__dirname,'src/main/resources'),
-        index:'./static/index.html',
+        // index:path.resolve(__dirname,'src/main/resources/static/index.html'),
+        index:'src/main/resources/static/index.html',
+        // index:'index.html',
         host:'localhost',
         port:9000
     },
 
     //Absolute path import (모듈 import 시, 절대경로 루트 지정)
     resolve:{
-        // modules:[
-        //     path.join(__dirname,"src/main/webapp/feapp/src"),
-        //     "node_modules"
-        // ]
-        alias:{
-            ComponentRoot:path.resolve(__dirname,'src/main/webapp/feapp/src/components/')
-        }
+        // alias:{
+        //     ComponentRoot:path.resolve(__dirname,'src/main/webapp/feapp/src/components/')
+        // }
+        modules:[
+            'node_modules',
+            path.resolve(__dirname,'src/main/webapp/feapp/src/')
+        ]
     },
 
     module:{
@@ -71,7 +73,8 @@ module.exports={
 log.info('outputPath:'+module.exports.output.path);
 log.info('devserver contentbase:'+module.exports.devServer.contentBase);
 log.info('devserver index:'+module.exports.devServer.index);
-log.info(module.exports.entry.path);
+log.info('module root path :'+module.exports.resolve.modules);
+log.info('module root path :'+module.exports.devServer.index);
 
 // log.info('Jingle Bells, Batman Smells');
 // log.warn('Robin laid an egg');
