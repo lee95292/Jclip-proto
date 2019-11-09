@@ -25,7 +25,7 @@ module.exports={
         watchContentBase:true,
         
         contentBase:path.resolve(__dirname,'src/main/resources'),
-        // index:path.resolve(__dirname,'src/main/resources/static/index.html'),
+        index:path.resolve(__dirname,'src/main/resources/static/index.html'),
         // index:'src/main/resources/static/index.html',
         index:'./static/index.html',
         host:'localhost',
