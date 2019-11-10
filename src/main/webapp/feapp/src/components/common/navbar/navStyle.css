@@ -1,11 +1,14 @@
-nav-container{
-    display: flex;
-}
-
-a{
+.Navbar a{
     text-decoration: none;
+    padding: 20px 10px 20px 10px;
+    margin: 5px 15px 5px 10px;
+
 }
 
-.active{
+.Navbar a .active{
     background-color: aqua;
+}
+
+.Navbar a:hover{
+    background-color: cadetblue;
 }

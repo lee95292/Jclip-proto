@@ -7,6 +7,7 @@ class About extends React.Component{
                 <h1>hello, it's Jclip!</h1>
 
                 <h3>About Jclip..</h3>
+                <input type="text"/>
             </div>
         );
     }
