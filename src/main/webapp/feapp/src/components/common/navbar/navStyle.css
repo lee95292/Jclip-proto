@@ -1,3 +1,6 @@
+.Navbar{
+    height:100%;
+}
 .Navbar a{
     text-decoration: none;
     padding: 20px 10px 20px 10px;

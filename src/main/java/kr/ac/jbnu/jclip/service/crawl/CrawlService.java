@@ -1,4 +1,4 @@
-package kr.ac.jbnu.jclip.crawl;
+package kr.ac.jbnu.jclip.service.crawl;
 
 import org.jsoup.nodes.Element;
 

@@ -5,10 +5,10 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import kr.ac.jbnu.jclip.crawl.CrawlService;
-import kr.ac.jbnu.jclip.crawl.JBNUMainCrawlService;
 import kr.ac.jbnu.jclip.model.Article;
 import kr.ac.jbnu.jclip.repository.ArticleRepository;
+import kr.ac.jbnu.jclip.service.crawl.CrawlService;
+import kr.ac.jbnu.jclip.service.crawl.JBNUMainCrawlService;
 
 @Service
 public class JBNUClipService {
@@ -17,6 +17,7 @@ public class JBNUClipService {
 	private JBNUMainCrawlService jbnu_mainCrawl;
 	
 	private int numberOfCrawl=30;
+	
 	public JBNUClipService(ArticleRepository articleRepository, JBNUMainCrawlService jbnuCrawl) {
 		this.articleRepository = articleRepository;
 		this.jbnu_mainCrawl=jbnuCrawl;
@@ -50,7 +51,7 @@ public class JBNUClipService {
 		return topArticle.getArticleNumber();
 	}
 	
-	void initArticleDB(String hostName) {
+	public void initArticleDB(String hostName) {
 		Article article =new Article();
 		article.setArticleNumber(articleNumberUnderBound);
 		article.setHostName(hostName);

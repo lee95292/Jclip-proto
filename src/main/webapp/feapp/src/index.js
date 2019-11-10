@@ -5,8 +5,6 @@ import Navbar from 'components/common/navbar/navbar.jsx';
 import './index.css';
 class MainViewApp extends React.Component {
     componentDidMount(){
-        document.body.style.width="100%"
-        document.body.style.height="100%"          
     }
     render() {
         return (

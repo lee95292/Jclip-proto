@@ -1,4 +1,9 @@
-package kr.ac.jbnu.jclip.crawl;
+/*
+ * Author : mklee(lee95292)
+ * 
+ * Description : kr.ac.jbnu.jclip.config.CrawlDataLoader에서 애플리케이션 시작 시 크롤링 데이터 모음.
+ * */
+package kr.ac.jbnu.jclip.service.crawl;
 
 import java.io.IOException;
 
