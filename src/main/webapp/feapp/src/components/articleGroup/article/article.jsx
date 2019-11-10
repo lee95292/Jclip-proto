@@ -4,7 +4,7 @@ import 'article.css';
 class Article extends React.Component{
     render(){
         return(
-            <div>
+            <div className="Article">
                 <p>{this.props.order}</p>
                 <a href={this.props.link}>{this.props.title}</a>
                 <div className="class">

@@ -1,7 +1,6 @@
 import React from 'react';
-import {BrowserRouter,Route,NavLink} from 'react-router-dom';
-// import './navStyle.css';
-// import About from '../../../components/contents/about.jsx';
+import { BrowserRouter, Route, NavLink } from 'react-router-dom';
+import './navStyle.css';
 import About from 'components/contents/about.jsx';
 import App from 'App';
 /**
@@ -20,19 +19,21 @@ import App from 'App';
 //      },
 //  ]
 
-class Navbar extends React.Component{
-    render(){
-        return(
-            <BrowserRouter>
-             
-                <NavLink exact to="/"><img src="" alt=""/>home</NavLink>
-                <NavLink exact to="/about">About</NavLink>
-                <NavLink exact to="/clips">Clips</NavLink>
-                <NavLink exact to="/articles">Articles</NavLink>
-
-                <Route exact path="/about" component={About}/>
-                <Route exact path="/" component={App}/>
-            </BrowserRouter>
+class Navbar extends React.Component {
+    render() {
+        return (
+                <div className="Navbar">
+                    <BrowserRouter>
+                        <NavLink exact to="/"><img src="" alt="" />home</NavLink>
+                        <NavLink exact to="/about">About</NavLink>
+                        <NavLink exact to="/clips">Clips</NavLink>
+                        <NavLink exact to="/articles">Articles</NavLink>
+                        <NavLink exact to="/login">Login</NavLink>
+                        
+                        <Route exact path="/" component={App} />
+                        <Route exact path="/about" component={About} />
+                    </BrowserRouter>
+                </div>
         );
     }
 }

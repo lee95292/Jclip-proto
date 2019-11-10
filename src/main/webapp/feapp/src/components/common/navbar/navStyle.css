@@ -1,3 +1,11 @@
 nav-container{
     display: flex;
 }
+
+a{
+    text-decoration: none;
+}
+
+.active{
+    background-color: aqua;
+}
