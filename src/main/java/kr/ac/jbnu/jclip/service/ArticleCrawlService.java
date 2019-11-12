@@ -11,20 +11,20 @@ import kr.ac.jbnu.jclip.service.crawl.CrawlService;
 import kr.ac.jbnu.jclip.service.crawl.JBNUMainCrawlService;
 
 @Service
-public class JBNUClipService {
-	private static final int articleNumberUnderBound=4000;
+public class ArticleCrawlService {
+	private static final int articleNumberUnderBound=40000;
 	private ArticleRepository articleRepository;
 	private JBNUMainCrawlService jbnu_mainCrawl;
 	
 	private int numberOfCrawl=30;
 	
-	public JBNUClipService(ArticleRepository articleRepository, JBNUMainCrawlService jbnuCrawl) {
+	public ArticleCrawlService(ArticleRepository articleRepository, JBNUMainCrawlService jbnuCrawl) {
 		this.articleRepository = articleRepository;
 		this.jbnu_mainCrawl=jbnuCrawl;
 		
 	}
 	
-	public List<Article> getVailidArticleList(String hostName){
+	public List<Article> getLatestArticles(String hostName){
 		int underBound = getTopArticleNumber(hostName)+1;
 		List<Article> validArticleList = new ArrayList<Article>();
 		Article article;
@@ -48,15 +48,14 @@ public class JBNUClipService {
 	int getTopArticleNumber(String hostName) {
 		Article topArticle = articleRepository.findTopByhostNameOrderByArticleNumberDesc(hostName);
 		
+		if(topArticle==null) {
+			return articleNumberUnderBound;
+		}
 		return topArticle.getArticleNumber();
 	}
 	
-	public void initArticleDB(String hostName) {
-		Article article =new Article();
-		article.setArticleNumber(articleNumberUnderBound);
-		article.setHostName(hostName);
-		articleRepository.save(article);
-	}
+
+	//TODO: Hostnames 레거시 enum으로 교체
 	CrawlService getCrawlServiceByHostName(String hostName) {
 		if(hostName.equals("jbnu_main")) {
 			return jbnu_mainCrawl;
