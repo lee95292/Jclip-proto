@@ -1,0 +1,23 @@
+logging:
+    level:
+        org:
+            hibernate: info
+spring:
+    devtools:
+        livereload:
+            enabled: true
+    jpa:
+        database: mysql
+        database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+        generate-ddl: true
+        hibernate:
+            ddl-auto: create
+        show-sql: true
+    mvc:
+        static-path-pattern: /static/**
+        view:
+            prefix: /WEB-INF/jsp/
+            suffix: .jsp
+    resources:
+        add-mappings: true
+        static-locations: classpath:/static/

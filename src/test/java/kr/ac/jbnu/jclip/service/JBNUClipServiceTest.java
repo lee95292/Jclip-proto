@@ -16,16 +16,15 @@ import kr.ac.jbnu.jclip.model.Article;
 @Commit
 public class JBNUClipServiceTest {
 	@Autowired
-	private JBNUClipService clipService;
+	private ArticleCrawlService clipService;
 	
 
 	@Before
 	public void setup() {
-		clipService.initArticleDB("jbnu_main");
 	}
 	@Test
 	public void test() {
-		List<Article> list = clipService.getVailidArticleList("jbnu_main");
+		List<Article> list = clipService.getLatestArticles("jbnu_main");
 		
 		for(Article a :list) {
 			System.out.println(a.toString());

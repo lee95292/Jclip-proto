@@ -35,3 +35,4 @@ out/
 ### Customized ###
 /bin/
 /node_modules/
+private.yml
