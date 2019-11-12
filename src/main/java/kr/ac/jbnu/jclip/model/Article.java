@@ -53,7 +53,7 @@ public class Article{
 	private String articleHyperlink;
 	
 	@Builder.Default
-	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "articles")
+	@ManyToMany(cascade = CascadeType.ALL, mappedBy = "articles")
 	private List<User> users = new ArrayList<User>();
 	@Override
 	public String toString() {

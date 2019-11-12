@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,6 +9,6 @@
 <body>
     <div id="root"></div>
 	
-	<script src="/static/js/react/main.bundle.js"></script>
+	<script src="/static/js/main.bundle.js"></script>
 </body>
 </html>

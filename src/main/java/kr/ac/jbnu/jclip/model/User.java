@@ -45,13 +45,13 @@ public class User{
 	
 
 	@Builder.Default
-	@ManyToMany(fetch = FetchType.EAGER)
+	@ManyToMany
 	@JoinTable(name="tbl_user_keyword", joinColumns = @JoinColumn(name="USER_ID")
 									  , inverseJoinColumns = @JoinColumn(name="KEYWORD_ID"))
 	private List<Keyword> keywords = new ArrayList<Keyword>();
 	
 	@Builder.Default
-	@ManyToMany(fetch = FetchType.LAZY)
+	@ManyToMany
 	@JoinTable(name = "tbl_user_article", joinColumns = @JoinColumn(name="USER_ID")
 										, inverseJoinColumns = @JoinColumn(name="ARTICLE_ID"))
 	private List<Article> articles =new ArrayList<Article>();
