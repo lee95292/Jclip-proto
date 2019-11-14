@@ -36,3 +36,4 @@ out/
 /bin/
 /node_modules/
 private.yml
+keystore.p12
