@@ -21,6 +21,10 @@ ProjectRoot> npm run-script build
 
 (oct.14 2019, 프로토타입 기능 최소화)
 
+(refactor..)
+크롤링 페이지 리스트 enum으로 관리하기
+레거시가 사용된 클래스 : service/ArticleCrawlService, config/crawlDataLoader
+
 (Backend 기능 구현)
 - [x] Article - Keyword - User 관계 작성(sep.19 2019)  
 - [ ] Email 공지사항 알림
