@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import kr.ac.jbnu.jclip.model.Keyword;
 import kr.ac.jbnu.jclip.model.User;
+import kr.ac.jbnu.jclip.model.UserConnection;
 import kr.ac.jbnu.jclip.repository.KeywordRepository;
 import kr.ac.jbnu.jclip.repository.UserRepository;
 
@@ -21,10 +22,26 @@ public class UserService {
 	KeywordRepository keywordRepository;
 	
 	
-	public void joinUser(User user) {
-		userRepository.save(user);
+	public User signUp(UserConnection userConnection) {
+		final User user = User.signUp(userConnection);
+		return userRepository.save(user);
 	}
 	
+	public User findBySocial(UserConnection userConnection) {
+		final User user=userRepository.findBySocial(userConnection);
+		if(user==null) {
+			/*
+			 * UserNotfound
+			 * */
+			throw new RuntimeException();
+		}
+		return user;
+	}
+	
+	public boolean isExistUser(UserConnection userConnection) {
+		final User user = userRepository.findBySocial(userConnection);
+        return (user != null);
+	}
 	/*
 	 * @Args keyword - hostname, word가 설정된 키워드
 	 * 

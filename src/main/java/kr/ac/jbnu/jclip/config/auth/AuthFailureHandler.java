@@ -1,4 +1,4 @@
-package kr.ac.jbnu.jclip.config;
+package kr.ac.jbnu.jclip.config.auth;
 
 import java.io.IOException;
 

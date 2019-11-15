@@ -3,17 +3,19 @@ package kr.ac.jbnu.jclip.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -26,13 +28,17 @@ import lombok.Setter;
 @Entity
 @Builder
 @AllArgsConstructor
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class User{
 	
 	@Id
 	@Column(name="USER_ID")
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
+	
+	@OneToOne(cascade = CascadeType.PERSIST)
+	@JoinColumn(name="provider_id", referencedColumnName = "provider_id",updatable = false,unique = true)
+	private UserConnection social;
 
 	@Column(name="user_name")
 	private String userName;
@@ -42,6 +48,9 @@ public class User{
 	
 	@Column(name="user_password")
 	private String userPassword;
+	
+	@Column(name="user_nickname")
+	private String userNickname;
 	
 
 	@Builder.Default
@@ -56,6 +65,19 @@ public class User{
 										, inverseJoinColumns = @JoinColumn(name="ARTICLE_ID"))
 	private List<Article> articles =new ArrayList<Article>();
 	
+	@Builder
+    private User(String email, String nickname, UserConnection social) {
+        this.userEmail = email;
+        this.userNickname = nickname;
+        this.social = social;
+    }
+	public static User signUp(UserConnection userConnection) {
+		return User.builder()
+				.userEmail(userConnection.getEmail())
+				.userNickname(userConnection.getDisplayName())
+				.social(userConnection)
+				.build();
+	}
 	public void addKeyword(Keyword keyword) {
 		this.keywords.add(keyword);
 	}

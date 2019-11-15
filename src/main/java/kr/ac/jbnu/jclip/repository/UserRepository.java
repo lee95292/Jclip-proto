@@ -6,10 +6,11 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import kr.ac.jbnu.jclip.model.User;
+import kr.ac.jbnu.jclip.model.UserConnection;
 
 @Repository
 public interface UserRepository extends CrudRepository<User, Integer>{
 
 	Optional<User> findUserByUserEmail(String userEmail);
-
+	User findBySocial(UserConnection userConnection);
 }
