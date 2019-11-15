@@ -21,4 +21,6 @@ spring:
     resources:
         add-mappings: true
         static-locations: classpath:/static/
-
+    jackson:
+        serialization:
+            WRITE_DATES_AS_TIMESTAMPS: false
