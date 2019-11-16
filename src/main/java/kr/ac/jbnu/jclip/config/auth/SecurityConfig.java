@@ -8,10 +8,10 @@ import javax.servlet.Filter;
 import org.springframework.boot.autoconfigure.security.oauth2.resource.UserInfoTokenServices;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
+import org.springframework.boot.web.servlet.server.ConfigurableServletWebServerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.configuration.EnableGlobalAuthentication;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
@@ -31,11 +31,6 @@ import kr.ac.jbnu.jclip.social.SocialService;
 import kr.ac.jbnu.jclip.social.google.GoogleOAuth2ClientAuthenticationProcessingFilter;
 import lombok.AllArgsConstructor;
 
-/*
- * Spring Security 참조 
- * @Authow wedul 님의
- * https://github.com/weduls/wedulpos_boot
- * */
 
 @Configuration
 @AllArgsConstructor
@@ -47,54 +42,37 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	
 	private final OAuth2ClientContext oauth2ClientContext;
 	private final SocialService socialService;
-	private AuthFailureHandler authFailureHandler;
-	private AuthSuccessHandler authSuccessHadnler;
-	private AuthenticationProvider authProvider;
 	
 	@Override
-		protected void configure(HttpSecurity http) throws Exception {
-		http.antMatcher("/**").authorizeRequests().antMatchers("/","/login**").permitAll().anyRequest()
-						.authenticated().and().exceptionHandling()
+	protected void configure(HttpSecurity http) throws Exception {
+
+		http.authorizeRequests()
+				.antMatchers("/static/**").permitAll()
+				//.antMatchers("/auth/sample").hasRole("ROLE_ADMIN")
+				.anyRequest().authenticated();
+		
+		http.antMatcher("/**").authorizeRequests().antMatchers("/","/login**").permitAll().anyRequest().authenticated()
+						.and()
+						.exceptionHandling()
+						//Spring Security의 자체 로그인 success/fail redirection 방지
 						.authenticationEntryPoint(new LoginUrlAuthenticationEntryPoint("/")).and()
 						.addFilterBefore(ssoFilter(),BasicAuthenticationFilter.class);
-
+		
 		http.logout()
 			.invalidateHttpSession(true)
 			.clearAuthentication(true)
 			.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
 			.logoutSuccessUrl("/").permitAll();
-				
-		
-		//			http
-//			//login페이지_파라미터_핸들러(성공,실패) 설정
-//			.formLogin()
-//			.loginPage("/")
-//			.loginProcessingUrl("/do_login")
-////			.failureHandler()
-//			.defaultSuccessUrl("/")
-//			.usernameParameter("id")
-//			.passwordParameter("password")
-//			.failureHandler(authFailureHandler)
-//			.successHandler(authSuccessHadnler)
-//		.and()
-//			//logout 관련 설정 
-//			.logout()
-//			.logoutRequestMatcher(new AntPathRequestMatcher("/user/logout"))
-//			.logoutSuccessUrl("/")
-//			.invalidateHttpSession(true)
-////		.and()
-////			.csrf()
-//		.and()
-//			.authenticationProvider(authProvider);
-			
-		}
+	}
 	
 	@Override
 	public void configure(WebSecurity web) throws Exception {
 		// TODO Auto-generated method stub
 		super.configure(web);
 	}
-	 private Filter ssoFilter() {
+	
+
+	private Filter ssoFilter() {
 	        CompositeFilter filter = new CompositeFilter();
 	        List<Filter> filters = new ArrayList<>();
 	        filters.add(ssoFilter(google(), new GoogleOAuth2ClientAuthenticationProcessingFilter(socialService)));
@@ -110,30 +88,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	        tokenServices.setRestTemplate(restTemplate);
 	        return filter;
 	    }
-//	private Filter ssoFilter() {
-//		CompositeFilter filter = new CompositeFilter();
-//		List<Filter> filters= new ArrayList<>();
-//		
-//		filters.add(sooFilter(google(),"/login/google"));
-//		
-//		filter.setFilters(filters);
-//		
-//		return filters;
-//	}
-//	
-//	private Filter ssoFilter(ClientResource client, String path) {
-//		OAuth2ClientAuthenticationProcessingFilter filter = new OAuth2ClientAuthenticationProcessingFilter(path);
-//		OAuth2RestTemplate restTemplate = new OAuth2RestTemplate(client.getClient(), oauth2ClientContext);
-//		UserInfoTokenServices tokenService= new UserInfoTokenServices(client.getResource().getUserInfoUri(), client.getClient().getClientId());
-//		filter.setRestTemplate(restTemplate);		
-//		tokenService.setRestTemplate(restTemplate);
-//		filter.setTokenServices(tokenService);
-//		return filter;
-//		
-//	}
-	
-
-	
 	
 	/*
 	 * OAuth Beans

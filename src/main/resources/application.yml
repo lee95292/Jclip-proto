@@ -24,3 +24,36 @@ spring:
     jackson:
         serialization:
             WRITE_DATES_AS_TIMESTAMPS: false
+
+##            
+## After this, defined in private.yml
+##
+
+#spring:
+#    datasource:
+#        driver-class-name: com.mysql.cj.jdbc.Driver
+#        password: [your-password]
+#        url: jdbc:mysql://[your-db-url]/jclip?characterEncoding=UTF-8&serverTimezone=UTC
+#        username: lee95292
+#        
+#server:
+#    ssl:
+#        key-store: keystore.p12
+#        key-store-password: [your-password]
+#        keyStoreType: PKCS12
+#        keyAlias: tomcat
+#        port: 8443
+#        enabled: true
+#
+#google :
+#  client :
+#    clientId : <your-client-id>
+#    clientSecret: <your-secret>
+#    accessTokenUri: https://www.googleapis.com/oauth2/v4/token
+#    userAuthorizationUri: https://accounts.google.com/o/oauth2/v2/auth
+#    clientAuthenticationScheme: form
+#    scope:
+#    - email
+#    - profile
+#  resource:
+#    userInfoUri: https://www.googleapis.com/oauth2/v3/userinfo
