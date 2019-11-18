@@ -44,5 +44,7 @@ public class GoogleOAuth2ClientAuthenticationProcessingFilter extends OAuth2Clie
         super.successfulAuthentication(request, response, chain, authenticationToken);
 
     }
+    
+ 
 
 }
