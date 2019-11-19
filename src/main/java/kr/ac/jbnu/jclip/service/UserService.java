@@ -5,6 +5,7 @@ import java.util.Optional;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import kr.ac.jbnu.jclip.model.Keyword;
@@ -28,6 +29,7 @@ public class UserService {
 	}
 	
 	public User findBySocial(UserConnection userConnection) {
+		
 		final User user=userRepository.findBySocial(userConnection);
 		if(user==null) {
 			/*

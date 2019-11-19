@@ -41,6 +41,7 @@ public class GoogleOAuth2ClientAuthenticationProcessingFilter extends OAuth2Clie
         final UserConnection userConnection = UserConnection.valueOf(userDetails);
 
         final UsernamePasswordAuthenticationToken authenticationToken = socialService.doAuthentication(userConnection);
+        //TODO: set auth token in the Response 
         super.successfulAuthentication(request, response, chain, authenticationToken);
 
     }

@@ -72,6 +72,7 @@ public class User{
         this.social = social;
     }
 	public static User signUp(UserConnection userConnection) {
+		System.out.println("debug:"+userConnection.getEmail());
 		return User.builder()
 				.userEmail(userConnection.getEmail())
 				.userNickname(userConnection.getDisplayName())
