@@ -26,7 +26,6 @@ import lombok.Setter;
 @Setter
 @Table
 @Entity
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class User{
@@ -48,34 +47,28 @@ public class User{
 	
 	@Column(name="user_password")
 	private String userPassword;
-	
-	@Column(name="user_nickname")
-	private String userNickname;
-	
 
-	@Builder.Default
 	@ManyToMany
 	@JoinTable(name="tbl_user_keyword", joinColumns = @JoinColumn(name="USER_ID")
 									  , inverseJoinColumns = @JoinColumn(name="KEYWORD_ID"))
 	private List<Keyword> keywords = new ArrayList<Keyword>();
 	
-	@Builder.Default
 	@ManyToMany
 	@JoinTable(name = "tbl_user_article", joinColumns = @JoinColumn(name="USER_ID")
 										, inverseJoinColumns = @JoinColumn(name="ARTICLE_ID"))
 	private List<Article> articles =new ArrayList<Article>();
 	
 	@Builder
-    private User(String email, String nickname, UserConnection social) {
-        this.userEmail = email;
-        this.userNickname = nickname;
+    private User(String userEmail, String userName, UserConnection social) {
+        this.userEmail = userEmail;
+        this.userName = userName;
         this.social = social;
     }
 	public static User signUp(UserConnection userConnection) {
 		System.out.println("debug:"+userConnection.getEmail());
 		return User.builder()
-				.userEmail(userConnection.getEmail())
-				.userNickname(userConnection.getDisplayName())
+//				.userEmail(userConnection.getEmail())	// 이메일만 왜않되?????
+				.userName(userConnection.getDisplayName())
 				.social(userConnection)
 				.build();
 	}
