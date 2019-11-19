@@ -67,7 +67,7 @@ public class User{
 	public static User signUp(UserConnection userConnection) {
 		System.out.println("debug:"+userConnection.getEmail());
 		return User.builder()
-//				.userEmail(userConnection.getEmail())	// 이메일만 왜않되?????
+				.userEmail(userConnection.getEmail())	// 이메일만 왜않되?????
 				.userName(userConnection.getDisplayName())
 				.social(userConnection)
 				.build();

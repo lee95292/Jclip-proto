@@ -26,7 +26,6 @@ public class UserService {
 	public User signUp(UserConnection userConnection) {
 		final User user = User.signUp(userConnection);
 		System.out.println("debug2:"+user.getUserEmail());
-		user.setUserEmail(userConnection.getEmail());
 		return userRepository.save(user);
 	}
 	
