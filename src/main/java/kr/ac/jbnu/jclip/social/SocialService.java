@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 
 import kr.ac.jbnu.jclip.model.User;
 import kr.ac.jbnu.jclip.model.UserConnection;
-import kr.ac.jbnu.jclip.service.UserService;
+import kr.ac.jbnu.jclip.service.user.UserService;
 import lombok.AllArgsConstructor;
 
 @Component

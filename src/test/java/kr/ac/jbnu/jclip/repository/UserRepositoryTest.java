@@ -27,7 +27,6 @@ public class UserRepositoryTest {
 			User user = User.builder()
 					.userName("mklee"+i)
 					.userEmail("lee9595"+i)
-					.userPassword("pspsp")
 					.build();
 			
 			user.addKeyword(testkey);

@@ -26,6 +26,7 @@ import lombok.Setter;
 @Setter
 @Table
 @Entity
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class User{
@@ -48,7 +49,7 @@ public class User{
 	@Column(name="user_password")
 	private String userPassword;
 
-	@ManyToMany
+	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name="tbl_user_keyword", joinColumns = @JoinColumn(name="USER_ID")
 									  , inverseJoinColumns = @JoinColumn(name="KEYWORD_ID"))
 	private List<Keyword> keywords = new ArrayList<Keyword>();
@@ -67,7 +68,7 @@ public class User{
 	public static User signUp(UserConnection userConnection) {
 		System.out.println("debug:"+userConnection.getEmail());
 		return User.builder()
-				.userEmail(userConnection.getEmail())	// 이메일만 왜않되?????
+				.userEmail(userConnection.getEmail())
 				.userName(userConnection.getDisplayName())
 				.social(userConnection)
 				.build();

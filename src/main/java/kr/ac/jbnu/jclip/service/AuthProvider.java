@@ -12,6 +12,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import kr.ac.jbnu.jclip.model.User;
+import kr.ac.jbnu.jclip.service.user.UserService;
 
 @Component("authProvider")
 public class AuthProvider implements AuthenticationProvider{
