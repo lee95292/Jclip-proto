@@ -9,7 +9,6 @@ import kr.ac.jbnu.jclip.model.Article;
 import kr.ac.jbnu.jclip.repository.ArticleRepository;
 import kr.ac.jbnu.jclip.service.crawl.domins.CrawlService;
 import kr.ac.jbnu.jclip.service.crawl.domins.JBNUMainCrawlService;
-import lombok.AllArgsConstructor;
 
 @Service
 public class ArticleUpdateService {

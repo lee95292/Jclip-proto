@@ -6,9 +6,6 @@
 package kr.ac.jbnu.jclip.service.crawl.domins;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;

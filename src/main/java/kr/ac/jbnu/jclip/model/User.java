@@ -6,8 +6,6 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -33,11 +31,6 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class User{
-	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 8205455882767009687L;
 
 	@Id
 	@Column(name="USER_ID")
@@ -80,6 +73,7 @@ public class User{
 				.social(userConnection)
 				.build();
 	}
+	
 	public void addKeyword(Keyword keyword) {
 		this.keywords.add(keyword);
 	}
