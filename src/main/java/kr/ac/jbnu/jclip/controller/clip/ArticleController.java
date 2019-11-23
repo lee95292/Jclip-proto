@@ -6,11 +6,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import kr.ac.jbnu.jclip.model.Article;
-import kr.ac.jbnu.jclip.service.ArticleCrawlService;
+import kr.ac.jbnu.jclip.service.crawl.ArticleUpdateService;
 
 @RestController(value = "/api/article/")
 public class ArticleController {
-	private ArticleCrawlService crawlService;
+	private ArticleUpdateService crawlService;
 	
 	
 	@GetMapping("recent")
@@ -19,7 +19,7 @@ public class ArticleController {
 	}
 	
 	//service binding 
-	public ArticleController(ArticleCrawlService crawlService) {
+	public ArticleController(ArticleUpdateService crawlService) {
 		this.crawlService = crawlService;
 	}
 }

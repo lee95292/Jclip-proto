@@ -1,4 +1,4 @@
-package kr.ac.jbnu.jclip.service.crawl;
+package kr.ac.jbnu.jclip.service.crawl.domins;
 
 import org.jsoup.nodes.Element;
 

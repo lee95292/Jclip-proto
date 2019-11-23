@@ -1,4 +1,4 @@
-package kr.ac.jbnu.jclip.service;
+package kr.ac.jbnu.jclip.service.crawl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,23 +7,28 @@ import org.springframework.stereotype.Service;
 
 import kr.ac.jbnu.jclip.model.Article;
 import kr.ac.jbnu.jclip.repository.ArticleRepository;
-import kr.ac.jbnu.jclip.service.crawl.CrawlService;
-import kr.ac.jbnu.jclip.service.crawl.JBNUMainCrawlService;
+import kr.ac.jbnu.jclip.service.crawl.domins.CrawlService;
+import kr.ac.jbnu.jclip.service.crawl.domins.JBNUMainCrawlService;
+import lombok.AllArgsConstructor;
 
 @Service
-public class ArticleCrawlService {
+public class ArticleUpdateService {
 	private static final int articleNumberUnderBound=40000;
 	private ArticleRepository articleRepository;
 	private JBNUMainCrawlService jbnu_mainCrawl;
 	
 	private int numberOfCrawl=30;
 	
-	public ArticleCrawlService(ArticleRepository articleRepository, JBNUMainCrawlService jbnuCrawl) {
+	public ArticleUpdateService(ArticleRepository articleRepository, JBNUMainCrawlService jbnuCrawl) {
 		this.articleRepository = articleRepository;
 		this.jbnu_mainCrawl=jbnuCrawl;
 		
 	}
 	
+	/*
+	 * Service 1.
+	 * HostName별로 Article List를 최신으로 유지
+	 * */
 	public List<Article> getLatestArticles(String hostName){
 		int underBound = getTopArticleNumber(hostName)+1;
 		List<Article> validArticleList = new ArrayList<Article>();

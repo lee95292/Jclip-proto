@@ -9,16 +9,16 @@ import org.springframework.stereotype.Component;
 
 import kr.ac.jbnu.jclip.model.Article;
 import kr.ac.jbnu.jclip.repository.ArticleRepository;
-import kr.ac.jbnu.jclip.service.ArticleCrawlService;
+import kr.ac.jbnu.jclip.service.crawl.ArticleUpdateService;
 
 @Component
 public class CrawlDataLoader {
 	
-	ArticleCrawlService crawlService;
+	ArticleUpdateService crawlService;
 	ArticleRepository articleRepository;
 	List<String> hostNames = new ArrayList<String>();
 	
-	public CrawlDataLoader(ArticleCrawlService crawlService,ArticleRepository articleRepository) {
+	public CrawlDataLoader(ArticleUpdateService crawlService,ArticleRepository articleRepository) {
 		this.articleRepository=articleRepository;
 		this.crawlService=crawlService;
 		

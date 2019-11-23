@@ -11,12 +11,13 @@ import org.springframework.test.annotation.Commit;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import kr.ac.jbnu.jclip.model.Article;
+import kr.ac.jbnu.jclip.service.crawl.ArticleUpdateService;
 @RunWith( SpringJUnit4ClassRunner.class )
 @SpringBootTest
 @Commit
 public class JBNUClipServiceTest {
 	@Autowired
-	private ArticleCrawlService clipService;
+	private ArticleUpdateService clipService;
 	
 
 	@Before
