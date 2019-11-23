@@ -28,11 +28,11 @@ public class SocialService {
     public UsernamePasswordAuthenticationToken doAuthentication(UserConnection userConnection) {
 
         if (userService.isExistUser(userConnection)) {
-            // ±âÁ¸ È¸¿øÀÏ °æ¿ì¿¡´Â µ¥ÀÌÅÍº£ÀÌ½º¿¡¼­ Á¶È¸ÇØ¼­ ÀÎÁõ Ã³¸®
+            // ê¸°ì¡´ íšŒì›ì¼ ê²½ìš°ì—ëŠ” ë°ì´í„°ë² ì´ìŠ¤ì—ì„œ ì¡°íšŒí•´ì„œ ì¸ì¦ ì²˜ë¦¬
             final User user = userService.findBySocial(userConnection);
             return setAuthenticationToken(user);
         } else {
-            // »õ È¸¿øÀÏ °æ¿ì È¸¿ø°¡ÀÔ ÀÌÈÄ ÀÎÁõ Ã³¸®
+            // ìƒˆ íšŒì›ì¼ ê²½ìš° íšŒì›ê°€ì… ì´í›„ ì¸ì¦ ì²˜ë¦¬
             final User user = userService.signUp(userConnection);
             return setAuthenticationToken(user);
 

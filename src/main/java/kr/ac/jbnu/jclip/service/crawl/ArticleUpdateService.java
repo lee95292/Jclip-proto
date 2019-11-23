@@ -27,7 +27,7 @@ public class ArticleUpdateService {
 	
 	/*
 	 * Service 1.
-	 * HostNameº°·Î Article List¸¦ ÃÖ½ÅÀ¸·Î À¯Áö
+	 * HostNameë³„ë¡œ Article Listë¥¼ ìµœì‹ ìœ¼ë¡œ ìœ ì§€
 	 * */
 	public List<Article> getLatestArticles(String hostName){
 		int underBound = getTopArticleNumber(hostName)+1;
@@ -60,7 +60,7 @@ public class ArticleUpdateService {
 	}
 	
 
-	//TODO: Hostnames ·¹°Å½Ã enumÀ¸·Î ±³Ã¼
+	//TODO: Hostnames ë ˆê±°ì‹œ enumìœ¼ë¡œ êµì²´
 	CrawlService getCrawlServiceByHostName(String hostName) {
 		if(hostName.equals("jbnu_main")) {
 			return jbnu_mainCrawl;

@@ -54,7 +54,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		http.antMatcher("/**").authorizeRequests().antMatchers("/","/login**").permitAll().anyRequest().authenticated()
 						.and()
 						.exceptionHandling()
-						//Spring SecurityÀÇ ÀÚÃ¼ ·Î±×ÀÎ success/fail redirection ¹æÁö
+						//Spring Securityì˜ ìì²´ ë¡œê·¸ì¸ success/fail redirection ë°©ì§€
 						.authenticationEntryPoint(new LoginUrlAuthenticationEntryPoint("/")).and()
 						.addFilterBefore(ssoFilter(),BasicAuthenticationFilter.class);
 		

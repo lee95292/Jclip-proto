@@ -13,7 +13,7 @@ import kr.ac.jbnu.jclip.social.google.GoogleUserDetails;
 import lombok.AllArgsConstructor;
 
 /*
- * Å×½ºÆ®¸¦ ÅëÇØ ¾Ë¾Æ³½ Á¤º¸
+ * í…ŒìŠ¤íŠ¸ë¥¼ í†µí•´ ì•Œì•„ë‚¸ ì •ë³´
  * 
  * */
 @AllArgsConstructor

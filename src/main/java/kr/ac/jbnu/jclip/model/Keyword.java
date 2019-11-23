@@ -37,7 +37,7 @@ public class Keyword{
 	@Column(name="host_name")
 	private String hostName;
 	
-	//TODO cascade À§Çè¼º Ã¼Å©ÇÏ°í refactor ÇÏ±â. ¼º´ÉÀúÇÏ ¿ì·Á
+	//TODO cascade ìœ„í—˜ì„± ì²´í¬í•˜ê³  refactor í•˜ê¸°. ì„±ëŠ¥ì €í•˜ ìš°ë ¤
 	@Builder.Default
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "keywords")	
 	private List<User> users= new ArrayList<User>();
