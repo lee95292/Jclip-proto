@@ -16,7 +16,9 @@ public class GoogleUserDetails {
     private boolean email_verified;
     private String gender;
     private String locale;
-
+    
+    private String hd;
+    
     private long expiration;
     private String access_token;
 

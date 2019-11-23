@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component;
 
 import kr.ac.jbnu.jclip.model.User;
 import kr.ac.jbnu.jclip.model.UserConnection;
+import kr.ac.jbnu.jclip.repository.UserRepository;
 import kr.ac.jbnu.jclip.service.user.UserService;
 import lombok.AllArgsConstructor;
 
@@ -22,7 +23,8 @@ import lombok.AllArgsConstructor;
 public class SocialService {
 
     private final UserService userService;
-
+    private final UserRepository userRepository;
+    
     public UsernamePasswordAuthenticationToken doAuthentication(UserConnection userConnection) {
 
         if (userService.isExistUser(userConnection)) {
@@ -39,17 +41,22 @@ public class SocialService {
 
 
     private UsernamePasswordAuthenticationToken setAuthenticationToken(Object user) {
-        return new UsernamePasswordAuthenticationToken(user, null, getAuthorities("ROLE_USER"));
+    	UsernamePasswordAuthenticationToken OauthToken=new UsernamePasswordAuthenticationToken(user, null, getAuthorities("ROLE_USER"));
+        return setTokenDetails(OauthToken, user);
     }
 
-    private Collection<? extends GrantedAuthority> getAuthorities(String role) {
+    private UsernamePasswordAuthenticationToken setTokenDetails(
+			UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken,Object user) {
+		usernamePasswordAuthenticationToken.setDetails(user);
+    	return usernamePasswordAuthenticationToken;
+	}
+
+
+	private Collection<? extends GrantedAuthority> getAuthorities(String role) {
         List<GrantedAuthority> authorities = new ArrayList<>();
         authorities.add(new SimpleGrantedAuthority(role));
         return authorities;
     }
-	@Bean
-	public PasswordEncoder passwordEncoder() {
-		return new BCryptPasswordEncoder();
-	}
+
 
 }

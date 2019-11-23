@@ -5,6 +5,7 @@ import java.util.Optional;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
@@ -64,7 +65,14 @@ public class UserService {
 		
 		return optionKeyword.orElse(keyword);
 	}
-
+	
+	public User getUserByAuthenticationToken(UsernamePasswordAuthenticationToken token){
+		if(token.getDetails()==null) {
+			throw new NullPointerException();
+		}
+		return (User)token.getDetails();
+	}
+	
 	@Transactional
 	public Optional<User> getUserByUserEmail(String userEmail) {
 		return userRepository.findUserByUserEmail(userEmail);
