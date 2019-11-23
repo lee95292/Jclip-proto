@@ -1,7 +1,7 @@
 /*
  * Author : mklee(lee95292)
  * 
- * Description : kr.ac.jbnu.jclip.config.CrawlDataLoader¿¡¼­ ¾ÖÇÃ¸®ÄÉÀÌ¼Ç ½ÃÀÛ ½Ã Å©·Ñ¸µ µ¥ÀÌÅÍ ¸ğÀ½.
+ * Description : kr.ac.jbnu.jclip.config.CrawlDataLoaderì—ì„œ ì• í”Œë¦¬ì¼€ì´ì…˜ ì‹œì‘ ì‹œ í¬ë¡¤ë§ ë°ì´í„° ëª¨ìŒ.
  * */
 package kr.ac.jbnu.jclip.service.crawl;
 
@@ -31,7 +31,7 @@ public class JBNUMainCrawlService implements CrawlService{
 			e.printStackTrace();
 		}
 		
-		// »èÁ¦µÈ °Ô½Ã±Û
+		// ì‚­ì œëœ ê²Œì‹œê¸€
 		if(articleElement==null) {
 			Article nullArticle = new Article();
 			nullArticle.setArticleContent("##");
@@ -44,7 +44,7 @@ public class JBNUMainCrawlService implements CrawlService{
 	
 	
 	/*
-	 * 	@Args - element : ¾ÆÆ¼Å¬ ÀüÃ¼¿¡ ÇØ´çÇÏ´Â HTML 
+	 * 	@Args - element : ì•„í‹°í´ ì „ì²´ì— í•´ë‹¹í•˜ëŠ” HTML 
 	 * */
 	@Override
 	public Article getArticleByElement(Element element) {

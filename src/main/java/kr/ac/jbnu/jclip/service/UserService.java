@@ -43,7 +43,7 @@ public class UserService {
         return (user != null);
 	}
 	/*
-	 * @Args keyword - hostname, word°¡ ¼³Á¤µÈ Å°¿öµå
+	 * @Args keyword - hostname, wordê°€ ì„¤ì •ëœ í‚¤ì›Œë“œ
 	 * 
 	 * */
 

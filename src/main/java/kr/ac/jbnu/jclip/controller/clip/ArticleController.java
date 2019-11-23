@@ -11,14 +11,13 @@ import kr.ac.jbnu.jclip.service.ArticleCrawlService;
 @RestController("/api/article/")
 public class ArticleController {
 	private ArticleCrawlService crawlService;
-	
-	
-	@GetMapping("recent")
-	public List<Article> getRecentArticle(){
-			return crawlService.getLatestArticles("jbnu_main");
+
+	@GetMapping("/service/recent")
+	public List<Article> getRecentArticle() {
+		return crawlService.getLatestArticles("jbnu_main");
 	}
-	
-	//service binding 
+
+	// service binding
 	public ArticleController(ArticleCrawlService crawlService) {
 		this.crawlService = crawlService;
 	}

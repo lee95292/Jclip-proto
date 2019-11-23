@@ -6,14 +6,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class UserController {
-	
-	
+
 	@GetMapping(value = "/login")
-	public  String login() {
-		
+	public String login() {
+
 		return "";
 	}
-	
+
 	@PostMapping(value = "/register")
 	public String registerByEmail() {
 		return "";

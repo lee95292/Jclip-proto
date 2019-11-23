@@ -7,18 +7,14 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 @SpringBootApplication
 @EnableGlobalMethodSecurity(securedEnabled = true)
 public class JclipProtoApplication {
-	private static final String APPLICATION=
-											"spring.config.location="+
-											"classpath:/application.yml,"+
-											"classpath:/private.yml";
+	private static final String APPLICATION = "spring.config.location=" + "classpath:/application.yml,"
+			+ "classpath:/private.yml";
 
 	public static void main(String[] args) {
+		System.setProperty("spring.profiles.active", "dev"); // 목적에 따라 주석 처리 가능함.
 		new SpringApplicationBuilder(JclipProtoApplication.class).properties(APPLICATION).run(args);
-		
-//		SpringApplication.run(JclipProtoApplication.class, args);
-	}
-	
 
+		// SpringApplication.run(JclipProtoApplication.class, args);
+	}
 
 }
-

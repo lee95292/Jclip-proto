@@ -55,7 +55,7 @@ public class ArticleCrawlService {
 	}
 	
 
-	//TODO: Hostnames ·¹°Å½Ã enumÀ¸·Î ±³Ã¼
+	//TODO: Hostnames ë ˆê±°ì‹œ enumìœ¼ë¡œ êµì²´
 	CrawlService getCrawlServiceByHostName(String hostName) {
 		if(hostName.equals("jbnu_main")) {
 			return jbnu_mainCrawl;
