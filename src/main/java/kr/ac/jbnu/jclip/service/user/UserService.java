@@ -50,21 +50,6 @@ public class UserService {
 	 * @Args keyword - hostname, word가 설정된 키워드
 	 * 
 	 * */
-
-	@Transactional
-	public void addKeyword(User user, Keyword keyword) {
-		Keyword validKeyword= getValidKeyword(keyword);		
-		validKeyword.addUser(user);	
-		
-		keywordRepository.save(validKeyword);
-	}
-	
-	@Transactional
-	public Keyword getValidKeyword(Keyword keyword) {
-		Optional<Keyword> optionKeyword = keywordRepository.findByHostNameAndWord(keyword.getHostName(), keyword.getWord());
-		
-		return optionKeyword.orElse(keyword);
-	}
 	
 	public User getUserByAuthenticationToken(UsernamePasswordAuthenticationToken token){
 		if(token.getDetails()==null) {

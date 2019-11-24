@@ -9,5 +9,5 @@ import kr.ac.jbnu.jclip.model.Keyword;
 
 @Repository
 public interface KeywordRepository extends CrudRepository<Keyword, Integer>{
-	Optional<Keyword> findByHostNameAndWord(String hostName, String word);
+	Keyword findByHostNameAndWord(String hostName, String word);
 }

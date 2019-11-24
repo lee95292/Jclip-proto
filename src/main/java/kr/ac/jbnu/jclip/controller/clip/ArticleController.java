@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import kr.ac.jbnu.jclip.model.Article;
 import kr.ac.jbnu.jclip.service.crawl.ArticleUpdateService;
 
-@RestController(value = "/api/article/")
+@RestController
 public class ArticleController {
 	private ArticleUpdateService crawlService;
 	

@@ -26,7 +26,7 @@ public class ArticleUpdateService {
 	
 	/*
 	 * Service 1.
-	 * HostName별로 Article List를 최신으로 유지
+	 * HostName별로  최신 Article crawl
 	 * */
 	public List<Article> getLatestArticles(String hostName){
 		int underBound = getTopArticleNumber(hostName)+1;

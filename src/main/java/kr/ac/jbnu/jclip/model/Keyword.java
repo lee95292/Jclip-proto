@@ -31,7 +31,7 @@ public class Keyword{
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
 	
-	@Column(name="word")
+	@Column(name="word",unique = true)
 	private String word;
 	
 	@Column(name="host_name")
@@ -47,6 +47,12 @@ public class Keyword{
 		return "word["+ word +"] hostName["+ hostName+ "] users["+users+"]";
 	}
 	
+	public static Keyword generateKeyword(String hostname,String word) {
+		return Keyword.builder()
+			.hostName(hostname)
+			.word(word)
+			.build();
+	}
 	public void addUser(User user) {
 		this.users.add(user);
 	}

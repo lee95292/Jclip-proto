@@ -21,7 +21,7 @@ public class JBNUMainCrawlService implements CrawlService{
 	private String hostName="jbnu_main";
 	
 	private int articleNumberUnderbound=40000;
-	
+//	private boolean 
 	@Override
 	public Article getArticle(int articleNumber) {
 		Element articleElement =null;
