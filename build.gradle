@@ -48,5 +48,5 @@ dependencies {
 	annotationProcessor 'org.projectlombok:lombok'
 	compile group: 'javax.servlet', name: 'jstl', version: '1.2'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-
+	implementation 'io.jsonwebtoken:jjwt:0.9.1'
 }

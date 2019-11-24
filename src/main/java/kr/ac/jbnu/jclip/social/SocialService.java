@@ -39,7 +39,6 @@ public class SocialService {
         }
     }
 
-
     private UsernamePasswordAuthenticationToken setAuthenticationToken(Object user) {
     	UsernamePasswordAuthenticationToken OauthToken=new UsernamePasswordAuthenticationToken(user, null, getAuthorities("ROLE_USER"));
         return setTokenDetails(OauthToken, user);
@@ -52,11 +51,9 @@ public class SocialService {
 	}
 
 
-	private Collection<? extends GrantedAuthority> getAuthorities(String role) {
+	public Collection<? extends GrantedAuthority> getAuthorities(String role) {
         List<GrantedAuthority> authorities = new ArrayList<>();
         authorities.add(new SimpleGrantedAuthority(role));
         return authorities;
     }
-
-
 }
