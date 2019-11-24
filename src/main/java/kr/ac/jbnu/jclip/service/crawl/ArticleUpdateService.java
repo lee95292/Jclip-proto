@@ -21,7 +21,6 @@ public class ArticleUpdateService {
 	public ArticleUpdateService(ArticleRepository articleRepository, JBNUMainCrawlService jbnuCrawl) {
 		this.articleRepository = articleRepository;
 		this.jbnu_mainCrawl=jbnuCrawl;
-		
 	}
 	
 	/*
@@ -65,6 +64,13 @@ public class ArticleUpdateService {
 			return jbnu_mainCrawl;
 		}
 		return null;
+	}
+	
+	//TODO: Hostnames 레거시 enum으로 교체
+	public void setLatestArticles(String hostName, List<Article> latestArticles) {
+		if(hostName.equals("jbnu_main")) {
+			jbnu_mainCrawl.setLatestArticles(latestArticles);;
+		}
 	}
 }
 

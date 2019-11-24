@@ -1,5 +1,7 @@
 package kr.ac.jbnu.jclip.service.crawl.domins;
 
+import java.util.List;
+
 import org.jsoup.nodes.Element;
 
 import kr.ac.jbnu.jclip.model.Article;
@@ -18,4 +20,15 @@ public class JBNUCSEMainCrawlService implements CrawlService{
 		return null;
 	}
 
+	@Override
+	public List<Article> getLatestArticles() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setLatestArticles(List<Article> latestArticles) {
+		// TODO Auto-generated method stub
+		
+	}
 }

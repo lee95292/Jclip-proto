@@ -6,6 +6,8 @@
 package kr.ac.jbnu.jclip.service.crawl.domins;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -19,6 +21,7 @@ public class JBNUMainCrawlService implements CrawlService{
 	private String host="https://www.jbnu.ac.kr/";
 	private String boardURL= host+"kor/?menuID=139&mode=view&no=";
 	private String hostName="jbnu_main";
+	private List<Article> latestArticles = new ArrayList<Article>();
 	
 	private int articleNumberUnderbound=40000;
 //	private boolean 
@@ -62,5 +65,18 @@ public class JBNUMainCrawlService implements CrawlService{
 	
 	public int getArticleNumberUnderbound() {
 		return this.articleNumberUnderbound;
+	}
+
+
+	@Override
+	public List<Article> getLatestArticles() {
+		return latestArticles;
+	}
+
+
+	@Override
+	public void setLatestArticles(List<Article> latestArticles) {
+		// TODO Auto-generated method stub
+		
 	}
 }

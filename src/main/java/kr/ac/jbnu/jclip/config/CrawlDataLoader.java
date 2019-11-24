@@ -14,23 +14,30 @@ import kr.ac.jbnu.jclip.service.crawl.ArticleUpdateService;
 @Component
 public class CrawlDataLoader {
 	
-	ArticleUpdateService crawlService;
+	ArticleUpdateService updateService;
 	ArticleRepository articleRepository;
 	List<String> hostNames = new ArrayList<String>();
 	
-	public CrawlDataLoader(ArticleUpdateService crawlService,ArticleRepository articleRepository) {
+	//for development. 
+	boolean workStatus = true;
+	
+	public CrawlDataLoader(ArticleUpdateService updateService,ArticleRepository articleRepository) {
 		this.articleRepository=articleRepository;
-		this.crawlService=crawlService;
+		this.updateService=updateService;
 		
 		hostNames.add("jbnu_main");
 	}
 	@PostConstruct
 	public void articleDataLoad() {
 
+		if(!workStatus)
+			return;
 		System.out.println(articleRepository.toString()+"\n\n\n");
 		for(String hostName :hostNames) {
-			List<Article> validArticles=crawlService.getLatestArticles(hostName);
-			articleRepository.saveAll(validArticles);
+			List<Article> latestArticles=updateService.getLatestArticles(hostName);
+			updateService.setLatestArticles(hostName, latestArticles);
+			articleRepository.saveAll(latestArticles);
+			
 		}
 
 	}
