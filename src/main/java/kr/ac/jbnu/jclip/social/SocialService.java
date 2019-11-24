@@ -56,4 +56,9 @@ public class SocialService {
         authorities.add(new SimpleGrantedAuthority(role));
         return authorities;
     }
+	
+	@Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
 }
