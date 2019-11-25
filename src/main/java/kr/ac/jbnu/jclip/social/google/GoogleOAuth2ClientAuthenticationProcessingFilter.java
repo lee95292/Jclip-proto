@@ -53,11 +53,8 @@ public class GoogleOAuth2ClientAuthenticationProcessingFilter extends OAuth2Clie
         String token = jwtUtil.createToken(userConnection, authenticationToken.getAuthorities());
         response.addHeader("token", token);
         System.out.println(token);
-<<<<<<< HEAD
+
         super.successfulAuthentication(request, response, chain, authenticationToken);
-=======
-         super.successfulAuthentication(request, response, chain,authenticationToken);
->>>>>>> 5ebbcb7da969b0061acae554e80c12654ff24751
 
     }
 
