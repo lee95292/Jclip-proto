@@ -78,6 +78,14 @@ public class User{
 		this.keywords.add(keyword);
 	}
 	
+	public void removeKeyword(Keyword removeKey) {
+		for(Keyword key : keywords) {
+			if(key.getHostName()==removeKey.getHostName()
+					&& key.getWord()== removeKey.getWord()) {
+				keywords.remove(key);
+			}
+		}
+	}
 	public void addArticle(Article article) {
 		this.articles.add(article);
 	}

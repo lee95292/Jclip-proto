@@ -17,6 +17,7 @@ public class GoogleUserDetails {
     private String gender;
     private String locale;
     
+    //it's unknown field, but jbnu.ac.kr(email) need it
     private String hd;
     
     private long expiration;
