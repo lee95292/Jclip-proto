@@ -1,7 +1,5 @@
 package kr.ac.jbnu.jclip.service.clip;
 
-import java.util.List;
-
 import org.springframework.stereotype.Service;
 
 import kr.ac.jbnu.jclip.model.Keyword;
@@ -23,8 +21,7 @@ public class ClipService {
 		this.keywordRepository=keywordRepository;
 	}
 	public void addKeyword(User user,String hostname,String word) {
-		//유효 문자열 체크 : controller
-		
+		//유효 문자열 체크 : controller		
 		Keyword keyword= keywordRepository.findByHostNameAndWord(hostname, word);
 		
 		if(keyword==null) {
@@ -33,7 +30,7 @@ public class ClipService {
 		user.addKeyword(keyword);
 	}
 	
-	public void removeKeywordByHostNameAndWord(User user, String hostname,String word) {		
+	public void removeKeyword(User user, String hostname,String word) {		
 		Keyword rmKey = Keyword.builder()
 			.hostName(hostname)
 			.word(word).build();

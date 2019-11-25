@@ -17,13 +17,10 @@ import org.springframework.stereotype.Service;
 import kr.ac.jbnu.jclip.model.Article;
 
 @Service
-public class JBNUMainCrawlService implements CrawlService{
+public class JBNUMainCrawlService extends CrawlServiceAdapter{
 	private String host="https://www.jbnu.ac.kr/";
 	private String boardURL= host+"kor/?menuID=139&mode=view&no=";
 	private String hostName="jbnu_main";
-	private List<Article> latestArticles = new ArrayList<Article>();
-	
-	private int articleNumberUnderbound=40000;
 //	private boolean 
 	@Override
 	public Article getArticle(int articleNumber) {
@@ -64,19 +61,6 @@ public class JBNUMainCrawlService implements CrawlService{
 	}
 	
 	public int getArticleNumberUnderbound() {
-		return this.articleNumberUnderbound;
-	}
-
-
-	@Override
-	public List<Article> getLatestArticles() {
-		return latestArticles;
-	}
-
-
-	@Override
-	public void setLatestArticles(List<Article> latestArticles) {
-		// TODO Auto-generated method stub
-		
+		return articleNumberUnderbound;
 	}
 }
