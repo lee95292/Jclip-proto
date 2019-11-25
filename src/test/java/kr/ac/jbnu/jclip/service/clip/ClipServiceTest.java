@@ -13,7 +13,7 @@ import kr.ac.jbnu.jclip.model.UserConnection;
 
 @RunWith( SpringJUnit4ClassRunner.class )
 @SpringBootTest
-public class ClipServiceTest {
+public class ClipServiceTest{
 	
 	@Autowired
 	ClipService clipService;
