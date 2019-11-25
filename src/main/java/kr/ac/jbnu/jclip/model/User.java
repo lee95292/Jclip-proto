@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -30,7 +31,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class User{
-	
+
 	@Id
 	@Column(name="USER_ID")
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -40,50 +41,54 @@ public class User{
 	@JoinColumn(name="provider_id", referencedColumnName = "provider_id",updatable = false,unique = true)
 	private UserConnection social;
 
-	@Column(name="user_name")
-	private String userName;
-
+	@Column(name="user_name",nullable = false)
+	private String username;
+	
 	@Column(name="user_email")
 	private String userEmail;
 	
 	@Column(name="user_password")
-	private String userPassword;
-	
-	@Column(name="user_nickname")
-	private String userNickname;
-	
+	private String password;
 
-	@Builder.Default
-	@ManyToMany
+	@ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
 	@JoinTable(name="tbl_user_keyword", joinColumns = @JoinColumn(name="USER_ID")
 									  , inverseJoinColumns = @JoinColumn(name="KEYWORD_ID"))
 	private List<Keyword> keywords = new ArrayList<Keyword>();
 	
-	@Builder.Default
 	@ManyToMany
 	@JoinTable(name = "tbl_user_article", joinColumns = @JoinColumn(name="USER_ID")
 										, inverseJoinColumns = @JoinColumn(name="ARTICLE_ID"))
 	private List<Article> articles =new ArrayList<Article>();
 	
 	@Builder
-    private User(String email, String nickname, UserConnection social) {
-        this.userEmail = email;
-        this.userNickname = nickname;
+    private User(String userEmail, String userName, UserConnection social) {
+        this.userEmail = userEmail;
+        this.username = userName;
         this.social = social;
     }
 	public static User signUp(UserConnection userConnection) {
 		return User.builder()
 				.userEmail(userConnection.getEmail())
-				.userNickname(userConnection.getDisplayName())
+				.userName(userConnection.getDisplayName())
 				.social(userConnection)
 				.build();
 	}
+	
 	public void addKeyword(Keyword keyword) {
 		this.keywords.add(keyword);
 	}
 	
+	public void removeKeyword(Keyword removeKey) {
+		for(Keyword key : keywords) {
+			if(key.getHostName()==removeKey.getHostName()
+					&& key.getWord()== removeKey.getWord()) {
+				keywords.remove(key);
+			}
+		}
+	}
 	public void addArticle(Article article) {
 		this.articles.add(article);
 	}
+	
 }
  

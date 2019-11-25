@@ -16,7 +16,10 @@ public class GoogleUserDetails {
     private boolean email_verified;
     private String gender;
     private String locale;
-
+    
+    //it's unknown field, but jbnu.ac.kr(email) need it
+    private String hd;
+    
     private long expiration;
     private String access_token;
 

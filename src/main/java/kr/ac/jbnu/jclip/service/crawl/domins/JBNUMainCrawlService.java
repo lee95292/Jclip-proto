@@ -3,9 +3,11 @@
  * 
  * Description : kr.ac.jbnu.jclip.config.CrawlDataLoader에서 애플리케이션 시작 시 크롤링 데이터 모음.
  * */
-package kr.ac.jbnu.jclip.service.crawl;
+package kr.ac.jbnu.jclip.service.crawl.domins;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -15,11 +17,11 @@ import org.springframework.stereotype.Service;
 import kr.ac.jbnu.jclip.model.Article;
 
 @Service
-public class JBNUMainCrawlService implements CrawlService{
+public class JBNUMainCrawlService extends CrawlServiceAdapter{
 	private String host="https://www.jbnu.ac.kr/";
 	private String boardURL= host+"kor/?menuID=139&mode=view&no=";
 	private String hostName="jbnu_main";
-	
+//	private boolean 
 	@Override
 	public Article getArticle(int articleNumber) {
 		Element articleElement =null;
@@ -56,5 +58,9 @@ public class JBNUMainCrawlService implements CrawlService{
 		article.setHostName(hostName);
 		article.setArticleContent(articleContent);
 		return article;
+	}
+	
+	public int getArticleNumberUnderbound() {
+		return articleNumberUnderbound;
 	}
 }

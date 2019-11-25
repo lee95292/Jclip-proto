@@ -33,7 +33,7 @@ out/
 
 
 ### Customized ###
-bin/
+/bin/
 /node_modules/
 private.yml
 keystore.p12

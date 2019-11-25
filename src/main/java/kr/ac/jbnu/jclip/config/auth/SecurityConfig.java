@@ -60,24 +60,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests().antMatchers("/static/**").permitAll()
 				// .antMatchers("/auth/sample").hasRole("ROLE_ADMIN")
 				.anyRequest().authenticated();
-
-		// http.authorizeRequests().antMatchers("login/**").permitAll().and().exceptionHandling()
-		// .authenticationEntryPoint(new LoginUrlAuthenticationEntryPoint("/")).and()
-		// .addFilterBefore(ssoFilter(), BasicAuthenticationFilter.class);
-
-		// http.authorizeRequests().antMatchers("/service/**").authenticated().and()
-		// .addFilterBefore(jwtAuthenticationFilter(), BasicAuthenticationFilter.class);
-
-		http.antMatcher("/**").authorizeRequests().antMatchers("/", "/login**").permitAll().anyRequest().authenticated()
-				.and().exceptionHandling()
-				// Spring Security의 자체 로그인 success/fail redirection 방지
-				.authenticationEntryPoint(new LoginUrlAuthenticationEntryPoint("/")).and()
-				.addFilterBefore(ssoFilter(), BasicAuthenticationFilter.class)
-				.addFilterBefore(jwtAuthenticationFilter(), FilterSecurityInterceptor.class);
-
-		http.logout().invalidateHttpSession(true).clearAuthentication(true)
-				.logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/").permitAll();
-
+		
+		http.antMatcher("/**").authorizeRequests().antMatchers("/","/login**").permitAll().anyRequest().authenticated()
+						.and()
+						.exceptionHandling()
+						//Spring Security의 자체 로그인 success/fail redirection 방지
+						.authenticationEntryPoint(new LoginUrlAuthenticationEntryPoint("/")).and()
+						.addFilterBefore(ssoFilter(),BasicAuthenticationFilter.class);
+		
+		http.logout()
+			.invalidateHttpSession(true)
+			.clearAuthentication(true)
+			.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+			.logoutSuccessUrl("/").permitAll();
 	}
 
 	@Override

@@ -6,19 +6,19 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import kr.ac.jbnu.jclip.model.Article;
-import kr.ac.jbnu.jclip.service.ArticleCrawlService;
+import kr.ac.jbnu.jclip.service.crawl.ArticleUpdateService;
 
-@RestController("/api/article/")
+@RestController
 public class ArticleController {
-	private ArticleCrawlService crawlService;
-
+	private ArticleUpdateService crawlService;
+	
 	@GetMapping("/service/recent")
 	public List<Article> getRecentArticle() {
 		return crawlService.getLatestArticles("jbnu_main");
 	}
 
 	// service binding
-	public ArticleController(ArticleCrawlService crawlService) {
+	public ArticleController(ArticleUpdateService crawlService) {
 		this.crawlService = crawlService;
 	}
 }
