@@ -11,15 +11,14 @@ import org.springframework.security.web.authentication.SimpleUrlAuthenticationSu
 import org.springframework.stereotype.Component;
 
 @Component
-public class AuthSuccessHandler extends SimpleUrlAuthenticationSuccessHandler{
+public class AuthSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
 			Authentication authentication) throws IOException, ServletException {
 		super.onAuthenticationSuccess(request, response, authentication);
 		response.setStatus(HttpServletResponse.SC_OK);
-		response.sendRedirect(""/*TODO*/);
+		response.sendRedirect(""/* TODO */);
 		response.getWriter().flush();
 	}
-	
 
 }

@@ -10,7 +10,8 @@ public interface CrawlService {
 	public Article getArticleByElement(Element row);
 
 	public Article getArticle(int articleNumber);
-	
+
 	public void setLatestArticles(List<Article> latestArticles);
+
 	public List<Article> getLatestArticles();
 }

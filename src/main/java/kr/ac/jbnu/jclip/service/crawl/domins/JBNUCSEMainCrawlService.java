@@ -4,7 +4,7 @@ import org.jsoup.nodes.Element;
 
 import kr.ac.jbnu.jclip.model.Article;
 
-public class JBNUCSEMainCrawlService extends CrawlServiceAdapter{
+public class JBNUCSEMainCrawlService extends CrawlServiceAdapter {
 
 	@Override
 	public Article getArticleByElement(Element row) {

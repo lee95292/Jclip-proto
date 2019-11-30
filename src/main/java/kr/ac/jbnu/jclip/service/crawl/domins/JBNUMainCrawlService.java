@@ -17,24 +17,25 @@ import org.springframework.stereotype.Service;
 import kr.ac.jbnu.jclip.model.Article;
 
 @Service
-public class JBNUMainCrawlService extends CrawlServiceAdapter{
-	private String host="https://www.jbnu.ac.kr/";
-	private String boardURL= host+"kor/?menuID=139&mode=view&no=";
-	private String hostName="jbnu_main";
-//	private boolean 
+public class JBNUMainCrawlService extends CrawlServiceAdapter {
+	private String host = "https://www.jbnu.ac.kr/";
+	private String boardURL = host + "kor/?menuID=139&mode=view&no=";
+	private String hostName = "jbnu_main";
+
+	// private boolean
 	@Override
 	public Article getArticle(int articleNumber) {
-		Element articleElement =null;
-		String articleURL = boardURL+articleNumber;
+		Element articleElement = null;
+		String articleURL = boardURL + articleNumber;
 		try {
-			Document totalDocument= Jsoup.connect(articleURL).get();
-			articleElement =totalDocument.getElementById("print_area");
-		}catch (IOException e) {
+			Document totalDocument = Jsoup.connect(articleURL).get();
+			articleElement = totalDocument.getElementById("print_area");
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+
 		// 삭제된 게시글
-		if(articleElement==null) {
+		if (articleElement == null) {
 			Article nullArticle = new Article();
 			nullArticle.setArticleContent("##");
 			return nullArticle;
@@ -42,12 +43,11 @@ public class JBNUMainCrawlService extends CrawlServiceAdapter{
 		Article article = getArticleByElement(articleElement);
 		article.setArticleHyperlink(articleURL);
 		return article;
-	}	
-	
-	
+	}
+
 	/*
-	 * 	@Args - element : 아티클 전체에 해당하는 HTML 
-	 * */
+	 * @Args - element : 아티클 전체에 해당하는 HTML
+	 */
 	@Override
 	public Article getArticleByElement(Element element) {
 		Article article = new Article();
@@ -59,7 +59,7 @@ public class JBNUMainCrawlService extends CrawlServiceAdapter{
 		article.setArticleContent(articleContent);
 		return article;
 	}
-	
+
 	public int getArticleNumberUnderbound() {
 		return articleNumberUnderbound;
 	}

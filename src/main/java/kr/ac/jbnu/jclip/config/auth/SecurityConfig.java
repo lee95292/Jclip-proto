@@ -23,7 +23,6 @@ import org.springframework.security.oauth2.client.OAuth2RestTemplate;
 import org.springframework.security.oauth2.client.filter.OAuth2ClientAuthenticationProcessingFilter;
 import org.springframework.security.oauth2.client.filter.OAuth2ClientContextFilter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableOAuth2Client;
-import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
 import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
@@ -60,19 +59,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests().antMatchers("/static/**").permitAll()
 				// .antMatchers("/auth/sample").hasRole("ROLE_ADMIN")
 				.anyRequest().authenticated();
-		
-		http.antMatcher("/**").authorizeRequests().antMatchers("/","/login**").permitAll().anyRequest().authenticated()
-						.and()
-						.exceptionHandling()
-						//Spring Security의 자체 로그인 success/fail redirection 방지
-						.authenticationEntryPoint(new LoginUrlAuthenticationEntryPoint("/")).and()
-						.addFilterBefore(ssoFilter(),BasicAuthenticationFilter.class);
-		
-		http.logout()
-			.invalidateHttpSession(true)
-			.clearAuthentication(true)
-			.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-			.logoutSuccessUrl("/").permitAll();
+
+		http.antMatcher("/**").authorizeRequests().antMatchers("/", "/login**").permitAll().anyRequest().authenticated()
+				.and().exceptionHandling()
+				// Spring Security의 자체 로그인 success/fail redirection 방지
+				.authenticationEntryPoint(new LoginUrlAuthenticationEntryPoint("/")).and()
+				.addFilterBefore(ssoFilter(), BasicAuthenticationFilter.class);
+
+		http.logout().invalidateHttpSession(true).clearAuthentication(true)
+				.logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/").permitAll();
 	}
 
 	@Override

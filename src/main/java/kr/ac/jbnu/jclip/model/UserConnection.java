@@ -21,15 +21,14 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Table(name = "user_connection")
 @Getter
-public class UserConnection implements Serializable{
-	
+public class UserConnection implements Serializable {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
 
-	@Id
+    @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
@@ -55,12 +54,12 @@ public class UserConnection implements Serializable{
     @Column(name = "access_token")
     private String accessToken;
 
-
     @Column(name = "expire_time")
     private long expireTime;
-    
-	@Builder
-    private UserConnection(String email, ProviderType provider, String providerId, String displayName, String profileUrl, String imageUrl, String accessToken, long expireTime) {
+
+    @Builder
+    private UserConnection(String email, ProviderType provider, String providerId, String displayName,
+            String profileUrl, String imageUrl, String accessToken, long expireTime) {
         this.email = email;
         this.provider = provider;
         this.providerId = providerId;
@@ -71,16 +70,10 @@ public class UserConnection implements Serializable{
         this.expireTime = expireTime;
     }
 
-	public static UserConnection valueOf(GoogleUserDetails userDetails) {
-        return UserConnection.builder()
-                .expireTime(userDetails.getExpiration())
-                .accessToken(userDetails.getAccess_token())
-                .providerId(userDetails.getSub())
-                .email(userDetails.getEmail())
-                .displayName(userDetails.getName())
-                .imageUrl(userDetails.getPicture())
-                .provider(ProviderType.GOOGLE)
-                .profileUrl(userDetails.getProfile())
-                .build();
+    public static UserConnection valueOf(GoogleUserDetails userDetails) {
+        return UserConnection.builder().expireTime(userDetails.getExpiration())
+                .accessToken(userDetails.getAccess_token()).providerId(userDetails.getSub())
+                .email(userDetails.getEmail()).displayName(userDetails.getName()).imageUrl(userDetails.getPicture())
+                .provider(ProviderType.GOOGLE).profileUrl(userDetails.getProfile()).build();
     }
 }
