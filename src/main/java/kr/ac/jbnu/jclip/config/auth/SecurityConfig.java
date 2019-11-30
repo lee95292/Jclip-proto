@@ -105,8 +105,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	}
 
 	@Bean
-	public FilterRegistrationBean oauth2ClientFilterRegistration(OAuth2ClientContextFilter filter) {
-		FilterRegistrationBean registration = new FilterRegistrationBean();
+	public FilterRegistrationBean<Filter> oauth2ClientFilterRegistration(OAuth2ClientContextFilter filter) {
+		FilterRegistrationBean<Filter> registration = new FilterRegistrationBean<Filter>();
 		registration.setFilter(filter);
 		registration.setOrder(-100);
 		return registration;
@@ -119,6 +119,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		// We do not need to do anything extra on REST authentication success, because
 		// there is no page to redirect to
 		filter.setAuthenticationSuccessHandler((request, response, authentication) -> {
+			// response.
 		});
 
 		return filter;

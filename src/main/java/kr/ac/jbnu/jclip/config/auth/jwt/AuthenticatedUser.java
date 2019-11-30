@@ -10,6 +10,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.util.StringUtils;
 
 public class AuthenticatedUser implements Authentication {
+    static final long serialVersionUID = 1L;
     private String email;
     private String name;
 

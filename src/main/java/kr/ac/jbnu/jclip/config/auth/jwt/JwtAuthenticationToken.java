@@ -8,6 +8,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 
 public class JwtAuthenticationToken implements Authentication {
+    static final long serialVersionUID = 1L;
+
     private String authToken;
 
     JwtAuthenticationToken(String authToken) {

@@ -8,6 +8,7 @@ import java.util.Date;
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -29,8 +30,8 @@ import lombok.RequiredArgsConstructor;
 @Repository
 public class JwtUtil { // JWT 토큰을 생성 및 검증 모듈
 
-    // @Value("spring.jwt.secret")
-    private String secretKey = "test";
+    @Value("spring.jwt.secret")
+    private String secretKey;
 
     private final long tokenValidMilisecond = 1000L * 60 * 60; // 1시간만 토큰 유효
 
@@ -40,6 +41,7 @@ public class JwtUtil { // JWT 토큰을 생성 및 검증 모듈
     @PostConstruct
     protected void init() {
         secretKey = Base64.getEncoder().encodeToString(secretKey.getBytes());
+        System.out.println("secret key :" + secretKey);
     }
 
     // Jwt 토큰 생성
