@@ -23,7 +23,6 @@ import org.springframework.security.oauth2.client.OAuth2RestTemplate;
 import org.springframework.security.oauth2.client.filter.OAuth2ClientAuthenticationProcessingFilter;
 import org.springframework.security.oauth2.client.filter.OAuth2ClientContextFilter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableOAuth2Client;
-import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
 import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
@@ -60,19 +59,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests().antMatchers("/static/**").permitAll()
 				// .antMatchers("/auth/sample").hasRole("ROLE_ADMIN")
 				.anyRequest().authenticated();
-		
-		http.antMatcher("/**").authorizeRequests().antMatchers("/","/login**").permitAll().anyRequest().authenticated()
-						.and()
-						.exceptionHandling()
-						//Spring Security의 자체 로그인 success/fail redirection 방지
-						.authenticationEntryPoint(new LoginUrlAuthenticationEntryPoint("/")).and()
-						.addFilterBefore(ssoFilter(),BasicAuthenticationFilter.class);
-		
-		http.logout()
-			.invalidateHttpSession(true)
-			.clearAuthentication(true)
-			.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-			.logoutSuccessUrl("/").permitAll();
+
+		http.antMatcher("/**").authorizeRequests().antMatchers("/", "/login**").permitAll().anyRequest().authenticated()
+				.and().exceptionHandling()
+				// Spring Security의 자체 로그인 success/fail redirection 방지
+				.authenticationEntryPoint(new LoginUrlAuthenticationEntryPoint("/")).and()
+				.addFilterBefore(ssoFilter(), BasicAuthenticationFilter.class);
+
+		http.logout().invalidateHttpSession(true).clearAuthentication(true)
+				.logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/").permitAll();
 	}
 
 	@Override
@@ -110,8 +105,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	}
 
 	@Bean
-	public FilterRegistrationBean oauth2ClientFilterRegistration(OAuth2ClientContextFilter filter) {
-		FilterRegistrationBean registration = new FilterRegistrationBean();
+	public FilterRegistrationBean<Filter> oauth2ClientFilterRegistration(OAuth2ClientContextFilter filter) {
+		FilterRegistrationBean<Filter> registration = new FilterRegistrationBean<Filter>();
 		registration.setFilter(filter);
 		registration.setOrder(-100);
 		return registration;
@@ -124,6 +119,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		// We do not need to do anything extra on REST authentication success, because
 		// there is no page to redirect to
 		filter.setAuthenticationSuccessHandler((request, response, authentication) -> {
+			// response.
 		});
 
 		return filter;

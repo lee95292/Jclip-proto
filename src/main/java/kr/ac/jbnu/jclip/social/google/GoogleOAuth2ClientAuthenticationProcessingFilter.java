@@ -7,10 +7,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.codehaus.jackson.map.ObjectMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.oauth2.client.filter.OAuth2ClientAuthenticationProcessingFilter;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
@@ -47,17 +45,12 @@ public class GoogleOAuth2ClientAuthenticationProcessingFilter extends OAuth2Clie
         userDetails.setAccessToken(accessToken);
         final UserConnection userConnection = UserConnection.valueOf(userDetails);
         final UsernamePasswordAuthenticationToken authenticationToken = socialService.doAuthentication(userConnection);
-  
-        //TODO: set auth token in the Response 
-        
+
+        // TODO: set auth token in the Response
+
         String token = jwtUtil.createToken(userConnection, authenticationToken.getAuthorities());
-        response.addHeader("token", token);
         System.out.println(token);
-<<<<<<< HEAD
         super.successfulAuthentication(request, response, chain, authenticationToken);
-=======
-         super.successfulAuthentication(request, response, chain,authenticationToken);
->>>>>>> 5ebbcb7da969b0061acae554e80c12654ff24751
 
     }
 
