@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.codehaus.jackson.map.ObjectMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.client.filter.OAuth2ClientAuthenticationProcessingFilter;
@@ -15,19 +16,24 @@ import org.springframework.security.oauth2.provider.OAuth2Authentication;
 
 import kr.ac.jbnu.jclip.config.auth.jwt.JwtUtil;
 import kr.ac.jbnu.jclip.model.UserConnection;
+import kr.ac.jbnu.jclip.model.redis.JwtCache;
+import kr.ac.jbnu.jclip.repository.JwtRedisRepository;
 import kr.ac.jbnu.jclip.social.SocialService;
 
 public class GoogleOAuth2ClientAuthenticationProcessingFilter extends OAuth2ClientAuthenticationProcessingFilter {
 
     private ObjectMapper mapper = new ObjectMapper();
     private SocialService socialService;
+    JwtRedisRepository jwtRedisRepository;
 
     private JwtUtil jwtUtil;
 
-    public GoogleOAuth2ClientAuthenticationProcessingFilter(SocialService socialService, JwtUtil jwtUtil) {
+    public GoogleOAuth2ClientAuthenticationProcessingFilter(SocialService socialService, JwtUtil jwtUtil,
+            JwtRedisRepository jwtRedisRepository) {
         super("/login/google");
         this.socialService = socialService;
         this.jwtUtil = jwtUtil;
+        this.jwtRedisRepository = jwtRedisRepository;
     }
 
     @Override
@@ -43,13 +49,19 @@ public class GoogleOAuth2ClientAuthenticationProcessingFilter extends OAuth2Clie
 
         final GoogleUserDetails userDetails = mapper.convertValue(details, GoogleUserDetails.class);
         userDetails.setAccessToken(accessToken);
+        System.out.println(userDetails.toString());
         final UserConnection userConnection = UserConnection.valueOf(userDetails);
         final UsernamePasswordAuthenticationToken authenticationToken = socialService.doAuthentication(userConnection);
 
         // TODO: set auth token in the Response
 
         String token = jwtUtil.createToken(userConnection, authenticationToken.getAuthorities());
-        System.out.println(token);
+        response.setHeader("token", token);
+
+        System.out.println("jwt token" + token);
+        JwtCache tmp = new JwtCache("test@test.com", 12345L);
+        // jwtRedisRepository.save(tmp);
+        System.out.println(jwtRedisRepository.findById("test@test.com").get().getIat());
         super.successfulAuthentication(request, response, chain, authenticationToken);
 
     }

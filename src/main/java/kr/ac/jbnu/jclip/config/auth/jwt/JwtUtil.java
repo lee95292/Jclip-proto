@@ -34,7 +34,7 @@ public class JwtUtil { // JWT 토큰을 생성 및 검증 모듈
     private String secretKey;
 
     private final long tokenValidMilisecond = 1000L * 60 * 60; // 1시간만 토큰 유효
-
+    private final String tokenAuthentication = "Bearer ";
     private final UserService userService;
     private final SocialService socialService;
 
@@ -54,7 +54,7 @@ public class JwtUtil { // JWT 토큰을 생성 및 검증 모듈
         });
 
         final Date now = new Date();
-        return Jwts.builder().setClaims(claims) // 데이터
+        return tokenAuthentication + Jwts.builder().setClaims(claims) // 데이터
                 .setIssuedAt(now) // 토큰 발행일자
                 .setExpiration(new Date(now.getTime() + tokenValidMilisecond)) // set Expire Time
                 .signWith(SignatureAlgorithm.HS256, secretKey) // 암호화 알고리즘, secret값 세팅

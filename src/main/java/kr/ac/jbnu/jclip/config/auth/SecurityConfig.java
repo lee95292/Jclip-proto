@@ -31,6 +31,7 @@ import org.springframework.web.filter.CompositeFilter;
 import kr.ac.jbnu.jclip.config.auth.jwt.JwtAuthenticationFilter;
 import kr.ac.jbnu.jclip.config.auth.jwt.JwtAuthenticationManager;
 import kr.ac.jbnu.jclip.config.auth.jwt.JwtUtil;
+import kr.ac.jbnu.jclip.repository.JwtRedisRepository;
 import kr.ac.jbnu.jclip.social.SocialService;
 import kr.ac.jbnu.jclip.social.google.GoogleOAuth2ClientAuthenticationProcessingFilter;
 import lombok.AllArgsConstructor;
@@ -49,6 +50,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private JwtUtil jwtUtil;
 	@Autowired
+	private JwtRedisRepository jwtRedisRepository;
+	@Autowired
 	private JwtAuthenticationManager jwtAuthenticationManager;
 
 	@Override
@@ -56,9 +59,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
-		http.authorizeRequests().antMatchers("/static/**").permitAll()
-				// .antMatchers("/auth/sample").hasRole("ROLE_ADMIN")
-				.anyRequest().authenticated();
+		http.authorizeRequests().antMatchers("/static/**").permitAll().antMatchers("/", "/error**").permitAll().and()
+				.authorizeRequests().antMatchers("/servie/**").authenticated().and()
+				.addFilterBefore(jwtAuthenticationFilter(), BasicAuthenticationFilter.class);
 
 		http.antMatcher("/**").authorizeRequests().antMatchers("/", "/login**").permitAll().anyRequest().authenticated()
 				.and().exceptionHandling()
@@ -79,7 +82,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	private Filter ssoFilter() {
 		CompositeFilter filter = new CompositeFilter();
 		List<Filter> filters = new ArrayList<>();
-		filters.add(ssoFilter(google(), new GoogleOAuth2ClientAuthenticationProcessingFilter(socialService, jwtUtil)));
+		filters.add(ssoFilter(google(),
+				new GoogleOAuth2ClientAuthenticationProcessingFilter(socialService, jwtUtil, jwtRedisRepository)));
 		filter.setFilters(filters);
 		return filter;
 	}
@@ -119,7 +123,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		// We do not need to do anything extra on REST authentication success, because
 		// there is no page to redirect to
 		filter.setAuthenticationSuccessHandler((request, response, authentication) -> {
-			// response.
 		});
 
 		return filter;
