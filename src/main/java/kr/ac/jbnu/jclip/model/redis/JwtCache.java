@@ -18,10 +18,9 @@ public class JwtCache implements Serializable {
 
     @Id
     private String id;
-    private Long iat;
+    private String iat;
 
-    @Builder
-    public JwtCache(String id, Long iat) {
+    public JwtCache(String id, String iat) {
         this.id = id;
         this.iat = iat;
     }

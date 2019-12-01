@@ -1,6 +1,8 @@
 package kr.ac.jbnu.jclip.social.google;
 
 import java.io.IOException;
+
+import javax.annotation.PostConstruct;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -18,24 +20,26 @@ import kr.ac.jbnu.jclip.config.auth.jwt.JwtUtil;
 import kr.ac.jbnu.jclip.model.UserConnection;
 import kr.ac.jbnu.jclip.model.redis.JwtCache;
 import kr.ac.jbnu.jclip.repository.JwtRedisRepository;
+import kr.ac.jbnu.jclip.service.user.RedisService;
 import kr.ac.jbnu.jclip.social.SocialService;
 
 public class GoogleOAuth2ClientAuthenticationProcessingFilter extends OAuth2ClientAuthenticationProcessingFilter {
 
     private ObjectMapper mapper = new ObjectMapper();
     private SocialService socialService;
-    JwtRedisRepository jwtRedisRepository;
+    RedisService redisService;
 
     private JwtUtil jwtUtil;
 
     public GoogleOAuth2ClientAuthenticationProcessingFilter(SocialService socialService, JwtUtil jwtUtil,
-            JwtRedisRepository jwtRedisRepository) {
+            RedisService redisService) {
         super("/login/google");
         this.socialService = socialService;
         this.jwtUtil = jwtUtil;
-        this.jwtRedisRepository = jwtRedisRepository;
+        this.redisService = redisService;
     }
 
+    @PostConstruct
     @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain,
             Authentication authResult) throws IOException, ServletException {
@@ -56,12 +60,13 @@ public class GoogleOAuth2ClientAuthenticationProcessingFilter extends OAuth2Clie
         // TODO: set auth token in the Response
 
         String token = jwtUtil.createToken(userConnection, authenticationToken.getAuthorities());
-        response.setHeader("token", token);
-
         System.out.println("jwt token" + token);
-        JwtCache tmp = new JwtCache("test@test.com", 12345L);
-        // jwtRedisRepository.save(tmp);
-        System.out.println(jwtRedisRepository.findById("test@test.com").get().getIat());
+        JwtCache jwtCache = JwtCache.builder().id(jwtUtil.getUserId(token)).iat(jwtUtil.getIat(token)).build();
+
+        response.setHeader("token: ", token);
+        redisService.saveToken(jwtCache);
+
+        System.out.println("redis test" + redisService.retrieveToken(jwtUtil.getUserId(token)).getIat());
         super.successfulAuthentication(request, response, chain, authenticationToken);
 
     }

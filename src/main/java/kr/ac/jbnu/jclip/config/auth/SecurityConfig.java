@@ -5,7 +5,6 @@ import java.util.List;
 
 import javax.servlet.Filter;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.oauth2.resource.UserInfoTokenServices;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
@@ -31,7 +30,7 @@ import org.springframework.web.filter.CompositeFilter;
 import kr.ac.jbnu.jclip.config.auth.jwt.JwtAuthenticationFilter;
 import kr.ac.jbnu.jclip.config.auth.jwt.JwtAuthenticationManager;
 import kr.ac.jbnu.jclip.config.auth.jwt.JwtUtil;
-import kr.ac.jbnu.jclip.repository.JwtRedisRepository;
+import kr.ac.jbnu.jclip.service.user.RedisService;
 import kr.ac.jbnu.jclip.social.SocialService;
 import kr.ac.jbnu.jclip.social.google.GoogleOAuth2ClientAuthenticationProcessingFilter;
 import lombok.AllArgsConstructor;
@@ -46,13 +45,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	private final OAuth2ClientContext oauth2ClientContext;
 	private final SocialService socialService;
-
-	@Autowired
-	private JwtUtil jwtUtil;
-	@Autowired
-	private JwtRedisRepository jwtRedisRepository;
-	@Autowired
-	private JwtAuthenticationManager jwtAuthenticationManager;
+	private final RedisService redisService;
+	private final JwtUtil jwtUtil;
+	private final JwtAuthenticationManager jwtAuthenticationManager;
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
@@ -83,7 +78,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		CompositeFilter filter = new CompositeFilter();
 		List<Filter> filters = new ArrayList<>();
 		filters.add(ssoFilter(google(),
-				new GoogleOAuth2ClientAuthenticationProcessingFilter(socialService, jwtUtil, jwtRedisRepository)));
+				new GoogleOAuth2ClientAuthenticationProcessingFilter(socialService, jwtUtil, redisService)));
 		filter.setFilters(filters);
 		return filter;
 	}

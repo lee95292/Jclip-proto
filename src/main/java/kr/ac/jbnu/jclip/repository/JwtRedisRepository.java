@@ -5,7 +5,7 @@ import org.springframework.stereotype.Repository;
 
 import kr.ac.jbnu.jclip.model.redis.JwtCache;
 
-@Repository
+@Repository("JwtRedisRepository")
 public interface JwtRedisRepository extends CrudRepository<JwtCache, String> {
 
 }
