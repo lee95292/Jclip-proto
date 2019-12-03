@@ -14,6 +14,11 @@ configurations {
 	}
 }
 
+bootJar{
+	archiveBaseName='-'
+	archiveFileName='jclip.jar'
+	archiveVersion="0.0.0"
+}
 
 repositories {
 	mavenCentral()
