@@ -9,18 +9,20 @@ import kr.ac.jbnu.jclip.model.Article;
 import kr.ac.jbnu.jclip.repository.ArticleRepository;
 import kr.ac.jbnu.jclip.service.crawl.domins.CrawlService;
 import kr.ac.jbnu.jclip.service.crawl.domins.JBNUMainCrawlService;
+import kr.ac.jbnu.jclip.util.CrawlerGroup;
 
 @Service
 public class ArticleUpdateService {
 	private static final int articleNumberUnderBound = 40000;
-	private ArticleRepository articleRepository;
-	private JBNUMainCrawlService jbnu_mainCrawl;
 
+	private ArticleRepository articleRepository;
+
+	// statically declared domains..
 	private int numberOfCrawl = 30;
 
-	public ArticleUpdateService(ArticleRepository articleRepository, JBNUMainCrawlService jbnuCrawl) {
+	public ArticleUpdateService(ArticleRepository articleRepository) {
 		this.articleRepository = articleRepository;
-		this.jbnu_mainCrawl = jbnuCrawl;
+
 	}
 
 	/*
@@ -56,19 +58,42 @@ public class ArticleUpdateService {
 		return topArticle.getArticleNumber();
 	}
 
+	<<<<<<<
+
+	HEAD
 	// TODO: Hostnames 레거시 enum으로 교체
-	CrawlService getCrawlServiceByHostName(String hostName) {
+	CrawlService
+
+	getCrawlServiceByHostName(String hostName) {
 		if (hostName.equals("jbnu_main")) {
 			return jbnu_mainCrawl;
+=======
+
+	public CrawlService getCrawlServiceByHostName(String hostName) {
+		for (CrawlerGroup unit : CrawlerGroup.values()) {
+			if (hostName.equals(unit.getHostName())) {
+				return unit.getCrawlService();
+			}
+>>>>>>> dev
 		}
 		return null;
 	}
+
+	<<<<<<<HEAD
 
 	// TODO: Hostnames 레거시 enum으로 교체
 	public void setLatestArticles(String hostName, List<Article> latestArticles) {
 		if (hostName.equals("jbnu_main")) {
 			jbnu_mainCrawl.setLatestArticles(latestArticles);
 			;
+=======
+
+	public void setLatestArticles(String hostName, List<Article> latestArticles) {
+		for (CrawlerGroup unit : CrawlerGroup.values()) {
+			if (hostName.equals(unit.getHostName())) {
+				unit.getCrawlService().setLatestArticles(latestArticles);
+			}
+>>>>>>> dev
 		}
 	}
 }
