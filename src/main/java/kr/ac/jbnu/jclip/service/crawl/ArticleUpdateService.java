@@ -9,6 +9,7 @@ import kr.ac.jbnu.jclip.model.Article;
 import kr.ac.jbnu.jclip.repository.ArticleRepository;
 import kr.ac.jbnu.jclip.service.crawl.domins.CrawlService;
 import kr.ac.jbnu.jclip.service.crawl.domins.JBNUMainCrawlService;
+import kr.ac.jbnu.jclip.util.CrawlerGroup;
 
 @Service
 public class ArticleUpdateService {
@@ -56,19 +57,20 @@ public class ArticleUpdateService {
 		return topArticle.getArticleNumber();
 	}
 
-	// TODO: Hostnames 레거시 enum으로 교체
 	public CrawlService getCrawlServiceByHostName(String hostName) {
-		if (hostName.equals("jbnu_main")) {
-			return jbnu_mainCrawl;
+		for (CrawlerGroup unit : CrawlerGroup.values()) {
+			if (hostName.equals(unit.getHostName())) {
+				return unit.getCrawlService();
+			}
 		}
 		return null;
 	}
 
-	// TODO: Hostnames 레거시 enum으로 교체
 	public void setLatestArticles(String hostName, List<Article> latestArticles) {
-		if (hostName.equals("jbnu_main")) {
-			jbnu_mainCrawl.setLatestArticles(latestArticles);
-			;
+		for (CrawlerGroup unit : CrawlerGroup.values()) {
+			if (hostName.equals(unit.getHostName())) {
+				unit.getCrawlService().setLatestArticles(latestArticles);
+			}
 		}
 	}
 }
