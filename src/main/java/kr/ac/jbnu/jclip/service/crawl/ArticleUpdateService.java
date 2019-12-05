@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import kr.ac.jbnu.jclip.model.Article;
 import kr.ac.jbnu.jclip.repository.ArticleRepository;
 import kr.ac.jbnu.jclip.service.crawl.domins.CrawlService;
-import kr.ac.jbnu.jclip.service.crawl.domins.JBNUMainCrawlService;
 import kr.ac.jbnu.jclip.util.CrawlerGroup;
 
 @Service
@@ -25,7 +24,7 @@ public class ArticleUpdateService {
 	}
 
 	/*
-	 * Service 1. HostName별로 최신 Article crawl
+	 * Service 1. HostNameë³„ë¡œ ìµœì‹  Article crawl
 	 */
 	public List<Article> getLatestArticles(String hostName) {
 		int underBound = getTopArticleNumber(hostName) + 1;

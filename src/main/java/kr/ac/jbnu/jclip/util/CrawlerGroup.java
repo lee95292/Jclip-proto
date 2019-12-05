@@ -4,12 +4,13 @@ import kr.ac.jbnu.jclip.service.crawl.domins.CrawlService;
 
 public enum CrawlerGroup {
 
-    JBNU_MAIN("jbnu_main", CrawlerList.jbnuMainCrawler), CSE_MAIN("jbnu_cse_main", CrawlerList.cseMainCrwaler);
+    jbnu_main("jbnu_main", CrawlerList.jbnuMainCrawler), jbnu_cse_main("jbnu_cse_main", CrawlerList.cseMainCrwaler);
 
     private String hostName;
     private CrawlService crawler;
 
     private CrawlerGroup(String hostName, CrawlService crawler) {
+        // System.out.println(hostName + crawler.toString());
         this.hostName = hostName;
         this.crawler = crawler;
     }
