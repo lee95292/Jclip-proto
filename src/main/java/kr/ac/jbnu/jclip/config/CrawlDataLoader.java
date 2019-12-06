@@ -10,34 +10,33 @@ import org.springframework.stereotype.Component;
 import kr.ac.jbnu.jclip.model.Article;
 import kr.ac.jbnu.jclip.repository.ArticleRepository;
 import kr.ac.jbnu.jclip.service.crawl.ArticleUpdateService;
+import kr.ac.jbnu.jclip.util.CrawlerGroup;
 
 @Component
 public class CrawlDataLoader {
-	
-	ArticleUpdateService updateService;
+
 	ArticleRepository articleRepository;
 	List<String> hostNames = new ArrayList<String>();
-	
-	//for development. 
+
+	// for development.
 	boolean workStatus = false;
-	
-	public CrawlDataLoader(ArticleUpdateService updateService,ArticleRepository articleRepository) {
-		this.articleRepository=articleRepository;
-		this.updateService=updateService;
-		
+
+	public CrawlDataLoader(ArticleRepository articleRepository) {
+		this.articleRepository = articleRepository;
 		hostNames.add("jbnu_main");
 	}
+
 	@PostConstruct
 	public void articleDataLoad() {
 
-		if(!workStatus)
+		if (!workStatus)
 			return;
-		System.out.println(articleRepository.toString()+"\n\n\n");
-		for(String hostName :hostNames) {
-			List<Article> latestArticles=updateService.getLatestArticles(hostName);
-			updateService.setLatestArticles(hostName, latestArticles);
+		System.out.println(articleRepository.toString() + "\n\n\n");
+		for (String hostName : hostNames) {
+			List<Article> latestArticles = CrawlerGroup.getLatestArticles(hostName);
+			CrawlerGroup.setLatestArticles(hostName, latestArticles);
 			articleRepository.saveAll(latestArticles);
-			
+
 		}
 
 	}

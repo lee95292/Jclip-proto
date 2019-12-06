@@ -30,65 +30,61 @@ import lombok.Setter;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class User{
+public class User {
 
 	@Id
-	@Column(name="USER_ID")
+	@Column(name = "USER_ID")
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
-	
+
 	@OneToOne(cascade = CascadeType.PERSIST)
-	@JoinColumn(name="provider_id", referencedColumnName = "provider_id",updatable = false,unique = true)
+	@JoinColumn(name = "provider_id", referencedColumnName = "provider_id", updatable = false, unique = true)
 	private UserConnection social;
 
-	@Column(name="user_name",nullable = false)
+	@Column(name = "user_name", nullable = false)
 	private String username;
-	
-	@Column(name="user_email")
+
+	@Column(name = "user_email")
 	private String userEmail;
-	
-	@Column(name="user_password")
+
+	@Column(name = "user_password")
 	private String password;
 
-	@ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
-	@JoinTable(name="tbl_user_keyword", joinColumns = @JoinColumn(name="USER_ID")
-									  , inverseJoinColumns = @JoinColumn(name="KEYWORD_ID"))
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinTable(name = "tbl_user_keyword", joinColumns = @JoinColumn(name = "USER_ID"), inverseJoinColumns = @JoinColumn(name = "KEYWORD_ID"))
 	private List<Keyword> keywords = new ArrayList<Keyword>();
-	
+
 	@ManyToMany
-	@JoinTable(name = "tbl_user_article", joinColumns = @JoinColumn(name="USER_ID")
-										, inverseJoinColumns = @JoinColumn(name="ARTICLE_ID"))
-	private List<Article> articles =new ArrayList<Article>();
-	
+	@JoinTable(name = "tbl_user_article", joinColumns = @JoinColumn(name = "USER_ID"), inverseJoinColumns = @JoinColumn(name = "ARTICLE_ID"))
+	private List<Article> articles = new ArrayList<Article>();
+
 	@Builder
-    private User(String userEmail, String userName, UserConnection social) {
-        this.userEmail = userEmail;
-        this.username = userName;
-        this.social = social;
-    }
-	public static User signUp(UserConnection userConnection) {
-		return User.builder()
-				.userEmail(userConnection.getEmail())
-				.userName(userConnection.getDisplayName())
-				.social(userConnection)
-				.build();
+	private User(String userEmail, String userName, UserConnection social) {
+		this.userEmail = userEmail;
+		this.username = userName;
+		this.social = social;
 	}
-	
+
+	public static User signUp(UserConnection userConnection) {
+		return User.builder().userEmail(userConnection.getEmail()).userName(userConnection.getDisplayName())
+				.social(userConnection).build();
+	}
+
 	public void addKeyword(Keyword keyword) {
 		this.keywords.add(keyword);
+		keyword.addUser(this);
 	}
-	
+
 	public void removeKeyword(Keyword removeKey) {
-		for(Keyword key : keywords) {
-			if(key.getHostName()==removeKey.getHostName()
-					&& key.getWord()== removeKey.getWord()) {
+		for (Keyword key : keywords) {
+			if (key.getHostName() == removeKey.getHostName() && key.getWord() == removeKey.getWord()) {
 				keywords.remove(key);
 			}
 		}
 	}
+
 	public void addArticle(Article article) {
 		this.articles.add(article);
 	}
-	
+
 }
- 

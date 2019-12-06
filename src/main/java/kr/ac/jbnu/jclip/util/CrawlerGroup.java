@@ -1,5 +1,9 @@
 package kr.ac.jbnu.jclip.util;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import kr.ac.jbnu.jclip.model.Article;
 import kr.ac.jbnu.jclip.service.crawl.domins.CrawlService;
 
 public enum CrawlerGroup {
@@ -21,5 +25,31 @@ public enum CrawlerGroup {
 
     public CrawlService getCrawlService() {
         return this.crawler;
+    }
+
+    public static CrawlService getCrawlServiceByHostName(String hostName) {
+        for (CrawlerGroup unit : CrawlerGroup.values()) {
+            if (hostName.equals(unit.getHostName())) {
+                return unit.getCrawlService();
+            }
+        }
+        return null;
+    }
+
+    public static void setLatestArticles(String hostName, List<Article> latestArticles) {
+        for (CrawlerGroup unit : CrawlerGroup.values()) {
+            if (hostName.equals(unit.getHostName())) {
+                unit.getCrawlService().setLatestArticles(latestArticles);
+            }
+        }
+    }
+
+    public static List<Article> getLatestArticles(String hostName) {
+        for (CrawlerGroup unit : CrawlerGroup.values()) {
+            if (hostName.equals(unit.getHostName())) {
+                return unit.getCrawlService().getLatestArticles();
+            }
+        }
+        return new ArrayList<Article>();
     }
 }
