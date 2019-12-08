@@ -27,29 +27,26 @@ public enum CrawlerGroup {
         return this.crawler;
     }
 
+    public static void setLatestArticles(String hostName, List<Article> latestArticles) {
+        getCrawlServiceByHostName(hostName).setLatestArticles(latestArticles);
+        if (getCrawlServiceByHostName(hostName) == null || latestArticles == null || latestArticles.size() == 0) {
+            System.out.println("test!!!\n\n");
+        }
+    }
+
+    public static List<Article> getLatestArticles(String hostName) {
+        return getCrawlServiceByHostName(hostName).getLatestArticles();
+
+    }
+
     public static CrawlService getCrawlServiceByHostName(String hostName) {
         for (CrawlerGroup unit : CrawlerGroup.values()) {
             if (hostName.equals(unit.getHostName())) {
                 return unit.getCrawlService();
             }
         }
-        return null;
+
+        throw new NullPointerException();
     }
 
-    public static void setLatestArticles(String hostName, List<Article> latestArticles) {
-        for (CrawlerGroup unit : CrawlerGroup.values()) {
-            if (hostName.equals(unit.getHostName())) {
-                unit.getCrawlService().setLatestArticles(latestArticles);
-            }
-        }
-    }
-
-    public static List<Article> getLatestArticles(String hostName) {
-        for (CrawlerGroup unit : CrawlerGroup.values()) {
-            if (hostName.equals(unit.getHostName())) {
-                return unit.getCrawlService().getLatestArticles();
-            }
-        }
-        return new ArrayList<Article>();
-    }
 }
