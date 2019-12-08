@@ -25,13 +25,13 @@ public class ArticleUpdateService {
 	}
 
 	/*
-	 * Service 1. HostName별로 최신 Article crawl
+	 * Service 1. HostNameë³„ë¡œ ìµœì‹  Article crawl
 	 */
 	public List<Article> getLatestArticles(String hostName) {
 		int underBound = getTopArticleNumber(hostName) + 1;
 		List<Article> validArticleList = new ArrayList<Article>();
 		Article article;
-		CrawlService crawl = getCrawlServiceByHostName(hostName);
+		CrawlService crawl = CrawlerGroup.getCrawlServiceByHostName(hostName);
 
 		for (int i = underBound; i < underBound + numberOfCrawl; i++) {
 			article = crawl.getArticle(i);
@@ -57,20 +57,4 @@ public class ArticleUpdateService {
 		return topArticle.getArticleNumber();
 	}
 
-	public CrawlService getCrawlServiceByHostName(String hostName) {
-		for (CrawlerGroup unit : CrawlerGroup.values()) {
-			if (hostName.equals(unit.getHostName())) {
-				return unit.getCrawlService();
-			}
-		}
-		return null;
-	}
-
-	public void setLatestArticles(String hostName, List<Article> latestArticles) {
-		for (CrawlerGroup unit : CrawlerGroup.values()) {
-			if (hostName.equals(unit.getHostName())) {
-				unit.getCrawlService().setLatestArticles(latestArticles);
-			}
-		}
-	}
 }

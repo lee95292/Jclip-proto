@@ -24,12 +24,12 @@ public class ClipServiceTest {
 	@Before
 	public void setup() {
 		user = User.signUp(new UserConnection());
-		keyword = Keyword.generateKeyword("jbnu_main", "학삭공지");
+		keyword = Keyword.generateKeyword("jbnu_main", "포인트");
 	}
 
 	@Test
 	public void test() {
-		clipService.addKeyword(user, "jbnu_main", "학삭공지");
+		clipService.addKeyword(user, "jbnu_main", "포인트");
 		for (Keyword key : user.getKeywords()) {
 			System.out.println(key.toString());
 		}

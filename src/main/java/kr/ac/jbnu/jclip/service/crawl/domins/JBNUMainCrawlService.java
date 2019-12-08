@@ -17,7 +17,10 @@ import org.springframework.stereotype.Service;
 import kr.ac.jbnu.jclip.model.Article;
 
 @Service
-public class JBNUMainCrawlService extends CrawlServiceAdapter {
+public class JBNUMainCrawlService implements CrawlService {
+	private List<Article> latestArticles = new ArrayList<Article>();
+	private int articleNumberUnderbound = 40000;
+
 	private String host = "https://www.jbnu.ac.kr/";
 	private String boardURL = host + "kor/?menuID=139&mode=view&no=";
 	private String hostName = "jbnu_main";
@@ -62,5 +65,15 @@ public class JBNUMainCrawlService extends CrawlServiceAdapter {
 
 	public int getArticleNumberUnderbound() {
 		return articleNumberUnderbound;
+	}
+
+	@Override
+	public List<Article> getLatestArticles() {
+		return latestArticles;
+	}
+
+	@Override
+	public void setLatestArticles(List<Article> latestArticles) {
+		this.latestArticles = latestArticles;
 	}
 }

@@ -72,6 +72,7 @@ public class User {
 
 	public void addKeyword(Keyword keyword) {
 		this.keywords.add(keyword);
+		keyword.addUser(this);
 	}
 
 	public void removeKeyword(Keyword removeKey) {
