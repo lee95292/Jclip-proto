@@ -11,8 +11,10 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import kr.ac.jbnu.jclip.config.CrawlDataLoader;
 import kr.ac.jbnu.jclip.model.Article;
+import kr.ac.jbnu.jclip.model.Keyword;
 import kr.ac.jbnu.jclip.model.User;
 import kr.ac.jbnu.jclip.model.UserConnection;
+import kr.ac.jbnu.jclip.service.bind.ArticleBindService;
 import kr.ac.jbnu.jclip.util.CrawlerGroup;
 
 @SpringBootTest
@@ -20,20 +22,29 @@ import kr.ac.jbnu.jclip.util.CrawlerGroup;
 public class ArticleBindServiceTest {
     @Autowired
     CrawlDataLoader cd;
+
+    @Autowired
+    ArticleBindService articleBindService;
+
     List<Article> latest;
     User user;
 
     @Before
     public void setup() {
-        user = User.signUp(new UserConnection());
         cd.articleDataLoad();
+
+        user = User.signUp(new UserConnection());
         latest = CrawlerGroup.getLatestArticles("jbnu_main");
     }
 
     @Test
     public void test() {
+        Keyword mykey = Keyword.generateKeyword("jbnu_main", "은");
+        user.addKeyword(mykey);
+
         for (Article article : latest) {
-            System.out.println(article.toString());
+            articleBindService.bindKeywordArticle(mykey, article);
         }
+
     }
 }

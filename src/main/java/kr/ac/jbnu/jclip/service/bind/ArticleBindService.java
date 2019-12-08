@@ -1,5 +1,5 @@
 
-package kr.ac.jbnu.jclip.service.clip;
+package kr.ac.jbnu.jclip.service.bind;
 
 import java.util.List;
 
