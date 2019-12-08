@@ -43,7 +43,11 @@ public class JBNUMainCrawlService implements CrawlService {
 			nullArticle.setArticleContent("##");
 			return nullArticle;
 		}
+
 		Article article = getArticleByElement(articleElement);
+		if (article.getArticleContent() == null) {
+			article.setArticleContent("##");
+		}
 		article.setArticleHyperlink(articleURL);
 		return article;
 	}

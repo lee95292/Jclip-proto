@@ -11,7 +11,7 @@ spring:
         
     jpa:
         database: mysql
-        database-platform: H2 #org.hibernate.dialect.MySQL5InnoDBDialect  #for deploy         # for test #H2 
+        database-platform: org.hibernate.dialect.MySQL5InnoDBDialect #org.hibernate.dialect.MySQL5InnoDBDialect  #for deploy         # for test #H2 
         generate-ddl: true
         hibernate:
             ddl-auto: create
