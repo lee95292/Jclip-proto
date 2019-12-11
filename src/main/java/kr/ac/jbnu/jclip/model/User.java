@@ -41,7 +41,7 @@ public class User {
 	@JoinColumn(name = "provider_id", referencedColumnName = "provider_id", updatable = false, unique = true)
 	private UserConnection social;
 
-	@Column(name = "user_name", nullable = false)
+	@Column(name = "user_name" /* ,nullable = false */)
 	private String username;
 
 	@Column(name = "user_email")

@@ -24,38 +24,38 @@ public class SocialService {
 
     private final UserService userService;
     private final UserRepository userRepository;
-    
+
     public UsernamePasswordAuthenticationToken doAuthentication(UserConnection userConnection) {
 
+        User user;
         if (userService.isExistUser(userConnection)) {
-            // 기존 회원일 경우에는 데이터베이스에서 조회해서 인증 처리
-            final User user = userService.findBySocial(userConnection);
-            return setAuthenticationToken(user);
+            // 기존 Userconnection에 존재할 경우에는 데이터베이스에서 조회해서 인증 처리
+            user = userService.findBySocial(userConnection);
         } else {
             // 새 회원일 경우 회원가입 이후 인증 처리
-            final User user = userService.signUp(userConnection);
-            return setAuthenticationToken(user);
-
+            user = userService.signUp(userConnection);
         }
+        return setAuthenticationToken(user);
     }
 
     private UsernamePasswordAuthenticationToken setAuthenticationToken(Object user) {
-    	UsernamePasswordAuthenticationToken OauthToken=new UsernamePasswordAuthenticationToken(user, null, getAuthorities("ROLE_USER"));
+        UsernamePasswordAuthenticationToken OauthToken = new UsernamePasswordAuthenticationToken(user, null,
+                getAuthorities("ROLE_USER"));
         return setTokenDetails(OauthToken, user);
     }
 
     private UsernamePasswordAuthenticationToken setTokenDetails(
-			UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken,Object user) {
-		usernamePasswordAuthenticationToken.setDetails(user);
-    	return usernamePasswordAuthenticationToken;
-	}
+            UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken, Object user) {
+        usernamePasswordAuthenticationToken.setDetails(user);
+        return usernamePasswordAuthenticationToken;
+    }
 
-
-	public Collection<? extends GrantedAuthority> getAuthorities(String role) {
+    public Collection<? extends GrantedAuthority> getAuthorities(String role) {
         List<GrantedAuthority> authorities = new ArrayList<>();
         authorities.add(new SimpleGrantedAuthority(role));
         return authorities;
     }
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
