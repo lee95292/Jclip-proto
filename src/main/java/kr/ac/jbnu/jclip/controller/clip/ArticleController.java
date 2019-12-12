@@ -11,7 +11,7 @@ import kr.ac.jbnu.jclip.service.crawl.ArticleUpdateService;
 @RestController
 public class ArticleController {
 	private ArticleUpdateService crawlService;
-	
+
 	@GetMapping("/service/recent")
 	public List<Article> getRecentArticle() {
 		return crawlService.getLatestArticles("jbnu_main");

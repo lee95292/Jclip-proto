@@ -9,9 +9,11 @@ import kr.ac.jbnu.jclip.model.User;
 import kr.ac.jbnu.jclip.model.UserConnection;
 
 @Repository
-public interface UserRepository extends CrudRepository<User, Integer>{
+public interface UserRepository extends CrudRepository<User, Integer> {
 
 	Optional<User> findUserByUserEmail(String userEmail);
+
 	User findBySocial(UserConnection userConnection);
+
 	User findByUsername(String name);
 }

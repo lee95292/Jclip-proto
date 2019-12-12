@@ -1,9 +1,6 @@
 package kr.ac.jbnu.jclip.config.auth.jwt;
 
 import java.io.IOException;
-import java.util.HashSet;
-import java.util.Set;
-
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -17,13 +14,8 @@ import io.jsonwebtoken.JwtException;
 
 public class JwtAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
 
-    private JwtUtil jwtUtil;
-    private Set<String> ignorePath = new HashSet<>();
-
     public JwtAuthenticationFilter(JwtUtil jwtUtil) {
         super("/service/**");
-        this.jwtUtil = jwtUtil;
-
     }
 
     // @Override
@@ -40,6 +32,7 @@ public class JwtAuthenticationFilter extends AbstractAuthenticationProcessingFil
             throws AuthenticationException {
 
         String header = request.getHeader("Authorization");
+
         if (header == null || !header.startsWith("Bearer ")) {
             throw new JwtException("No JWT token found in request headers");
         }

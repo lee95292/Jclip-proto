@@ -6,11 +6,8 @@ import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 
-import kr.ac.jbnu.jclip.model.Keyword;
 import kr.ac.jbnu.jclip.model.User;
 import kr.ac.jbnu.jclip.model.UserConnection;
 import kr.ac.jbnu.jclip.repository.KeywordRepository;
@@ -26,8 +23,7 @@ public class UserService {
 
 	public User signUp(UserConnection userConnection) {
 		final User user = User.signUp(userConnection);
-		System.out.println("debug1:" + user.getUsername());
-		System.out.println("debug1:" + userConnection.getDisplayName());
+		System.out.println("debug2:" + user.getUserEmail());
 		return userRepository.save(user);
 	}
 

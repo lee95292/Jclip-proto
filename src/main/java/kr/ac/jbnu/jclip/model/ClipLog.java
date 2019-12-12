@@ -11,17 +11,18 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Getter @Setter
+@Getter
+@Setter
 public class ClipLog {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer Id;
-	
+
 	@OneToOne
 	@JoinColumn(name = "USER_ID")
 	private User user;
-	
+
 	@OneToOne
-	@JoinColumn(name= "KEYWORD_ID")
+	@JoinColumn(name = "KEYWORD_ID")
 	private Keyword keyword;
 }

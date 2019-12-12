@@ -26,38 +26,39 @@ import lombok.Setter;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Article{
-	
+public class Article {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
-	
-	@Column(name="article_number")
+
+	@Column(name = "article_number")
 	private int articleNumber;
-	
+
 	@CreationTimestamp
 	private LocalDate creationTime;
-	//jbnu_main,cse, carrer ..etc
-	@Column(name="host_name")
+	// jbnu_main,cse, carrer ..etc
+	@Column(name = "host_name")
 	private String hostName;
-	
-	
-	@Column(name="article_name")
+
+	@Column(name = "article_name")
 	private String articleName;
-	
-	@Column(name="article_content" ,length = 2048)
+
+	@Column(name = "article_content", length = 2048)
 	private String articleContent;
 
 	@Column(name = "article_href")
 	private String articleHyperlink;
-	
+
 	@Builder.Default
 	@ManyToMany(cascade = CascadeType.ALL, mappedBy = "articles")
 	private List<User> users = new ArrayList<User>();
+
 	@Override
 	public String toString() {
-		
-		return "articleNumber:["+ articleNumber +"] creationTime[" + creationTime +"] hostName["+hostName +"] articleName["+ articleName +"] articleContent["+articleContent+"]";
+
+		return "articleNumber:[" + articleNumber + "] creationTime[" + creationTime + "] hostName[" + hostName
+				+ "] articleName[" + articleName + "] articleContent[" + articleContent + "]";
 	}
-	
+
 }

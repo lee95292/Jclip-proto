@@ -35,5 +35,6 @@ out/
 ### Customized ###
 /bin/
 /node_modules/
+/build/
 private.yml
 keystore.p12

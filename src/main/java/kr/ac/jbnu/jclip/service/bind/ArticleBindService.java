@@ -26,9 +26,7 @@ public class ArticleBindService {
     // keyword에 해당하는 article인지? --> TODO: Elastic search 쿼리로 수정 가능!
     public boolean isMatchKeyword(Keyword keyword, Article article) {
         String word = keyword.getWord();
-        if (article.getArticleName() == null || article.getArticleContent() == null) {
-            return false;
-        }
+
         if (article.getArticleContent().contains(word)) {
             return true;
         } else if (article.getArticleName().contains(word)) {

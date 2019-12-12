@@ -24,35 +24,33 @@ import lombok.Setter;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Keyword{
-	
+public class Keyword {
+
 	@Id
-	@Column(name = "KEYWORD_ID")	
+	@Column(name = "KEYWORD_ID")
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
-	
-	@Column(name="word",unique = true)
+
+	@Column(name = "word", unique = true)
 	private String word;
-	
-	@Column(name="host_name")
+
+	@Column(name = "host_name")
 	private String hostName;
-	
-	//TODO cascade 위험성 체크하고 refactor 하기. 성능저하 우려
+
+	// TODO cascade 위험성 체크하고 refactor 하기. 성능저하 우려
 	@Builder.Default
-	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "keywords")	
-	private List<User> users= new ArrayList<User>();
-	
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "keywords")
+	private List<User> users = new ArrayList<User>();
+
 	@Override
 	public String toString() {
-		return "word["+ word +"] hostName["+ hostName+ "] users["+users+"]";
+		return "word[" + word + "] hostName[" + hostName + "] users[" + users + "]";
 	}
-	
-	public static Keyword generateKeyword(String hostname,String word) {
-		return Keyword.builder()
-			.hostName(hostname)
-			.word(word)
-			.build();
+
+	public static Keyword generateKeyword(String hostname, String word) {
+		return Keyword.builder().hostName(hostname).word(word).build();
 	}
+
 	public void addUser(User user) {
 		this.users.add(user);
 	}

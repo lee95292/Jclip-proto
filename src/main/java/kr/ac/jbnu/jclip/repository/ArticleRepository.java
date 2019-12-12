@@ -7,6 +7,5 @@ import kr.ac.jbnu.jclip.model.Article;
 
 @Repository
 public interface ArticleRepository extends CrudRepository<Article, Integer> {
-	Article findTopByhostNameOrderByArticleNumberDesc(String hostName);	
+	Article findTopByhostNameOrderByArticleNumberDesc(String hostName);
 }
-	

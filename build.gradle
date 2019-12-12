@@ -2,6 +2,7 @@ plugins {
 	id 'org.springframework.boot' version '2.1.7.RELEASE'
 	id 'io.spring.dependency-management' version '1.0.8.RELEASE'
 	id 'java'
+	id 'war'
 }
 
 group = 'kr.ac.jbnu'
@@ -14,6 +15,11 @@ configurations {
 	}
 }
 
+bootWar{
+	archiveBaseName='-'
+	archiveFileName='jclip.war'
+	archiveVersion="0.0.0"
+}
 
 repositories {
 	mavenCentral()
