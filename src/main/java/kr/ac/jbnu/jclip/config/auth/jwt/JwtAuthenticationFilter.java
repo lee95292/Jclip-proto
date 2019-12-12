@@ -1,6 +1,7 @@
 package kr.ac.jbnu.jclip.config.auth.jwt;
 
 import java.io.IOException;
+
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -9,8 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
-
-import io.jsonwebtoken.JwtException;
 
 public class JwtAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
 

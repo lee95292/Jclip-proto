@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.codehaus.jackson.map.ObjectMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.client.filter.OAuth2ClientAuthenticationProcessingFilter;
@@ -19,7 +18,6 @@ import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import kr.ac.jbnu.jclip.config.auth.jwt.JwtUtil;
 import kr.ac.jbnu.jclip.model.UserConnection;
 import kr.ac.jbnu.jclip.model.redis.JwtCache;
-import kr.ac.jbnu.jclip.repository.JwtRedisRepository;
 import kr.ac.jbnu.jclip.service.user.RedisService;
 import kr.ac.jbnu.jclip.social.SocialService;
 

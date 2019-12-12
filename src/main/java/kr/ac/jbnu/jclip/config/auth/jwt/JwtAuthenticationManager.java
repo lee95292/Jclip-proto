@@ -6,7 +6,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.stereotype.Component;
 
-import kr.ac.jbnu.jclip.repository.JwtRedisRepository;
 import kr.ac.jbnu.jclip.service.user.RedisService;
 
 @Component
