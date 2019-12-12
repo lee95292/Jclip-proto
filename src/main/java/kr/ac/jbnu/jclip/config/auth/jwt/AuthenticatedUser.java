@@ -14,9 +14,9 @@ public class AuthenticatedUser implements Authentication {
     private String email;
     private String name;
 
-    AuthenticatedUser(String email, String nickname) {
+    AuthenticatedUser(String email, String name) {
         this.email = email;
-        this.name = nickname;
+        this.name = name;
     }
 
     @Override
