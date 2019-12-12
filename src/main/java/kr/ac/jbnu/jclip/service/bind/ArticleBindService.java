@@ -12,7 +12,7 @@ import kr.ac.jbnu.jclip.model.User;
 @Service
 public class ArticleBindService {
 
-    public void bindKeywordArticle(Keyword keyword, Article article) {
+    public void bindKeywordArtile(Keyword keyword, Article article) {
         if (!isMatchKeyword(keyword, article)) {
             return;
         }

@@ -1,14 +1,18 @@
 package kr.ac.jbnu.jclip.controller;
 
 import java.security.Principal;
+import java.util.List;
 
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import kr.ac.jbnu.jclip.model.Article;
 import kr.ac.jbnu.jclip.model.User;
 import kr.ac.jbnu.jclip.repository.UserRepository;
+import kr.ac.jbnu.jclip.util.CrawlerGroup;
 import lombok.AllArgsConstructor;
 
 /*
@@ -42,5 +46,10 @@ public class TestController {
 	public User test2(UsernamePasswordAuthenticationToken token) {
 
 		return ((User) token.getDetails());
+	}
+
+	@GetMapping("/service/recent")
+	public List<Article> getRecentArticle() {
+		return CrawlerGroup.getLatestArticles("jbnu_main");
 	}
 }

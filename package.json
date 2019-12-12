@@ -21,6 +21,7 @@
   "homepage": "https://github.com/lee95292/Jclip-proto#readme",
   "dependencies": {
     "axios": "^0.19.0",
+    "jwt-decode": "^2.2.0",
     "react": "^16.10.1",
     "react-dom": "^16.10.1",
     "react-router-dom": "^5.1.2",
