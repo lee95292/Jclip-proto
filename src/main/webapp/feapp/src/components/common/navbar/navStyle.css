@@ -1,17 +1,19 @@
-.Navbar{
-    height:100%;
+.Navbar {
+  margin: 30px 10px 10px 10px;
+  height: 20%;
+  width: 100%;
 }
-.Navbar a{
-    text-decoration: none;
-    padding: 20px 10px 20px 10px;
-    margin: 5px 15px 5px 10px;
-
-}
-
-.Navbar a .active{
-    background-color: aqua;
+.Navbar a {
+  font-size: 32px;
+  text-decoration: none;
+  padding: 20px 10px 20px 10px;
+  margin: 5px 15px 5px 10px;
 }
 
-.Navbar a:hover{
-    background-color: cadetblue;
+.Navbar a .active {
+  background-color: aqua;
+}
+
+.Navbar a:hover {
+  background-color: black;
 }

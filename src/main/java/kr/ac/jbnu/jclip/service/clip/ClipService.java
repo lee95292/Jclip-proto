@@ -4,21 +4,15 @@ import org.springframework.stereotype.Service;
 
 import kr.ac.jbnu.jclip.model.Keyword;
 import kr.ac.jbnu.jclip.model.User;
-import kr.ac.jbnu.jclip.repository.ArticleRepository;
 import kr.ac.jbnu.jclip.repository.KeywordRepository;
-import kr.ac.jbnu.jclip.service.crawl.ArticleUpdateService;
 
 @Service
 public class ClipService {
 
-	private ArticleUpdateService articleUpdateService;
-	private ArticleRepository articleRepository;
 	private KeywordRepository keywordRepository;
 
-	public ClipService(ArticleUpdateService articleUpdateService, ArticleRepository articleRepository,
-			KeywordRepository keywordRepository) {
-		this.articleUpdateService = articleUpdateService;
-		this.articleRepository = articleRepository;
+	public ClipService(KeywordRepository keywordRepository) {
+
 		this.keywordRepository = keywordRepository;
 	}
 
