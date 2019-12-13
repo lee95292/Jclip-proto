@@ -23,8 +23,10 @@ public class ArticleBindController {
     }
 
     @GetMapping(value = "bind/{keyword}")
-    public void singleWordArticleBind(@PathVariable("keyword") String keyword,Principal principal) {
-        System.out.println("ArticleBindController debug - "+principal.getName(););
-        
+    public void singleWordArticleBind(@PathVariable("keyword") String keyword, Principal principal) {
+        System.out.println("ArticleBindController debug - " + principal.getName());
+
+        clipService.addKeyword(user, hostname, word);
+
     }
 }
