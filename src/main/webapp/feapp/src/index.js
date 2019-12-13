@@ -7,7 +7,6 @@ import "./index.css";
 import decodeJWT from "components/utils/jwtDecoder.js";
 
 class MainViewApp extends React.Component {
-  componentDidMount() {}
   render() {
     return (
       <>
