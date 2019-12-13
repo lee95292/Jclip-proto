@@ -24,6 +24,7 @@ import org.springframework.security.oauth2.client.filter.OAuth2ClientContextFilt
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableOAuth2Client;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.CorsUtils;
@@ -55,7 +56,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 
-		http.cors().and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+		http.csrf().disable();
 		http.authorizeRequests().antMatchers("/static/**").permitAll().antMatchers("/", "/error**").permitAll()
 				.requestMatchers(CorsUtils::isPreFlightRequest).permitAll().and().authorizeRequests()
 				.antMatchers("/servie/**").authenticated().and()
@@ -66,9 +68,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				// Spring Security의 자체 로그인 success/fail redirection 방지
 				.and().addFilterBefore(ssoFilter(), UsernamePasswordAuthenticationFilter.class);
 
-		// http.logout().invalidateHttpSession(true).clearAuthentication(true)
-		// .logoutRequestMatcher(new
-		// AntPathRequestMatcher("/logout")).logoutSuccessUrl("/").permitAll();
+		http.logout().invalidateHttpSession(true).clearAuthentication(true)
+				.logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/").permitAll();
 
 	}
 

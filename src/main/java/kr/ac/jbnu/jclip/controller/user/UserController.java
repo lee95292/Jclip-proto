@@ -19,4 +19,9 @@ public class UserController {
 		return "";
 	}
 
+	@GetMapping(value = "/token")
+	public void getToken() {
+
+	}
+
 }
