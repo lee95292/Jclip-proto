@@ -1,7 +1,6 @@
 package kr.ac.jbnu.jclip.config.auth.jwt;
 // import 생략
 
-import java.util.Base64;
 import java.util.Collection;
 import java.util.Date;
 
@@ -32,7 +31,7 @@ public class JwtUtil { // JWT 토큰을 생성 및 검증 모듈
 
     @Value("${jwt.secret}")
     private String secretKey;
-
+    private byte[] secretByte;
     private final long tokenValidMilisecond = 1000L * 60 * 60; // 1시간만 토큰 유효
     // private final String tokenType = "Bearer ";
     private final UserService userService;
@@ -40,7 +39,11 @@ public class JwtUtil { // JWT 토큰을 생성 및 검증 모듈
 
     @PostConstruct
     protected void init() {
-        secretKey = Base64.getEncoder().encodeToString(secretKey.getBytes());
+        try {
+            secretByte = secretKey.getBytes("UTF-8");
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }
 
     // Jwt 토큰 생성
@@ -56,7 +59,7 @@ public class JwtUtil { // JWT 토큰을 생성 및 검증 모듈
         return Jwts.builder().setClaims(claims) // 데이터
                 .setIssuedAt(now) // 토큰 발행일자
                 .setExpiration(new Date(now.getTime() + tokenValidMilisecond)) // set Expire Time
-                .signWith(SignatureAlgorithm.HS256, secretKey) // 암호화 알고리즘, secret값 세팅
+                .signWith(SignatureAlgorithm.HS256, secretByte) // 암호화 알고리즘, secret값 세팅
                 .compact();
     }
 
@@ -74,15 +77,15 @@ public class JwtUtil { // JWT 토큰을 생성 및 검증 모듈
 
     // Jwt 토큰에서 회원 구별 정보 추출
     public String getUserId(final String token) {
-        return Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody().getSubject();
+        return Jwts.parser().setSigningKey(secretByte).parseClaimsJws(token).getBody().getSubject();
     }
 
     public String getUserName(final String token) {
-        return Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody().get("name").toString();
+        return Jwts.parser().setSigningKey(secretByte).parseClaimsJws(token).getBody().get("name").toString();
     }
 
     public String getIat(final String token) {
-        return Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody().get("iat").toString();
+        return Jwts.parser().setSigningKey(secretByte).parseClaimsJws(token).getBody().get("iat").toString();
     }
 
     // Request의 Header에서 token 파싱 : "X-AUTH-TOKEN: jwt토큰"
@@ -93,7 +96,7 @@ public class JwtUtil { // JWT 토큰을 생성 및 검증 모듈
     // Jwt 토큰의 유효성 + 만료일자 확인
     public boolean isValidateToken(final String jwtToken) {
         try {
-            final Jws<Claims> claims = Jwts.parser().setSigningKey(secretKey).parseClaimsJws(jwtToken);
+            final Jws<Claims> claims = Jwts.parser().setSigningKey(secretByte).parseClaimsJws(jwtToken);
             return !claims.getBody().getExpiration().before(new Date());
         } catch (final Exception e) {
             System.out.println(e);
