@@ -43,7 +43,6 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 @EnableOAuth2Client
 @EnableWebSecurity
-@EnableGlobalAuthentication
 @ComponentScan(basePackages = { "kr.ac.jbnu.jclip" })
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
@@ -55,10 +54,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-
 		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 		http.csrf().disable();
-		http.authorizeRequests().antMatchers("/static/**").permitAll().antMatchers("/", "/error**").permitAll()
+		http.authorizeRequests().antMatchers("/static/**", "/", "/token").permitAll()
 				.requestMatchers(CorsUtils::isPreFlightRequest).permitAll().and().authorizeRequests()
 				.antMatchers("/servie/**").authenticated().and()
 				.addFilterBefore(jwtAuthenticationFilter(), BasicAuthenticationFilter.class);

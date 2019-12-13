@@ -3,6 +3,10 @@ logging:
         org:
             hibernate: info
 spring:
+    session:
+    
+        store-type: none
+
     devtools:
         livereload:
             enabled: true
