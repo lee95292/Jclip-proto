@@ -42,7 +42,7 @@ public class ArticleBindServiceTest {
         user.addKeyword(mykey);
 
         for (Article article : latest) {
-            articleBindService.bindKeywordArticle(mykey, article);
+            // articleBindService.bindKeywordArticle(mykey, article);
         }
 
         for (Article article : user.getArticles()) {

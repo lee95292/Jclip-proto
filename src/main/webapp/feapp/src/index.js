@@ -4,13 +4,20 @@ import ReactDom from "react-dom";
 import Navbar from "components/common/navbar/navbar.jsx";
 import "./index.css";
 class MainViewApp extends React.Component {
-  componentDidMount() {}
   render() {
     return (
       <>
         <Navbar />
       </>
     );
+  }
+  componentDidMount() {
+    axios.get("https://localhost:8443/login/google").then(res => {
+      console.log(res.status);
+    });
+    // axios.get("https://localhost:8443").then(res => {
+    //   console.log("root" + res);
+    // });
   }
 }
 
