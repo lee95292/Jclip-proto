@@ -4,26 +4,22 @@ import java.io.IOException;
 
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.http.server.ServletServerHttpResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import kr.ac.jbnu.jclip.config.auth.jwt.JwtUtil;
+import kr.ac.jbnu.jclip.service.user.UserService;
 
 @Controller
 public class UserController {
 
-	@GetMapping(value = "/login")
-	public String login() {
+	UserService userService;
+	JwtUtil jwtUtil;
 
-		return "";
-	}
-
-	@PostMapping(value = "/register")
-	public String registerByEmail() {
-		return "";
+	UserController(UserService userService, JwtUtil jwtUtil) {
+		this.userService = userService;
+		this.jwtUtil = jwtUtil;
 	}
 
 	@GetMapping(value = "/token")

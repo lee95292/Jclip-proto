@@ -3,6 +3,7 @@ import { BrowserRouter, Route, NavLink } from "react-router-dom";
 import "./navStyle.css";
 import About from "components/contents/about.jsx";
 import App from "App";
+import AuthProvider from "components/auth/signin/authProvider.js";
 /**
  *  props of nav-item
  *  1. navItem order
@@ -12,7 +13,6 @@ import App from "App";
  */
 
 class Navbar extends React.Component {
-  Navbar() {}
   render() {
     return (
       <BrowserRouter>
@@ -30,12 +30,12 @@ class Navbar extends React.Component {
           <NavLink exact to="/articles">
             Articles
           </NavLink>
-          <NavLink exact to="/login/google" href="/login/google">
+          <a href="/login/google">
             <img
               src="/static/img/1x/btn_google_signin_dark_pressed_web.png"
               alt=""
             />
-          </NavLink>
+          </a>
         </div>
 
         <Route exact path="/" component={App} />

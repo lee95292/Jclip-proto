@@ -58,10 +58,10 @@ public class GoogleOAuth2ClientAuthenticationProcessingFilter extends OAuth2Clie
         // TODO: set auth token in the Response
 
         String token = jwtUtil.createToken(userConnection, authenticationToken.getAuthorities());
-        System.out.println("jwt token" + token);
+        System.out.println("GoogleOAuth2ClientAuthenticationProcessingFilter debug :jwt token" + token);
         JwtCache jwtCache = JwtCache.builder().id(jwtUtil.getUserId(token)).iat(jwtUtil.getIat(token)).build();
 
-        response.setHeader("token: ", token);
+        response.addHeader("token: ", token);
         response.sendRedirect("/token?token=" + token);
         redisService.saveToken(jwtCache);
 

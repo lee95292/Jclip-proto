@@ -18,7 +18,7 @@ public class CrawlDataLoader {
 	ArticleRepository articleRepository;
 	List<String> hostNames = new ArrayList<String>();
 
-	boolean workStatus = true;
+	boolean workStatus = false;
 
 	public CrawlDataLoader(ArticleRepository articleRepository, ArticleUpdateService articleUpdateService) {
 		this.articleRepository = articleRepository;

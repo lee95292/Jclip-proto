@@ -58,7 +58,7 @@ public class UserService {
 	}
 
 	@Transactional
-	public Optional<User> getUserByUserEmail(String userEmail) {
+	public User getUserByUserEmail(String userEmail) {
 		return userRepository.findUserByUserEmail(userEmail);
 	}
 
