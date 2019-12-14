@@ -71,7 +71,7 @@ public class JwtUtil { // JWT 토큰을 생성 및 검증 모듈
         // Jwts.parser().setSigningKey(this.secretKey).parseClaimsJws(token).getBody();
 
         Collection<? extends GrantedAuthority> authorities = socialService.getAuthorities("ROLE_USER");
-        final User userDetails = userService.getUserByUserEmail(this.getUserId(token)).get();
+        final User userDetails = userService.getUserByUserEmail(this.getUserId(token));
         return new UsernamePasswordAuthenticationToken(userDetails, null, authorities);
     }
 

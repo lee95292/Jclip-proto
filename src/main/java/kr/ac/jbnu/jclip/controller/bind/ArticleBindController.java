@@ -38,16 +38,16 @@ public class ArticleBindController {
         return user.getArticles();
     }
 
-    @GetMapping(value="/bind")
-    public void bindUserKeyword(@RequestParam("keyword") String word, @RequestParam("token")String token
-                                    ,@RequestParam("hostname") String hostname){
-		User user = getUserByToken(token);
-		
-		if(user==null){
-			return ;
+    @GetMapping(value = "/bind")
+    public void bindUserKeyword(@RequestParam("keyword") String word, @RequestParam("token") String token,
+            @RequestParam("hostname") String hostname) {
+        User user = getUserByToken(token);
+
+        if (user == null) {
+            return;
         }
-        
-        Keyword keyword= Keyword.generateKeyword(hostname, word)
+
+        Keyword keyword = Keyword.generateKeyword(hostname, word);
         user.addKeyword(keyword);
     }
 
