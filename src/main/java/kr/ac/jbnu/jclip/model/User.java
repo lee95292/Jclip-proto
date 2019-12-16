@@ -16,6 +16,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -55,6 +57,7 @@ public class User {
 	private List<Keyword> keywords = new ArrayList<Keyword>();
 
 	@ManyToMany
+	@JsonManagedReference
 	@JoinTable(name = "tbl_user_article", joinColumns = @JoinColumn(name = "USER_ID"), inverseJoinColumns = @JoinColumn(name = "ARTICLE_ID"))
 	private List<Article> articles = new ArrayList<Article>();
 

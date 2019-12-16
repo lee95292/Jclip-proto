@@ -22,6 +22,7 @@ public class ClipService {
 
 		if (keyword == null) {
 			keyword = Keyword.generateKeyword(hostname, word);
+			keywordRepository.save(keyword);
 		}
 		user.addKeyword(keyword);
 	}

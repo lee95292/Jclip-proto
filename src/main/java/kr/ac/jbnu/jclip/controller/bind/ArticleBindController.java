@@ -19,12 +19,14 @@ public class ArticleBindController {
     ArticleBindService ArticleBindService;
     UserService userService;
     JwtUtil jwtUtil;
+    ClipService clipService;
 
     public ArticleBindController(JwtUtil jwtUtil, UserService userService, ArticleBindService articleBindService,
             ClipService clipService) {
         this.ArticleBindService = articleBindService;
         this.userService = userService;
         this.jwtUtil = jwtUtil;
+        this.clipService = clipService;
     }
 
     @GetMapping(value = "/article")
@@ -39,16 +41,16 @@ public class ArticleBindController {
     }
 
     @GetMapping(value = "/bind")
-    public void bindUserKeyword(@RequestParam("keyword") String word, @RequestParam("token") String token,
+    public List<Keyword> bindUserKeyword(@RequestParam("keyword") String word, @RequestParam("token") String token,
             @RequestParam("hostname") String hostname) {
         User user = getUserByToken(token);
 
         if (user == null) {
-            return;
+            System.out.println("ArticleBindController debug: user null");
+            return null;
         }
-
-        Keyword keyword = Keyword.generateKeyword(hostname, word);
-        user.addKeyword(keyword);
+        clipService.addKeyword(user, hostname, word);
+        return user.getKeywords();
     }
 
     private User getUserByToken(String token) {
