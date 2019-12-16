@@ -15,38 +15,37 @@ import kr.ac.jbnu.jclip.service.user.UserService;
 @Component("authProvider")
 public class AuthProvider implements AuthenticationProvider {
 
-	@Autowired
-	UserService userService;
+    @Autowired
+    UserService userService;
 
-	@Autowired
-	PasswordEncoder passwordEncoder;
+    @Autowired
+    PasswordEncoder passwordEncoder;
 
-	@Override
-	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
+    @Override
+    public Authentication authenticate(Authentication authentication) throws AuthenticationException {
 
-		String id = authentication.getName();
-		User user = userService.getUserByUserEmail(id);
+        String id = authentication.getName();
+        User user = userService.getUserByUserEmail(id);
 
-		boolean passwordMatching = false;
+        boolean passwordMatching = false;
 
-		// if (user.isPresent()) {
-		// passwordMatching =
-		// passwordEncoder.matches(authentication.getCredentials().toString(),
-		// user.get().getPassword());
-		// }
+        // if (user.isPresent()) {
+        // passwordMatching =
+        // passwordEncoder.matches(authentication.getCredentials().toString(),
+        // user.get().getPassword());
+        // }
 
-		if (!passwordMatching) {
-			authentication.setAuthenticated(false);
-			;
-		}
+        if (!passwordMatching) {
+            authentication.setAuthenticated(false);
+        }
 
-		return authentication;
-	}
+        return authentication;
+    }
 
-	@Override
-	public boolean supports(Class<?> authentication) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+    @Override
+    public boolean supports(Class<?> authentication) {
+        // TODO Auto-generated method stub
+        return false;
+    }
 
 }

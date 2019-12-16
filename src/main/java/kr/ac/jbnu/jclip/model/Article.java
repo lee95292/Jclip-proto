@@ -7,6 +7,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -51,7 +52,7 @@ public class Article {
 	private String articleHyperlink;
 
 	@Builder.Default
-	@ManyToMany(cascade = CascadeType.ALL, mappedBy = "articles")
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "articles")
 	private List<User> users = new ArrayList<User>();
 
 	@Override

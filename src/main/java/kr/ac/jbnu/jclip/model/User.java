@@ -53,6 +53,7 @@ public class User {
 	private String password;
 
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JsonManagedReference
 	@JoinTable(name = "tbl_user_keyword", joinColumns = @JoinColumn(name = "USER_ID"), inverseJoinColumns = @JoinColumn(name = "KEYWORD_ID"))
 	private List<Keyword> keywords = new ArrayList<Keyword>();
 
@@ -74,20 +75,22 @@ public class User {
 	}
 
 	public void addKeyword(Keyword keyword) {
-		this.keywords.add(keyword);
-		keyword.addUser(this);
+		if (!this.keywords.contains(keyword)) {
+			this.keywords.add(keyword);
+			keyword.addUser(this);
+		}
 	}
 
 	public void removeKeyword(Keyword removeKey) {
-		for (Keyword key : keywords) {
-			if (key.getHostName() == removeKey.getHostName() && key.getWord() == removeKey.getWord()) {
-				keywords.remove(key);
-			}
+		if (this.keywords.contains(removeKey)) {
+			keywords.remove(removeKey);
 		}
 	}
 
 	public void addArticle(Article article) {
-		this.articles.add(article);
+		if (!this.articles.contains(article)) {
+			this.articles.add(article);
+		}
 	}
 
 }
