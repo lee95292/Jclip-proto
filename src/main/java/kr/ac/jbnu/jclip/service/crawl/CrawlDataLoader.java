@@ -9,33 +9,34 @@ import org.springframework.stereotype.Component;
 
 import kr.ac.jbnu.jclip.model.Article;
 import kr.ac.jbnu.jclip.repository.ArticleRepository;
+import kr.ac.jbnu.jclip.service.bind.ArticleBindService;
 import kr.ac.jbnu.jclip.util.CrawlerGroup;
 
 @Component
 public class CrawlDataLoader {
 
-	ArticleUpdateService articleUpdateService;
+	ArticleBindService articleBindService;
 	ArticleRepository articleRepository;
 
 	boolean workStatus = true;
 
-	public CrawlDataLoader(ArticleRepository articleRepository, ArticleUpdateService articleUpdateService) {
+	public CrawlDataLoader(ArticleRepository articleRepository, ArticleBindService articleBindService) {
 		this.articleRepository = articleRepository;
-		this.articleUpdateService = articleUpdateService;
+		this.articleBindService = articleBindService;
 	}
 
-	@PostConstruct
-	public void articleDataLoad() {
-		doPrerequisite();
-		if (!workStatus)
-			return;
-		for (CrawlerGroup unit : CrawlerGroup.values()) {
-			List<Article> latestArticles = unit.getCrawlService().crawlLatestArticles();
-			articleRepository.saveAll(latestArticles);
-			CrawlerGroup.setLatestArticles(unit.getHostName(), latestArticles);
-		}
+	// @PostConstruct
+	// public void articleDataLoad() {
+	// doPrerequisite();
+	// if (!workStatus)
+	// return;
+	// for (CrawlerGroup unit : CrawlerGroup.values()) {
+	// List<Article> latestArticles = unit.getCrawlService().crawlLatestArticles();
+	// articleRepository.saveAll(latestArticles);
+	// CrawlerGroup.setLatestArticles(unit.getHostName(), latestArticles);
+	// }
 
-	}
+	// }
 
 	@Scheduled(cron = "0 0/3 * * * *")
 	public void periodicalDataLoader() {
@@ -45,6 +46,7 @@ public class CrawlDataLoader {
 			List<Article> latestArticles = unit.getCrawlService().crawlLatestArticles();
 			articleRepository.saveAll(latestArticles);
 			CrawlerGroup.setLatestArticles(unit.getHostName(), latestArticles);
+			articleBindService.bindAllKeywordAndLatestArticle(latestArticles, unit.getHostName());
 		}
 	}
 

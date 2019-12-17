@@ -8,9 +8,38 @@ import org.springframework.stereotype.Service;
 import kr.ac.jbnu.jclip.model.Article;
 import kr.ac.jbnu.jclip.model.Keyword;
 import kr.ac.jbnu.jclip.model.User;
+import kr.ac.jbnu.jclip.repository.KeywordRepository;
+import kr.ac.jbnu.jclip.util.CrawlerGroup;
 
 @Service
 public class ArticleBindService {
+
+    private KeywordRepository keywordRepository;
+
+    ArticleBindService(KeywordRepository keywordRepository) {
+        this.keywordRepository = keywordRepository;
+    }
+
+    public void bindAllKeywordAndLatestArticle(List<Article> articles, String hostname) {
+        List<Keyword> bindingKeys = keywordRepository.findByHostName(hostname);
+
+        for (Article article : articles) {
+            String title = article.getArticleName();
+            String content = article.getArticleContent() + title;
+            for (Keyword keyword : bindingKeys) {
+                /**
+                 * Keyword와 Article이 String match
+                 */
+                if (content.contains(keyword.getWord())) {
+                    System.out.println("ArticleBindService matching debug Keyword:" + keyword.getWord() + "And Article:"
+                            + article.getArticleName());
+                    for (User user : keyword.getUsers()) {
+                        user.addArticle(article);
+                    }
+                }
+            }
+        }
+    }
 
     public void bindKeywordArtile(Keyword keyword, Article article) {
         if (!isMatchKeyword(keyword, article)) {
