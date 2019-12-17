@@ -14,7 +14,7 @@ import kr.ac.jbnu.jclip.model.Keyword;
 import kr.ac.jbnu.jclip.model.User;
 import kr.ac.jbnu.jclip.model.UserConnection;
 import kr.ac.jbnu.jclip.service.bind.ArticleBindService;
-import kr.ac.jbnu.jclip.util.CrawlDataLoader;
+import kr.ac.jbnu.jclip.service.crawl.CrawlDataLoader;
 import kr.ac.jbnu.jclip.util.CrawlerGroup;
 
 @SpringBootTest

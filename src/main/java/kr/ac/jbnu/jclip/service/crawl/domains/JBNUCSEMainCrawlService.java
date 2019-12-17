@@ -1,4 +1,4 @@
-package kr.ac.jbnu.jclip.service.crawl.domins;
+package kr.ac.jbnu.jclip.service.crawl.domains;
 
 import java.util.List;
 
@@ -7,6 +7,11 @@ import org.jsoup.nodes.Element;
 import kr.ac.jbnu.jclip.model.Article;
 
 public class JBNUCSEMainCrawlService implements CrawlService {
+
+	@Override
+	public List<Article> crawlLatestArticles() {
+		return null;
+	}
 
 	@Override
 	public Article getArticleByElement(Element row) {
@@ -30,6 +35,12 @@ public class JBNUCSEMainCrawlService implements CrawlService {
 	public List<Article> getLatestArticles() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public void setCrawlUnderBound(int bound) {
+		// TODO Auto-generated method stub
+
 	}
 
 }

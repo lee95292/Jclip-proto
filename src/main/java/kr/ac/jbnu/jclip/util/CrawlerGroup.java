@@ -1,14 +1,14 @@
 package kr.ac.jbnu.jclip.util;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import kr.ac.jbnu.jclip.model.Article;
-import kr.ac.jbnu.jclip.service.crawl.domins.CrawlService;
+import kr.ac.jbnu.jclip.service.crawl.domains.CrawlService;
 
 public enum CrawlerGroup {
 
-    jbnu_main("jbnu_main", CrawlerList.jbnuMainCrawler), jbnu_cse_main("jbnu_cse_main", CrawlerList.cseMainCrwaler);
+    jbnu_main("jbnu_main",
+            CrawlerList.jbnuMainCrawler)/* , jbnu_cse_main("jbnu_cse_main", CrawlerList.cseMainCrwaler) */;
 
     private String hostName;
     private CrawlService crawler;
@@ -30,7 +30,6 @@ public enum CrawlerGroup {
     public static void setLatestArticles(String hostName, List<Article> latestArticles) {
         getCrawlServiceByHostName(hostName).setLatestArticles(latestArticles);
         if (getCrawlServiceByHostName(hostName) == null || latestArticles == null || latestArticles.size() == 0) {
-            System.out.println("test!!!\n\n");
         }
     }
 

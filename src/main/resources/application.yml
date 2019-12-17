@@ -3,8 +3,13 @@ logging:
         org:
             hibernate: info
 spring:
+    task:
+      scheduling:
+        pool:
+          size: 8
+        thread-name-prefix: crawl-schedule
+
     session:
-    
         store-type: none
 
     devtools:
@@ -18,7 +23,7 @@ spring:
         database-platform: org.hibernate.dialect.MySQL5InnoDBDialect #org.hibernate.dialect.MySQL5InnoDBDialect  #for deploy         # for test #H2 
         generate-ddl: true
         hibernate:
-            ddl-auto: create
+            ddl-auto: create-drop
         show-sql: true
     mvc:
         static-path-pattern: /static/**

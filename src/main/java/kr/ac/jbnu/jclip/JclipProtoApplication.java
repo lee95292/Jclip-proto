@@ -2,10 +2,12 @@ package kr.ac.jbnu.jclip;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 
 @SpringBootApplication
 @EnableGlobalMethodSecurity(securedEnabled = true)
+@EnableScheduling
 public class JclipProtoApplication {
 	private static final String APPLICATION = "spring.config.location=" + "classpath:/application.yml,"
 			+ "classpath:/private.yml";

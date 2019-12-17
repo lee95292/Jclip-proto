@@ -7,20 +7,20 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import kr.ac.jbnu.jclip.model.Article;
-import kr.ac.jbnu.jclip.service.crawl.domins.JBNUMainCrawlService;
+import kr.ac.jbnu.jclip.service.crawl.domains.JBNUMainCrawlService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest
 public class JBNUMainCrawlServiceTest {
-	
+
 	@Autowired
 	JBNUMainCrawlService crawl;
-	
+
 	@Test
 	public void test() {
 		Article article = crawl.getArticle(42036);
 		article.setArticleNumber(41036);
-		
+
 		System.out.println(article.toString());
 	}
 

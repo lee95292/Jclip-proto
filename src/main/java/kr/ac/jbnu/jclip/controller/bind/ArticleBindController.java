@@ -29,6 +29,16 @@ public class ArticleBindController {
         this.clipService = clipService;
     }
 
+    @GetMapping(value = "keyword")
+    public List<Keyword> getUserKeyword(@RequestParam("token") String token) {
+        User user = getUserByToken(token);
+        if (user == null) {
+            return null;
+        }
+
+        return user.getKeywords();
+    }
+
     @GetMapping(value = "/article")
     public List<Article> getBindedArticle(@RequestParam("token") String token) {
         User user = getUserByToken(token);

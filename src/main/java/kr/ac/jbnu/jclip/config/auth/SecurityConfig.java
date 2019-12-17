@@ -56,7 +56,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 		http.csrf().disable();
-		http.authorizeRequests().antMatchers("/static/**", "/", "/token", "/article", "/bind").permitAll()
+		http.authorizeRequests().antMatchers("/static/**", "/", "/token", "/article", "/bind", "/keyword").permitAll()
 				.requestMatchers(CorsUtils::isPreFlightRequest).permitAll().and().authorizeRequests()
 				.antMatchers("/servie/**").authenticated().and()
 				.addFilterBefore(jwtAuthenticationFilter(), BasicAuthenticationFilter.class);

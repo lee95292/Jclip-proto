@@ -11,9 +11,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import kr.ac.jbnu.jclip.model.Article;
 import kr.ac.jbnu.jclip.service.crawl.ArticleUpdateService;
-import kr.ac.jbnu.jclip.service.crawl.domins.CrawlService;
-import kr.ac.jbnu.jclip.util.CrawlerGroup;
-import kr.ac.jbnu.jclip.util.CrawlerList;
 
 @SpringBootTest() // (properties = { "classpath:application.yml", "classpath:private.yml" })
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -29,11 +26,5 @@ public class ArticleUpdateServiceTest {
     @Test
     public void test() {
 
-        List<Article> list = articleUpdateService.getLatestArticles("jbnu_main");
-
-        for (Article a : list) {
-            System.out.println(a.getArticleContent());
-            // articleRepository.save(a);
-        }
     }
 }

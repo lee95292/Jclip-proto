@@ -1,4 +1,4 @@
-package kr.ac.jbnu.jclip.service.crawl.domins;
+package kr.ac.jbnu.jclip.service.crawl.domains;
 
 import java.util.List;
 
@@ -10,6 +10,8 @@ import kr.ac.jbnu.jclip.model.Article;
 	1. 삭제된 게시글 또는 컨텐츠 텍스트 없는 게시글 처리
 */
 public interface CrawlService {
+	public List<Article> crawlLatestArticles();
+
 	public Article getArticleByElement(Element row);
 
 	public Article getArticle(int articleNumber);
@@ -17,4 +19,6 @@ public interface CrawlService {
 	public void setLatestArticles(List<Article> latestArticles);
 
 	public List<Article> getLatestArticles();
+
+	public void setCrawlUnderBound(int bound);
 }

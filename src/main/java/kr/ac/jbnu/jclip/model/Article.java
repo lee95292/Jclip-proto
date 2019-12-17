@@ -45,7 +45,7 @@ public class Article {
 	@Column(name = "article_name")
 	private String articleName;
 
-	@Column(name = "article_content", length = 2048)
+	@Column(name = "article_content", length = 1048576)
 	private String articleContent;
 
 	@Column(name = "article_href")

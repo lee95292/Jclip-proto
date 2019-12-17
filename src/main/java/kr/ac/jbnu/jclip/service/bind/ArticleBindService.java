@@ -27,6 +27,10 @@ public class ArticleBindService {
     public boolean isMatchKeyword(Keyword keyword, Article article) {
         String word = keyword.getWord();
 
+        if (keyword.getHostName() != article.getHostName()) {
+            return false;
+        }
+
         if (article.getArticleContent().contains(word)) {
             return true;
         } else if (article.getArticleName().contains(word)) {

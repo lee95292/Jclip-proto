@@ -50,6 +50,13 @@ class ClipGroup extends React.Component {
   }
   componentDidMount() {
     getArticles();
+    getKeywords();
+  }
+}
+
+class Keyword extends React.Component {
+  render() {
+    return <div className="keyword"></div>;
   }
 }
 
@@ -62,8 +69,23 @@ function getArticles() {
   }
 
   axios.get(requestURL).then(res => {
+    console.log("--clipGroup.getArtricles---");
     console.log(res.status);
-    console.log(requestURL);
+    console.log(res);
+  });
+}
+
+function getKeywords() {
+  var token = localStorage.getItem("token");
+  var requestURL = "keyword?token=" + token;
+
+  if (!token) {
+    return;
+  }
+
+  axios.get(requestURL).then(res => {
+    console.log("--clipGroup.getKeywords---");
+    console.log(res.status);
     console.log(res);
   });
 }
