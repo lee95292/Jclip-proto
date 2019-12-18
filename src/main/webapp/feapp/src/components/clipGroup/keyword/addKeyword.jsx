@@ -22,6 +22,7 @@ class AddKeyword extends React.Component {
     axios.get(requsetURL).then(res => {
       if (res.status == 200) {
         console.log(item + "added");
+        console.log(res.data);
         document.getElementById("addWord").value = "";
       }
       //keyword group의 keywords 변수 변경하는 방법

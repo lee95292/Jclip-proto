@@ -4,6 +4,8 @@ import "./navStyle.css";
 import About from "components/contents/about.jsx";
 import App from "App";
 import AuthProvider from "components/auth/signin/authProvider.js";
+import ArticleGroup from "components/articleGroup/articleGroup.jsx";
+import ClipGroup from "components/clipGroup/clipGroup.jsx";
 /**
  *  props of nav-item
  *  1. navItem order
@@ -40,6 +42,8 @@ class Navbar extends React.Component {
 
         <Route exact path="/" component={App} />
         <Route exact path="/about" component={About} />
+        <Route exact path="/clips" component={ClipGroup} />
+        <Route exact path="/articles" component={ArticleGroup} />
       </BrowserRouter>
     );
   }

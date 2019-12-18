@@ -19,7 +19,7 @@ public class ClipService {
 	}
 
 	@Transactional
-	public void addKeyword(User user, String hostname, String word) {
+	public Keyword addKeyword(User user, String hostname, String word) {
 		// 유효 문자열 체크 : controller
 		Keyword keyword = keywordRepository.findByHostNameAndWord(hostname, word);
 
@@ -28,6 +28,8 @@ public class ClipService {
 			keywordRepository.save(keyword);
 		}
 		user.addKeyword(keyword);
+
+		return keyword;
 	}
 
 	public void removeKeyword(User user, String hostname, String word) {

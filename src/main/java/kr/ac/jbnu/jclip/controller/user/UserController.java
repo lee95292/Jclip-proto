@@ -5,9 +5,9 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import kr.ac.jbnu.jclip.config.auth.jwt.JwtUtil;
 import kr.ac.jbnu.jclip.model.Article;
@@ -15,7 +15,7 @@ import kr.ac.jbnu.jclip.model.Keyword;
 import kr.ac.jbnu.jclip.model.User;
 import kr.ac.jbnu.jclip.service.user.UserService;
 
-@Controller
+@RestController
 public class UserController {
 
 	UserService userService;
@@ -33,14 +33,7 @@ public class UserController {
 		if (user == null) {
 			return null;
 		}
-
 		return user.getArticles();
-	}
-
-	@GetMapping(value = "/token")
-	public String getToken(@RequestParam("token") String token, HttpServletResponse response) throws IOException {
-		response.setHeader("token", token);
-		return "index";
 	}
 
 	@GetMapping(value = "/user/keyword")

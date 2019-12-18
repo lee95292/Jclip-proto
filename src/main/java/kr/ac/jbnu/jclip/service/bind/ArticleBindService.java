@@ -28,7 +28,7 @@ public class ArticleBindService {
             String content = article.getArticleContent() + title;
             for (Keyword keyword : bindingKeys) {
                 /**
-                 * Keyword와 Article이 String match
+                 * Keyword와 Article이 String match keyword에 article들 bind할지 user에 bind할지 고민해보기
                  */
                 if (content.contains(keyword.getWord())) {
                     System.out.println("ArticleBindService matching debug Keyword:" + keyword.getWord() + "And Article:"
@@ -36,6 +36,19 @@ public class ArticleBindService {
                     for (User user : keyword.getUsers()) {
                         user.addArticle(article);
                     }
+                }
+            }
+        }
+    }
+
+    public void bindKeywordAndLatestArticle(List<Article> latestArticle, Keyword keyword) {
+        System.out.println("bindKeywordAndLatestArticle debug" + latestArticle.size());
+        for (Article article : latestArticle) {
+            String title = article.getArticleName();
+            String content = article.getArticleContent() + title;
+            if (content.contains(keyword.getWord())) {
+                for (User user : keyword.getUsers()) {
+                    user.addArticle(article);
                 }
             }
         }

@@ -46,7 +46,8 @@ public class ArticleBindController {
             System.out.println("ArticleBindController debug: user null");
             return null;
         }
-        clipService.addKeyword(user, hostname, word);
+        ArticleBindService.bindKeywordAndLatestArticle(CrawlerGroup.getLatestArticles(hostname),
+                clipService.addKeyword(user, hostname, word));
         return user.getKeywords();
     }
 

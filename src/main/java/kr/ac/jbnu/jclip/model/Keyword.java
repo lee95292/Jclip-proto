@@ -42,7 +42,7 @@ public class Keyword {
 	// TODO cascade 위험성 체크하고 refactor 하기. 성능저하 우려
 	@Builder.Default
 	@JsonBackReference
-	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "keywords")
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "keywords")
 	private List<User> users = new ArrayList<User>();
 
 	@Override

@@ -1,15 +1,16 @@
 package kr.ac.jbnu.jclip.service.user;
 
-import java.util.Optional;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.transaction.Transactional;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Service;
 
 import kr.ac.jbnu.jclip.config.auth.jwt.JwtUtil;
+import kr.ac.jbnu.jclip.model.Article;
+import kr.ac.jbnu.jclip.model.Keyword;
 import kr.ac.jbnu.jclip.model.User;
 import kr.ac.jbnu.jclip.model.UserConnection;
 import kr.ac.jbnu.jclip.repository.KeywordRepository;

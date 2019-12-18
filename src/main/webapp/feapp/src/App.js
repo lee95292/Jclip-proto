@@ -4,13 +4,16 @@
  */
 import React from "react";
 import "./App.css";
-import ClipGroup from "components/clipGroup/clipGroup.jsx";
+// import ClipGroup from "components/clipGroup/clipGroup.jsx";
+import About from "components/contents/about.jsx";
+import ArticleGroup from "components/articleGroup/articleGroup.jsx";
 
 class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <ClipGroup />
+        <About />
+        <ArticleGroup />
       </div>
     );
   }

@@ -120,7 +120,7 @@ public class JBNUMainCrawlService implements CrawlService {
 
 	@Override
 	public void setLatestArticles(List<Article> latestArticles) {
-		this.latestArticles = latestArticles;
+		this.latestArticles.addAll(latestArticles);
 	}
 
 	@Override
