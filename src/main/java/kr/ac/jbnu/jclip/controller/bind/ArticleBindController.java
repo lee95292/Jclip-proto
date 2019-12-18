@@ -13,6 +13,7 @@ import kr.ac.jbnu.jclip.model.User;
 import kr.ac.jbnu.jclip.service.bind.ArticleBindService;
 import kr.ac.jbnu.jclip.service.clip.ClipService;
 import kr.ac.jbnu.jclip.service.user.UserService;
+import kr.ac.jbnu.jclip.util.CrawlerGroup;
 
 @RestController
 public class ArticleBindController {
@@ -29,31 +30,17 @@ public class ArticleBindController {
         this.clipService = clipService;
     }
 
-    @GetMapping(value = "keyword")
-    public List<Keyword> getUserKeyword(@RequestParam("token") String token) {
-        User user = getUserByToken(token);
-        if (user == null) {
-            return null;
-        }
-
-        return user.getKeywords();
-    }
-
+    // 호스트별로 최신 아티클 로드
     @GetMapping(value = "/article")
-    public List<Article> getBindedArticle(@RequestParam("token") String token) {
-        User user = getUserByToken(token);
-
-        if (user == null) {
-            return null;
-        }
-
-        return user.getArticles();
+    public List<Article> getLatestArticle(@RequestParam("hostname") String hostname) {
+        return CrawlerGroup.getLatestArticles(hostname);
     }
 
+    // 키워드 추가 요청 받는 컨트롤러
     @GetMapping(value = "/bind")
     public List<Keyword> bindUserKeyword(@RequestParam("keyword") String word, @RequestParam("token") String token,
             @RequestParam("hostname") String hostname) {
-        User user = getUserByToken(token);
+        User user = userService.getUserByToken(token);
 
         if (user == null) {
             System.out.println("ArticleBindController debug: user null");
@@ -61,15 +48,6 @@ public class ArticleBindController {
         }
         clipService.addKeyword(user, hostname, word);
         return user.getKeywords();
-    }
-
-    private User getUserByToken(String token) {
-        String email = jwtUtil.getUserId(token);
-        if (email == null) {
-            return null;
-        }
-
-        return userService.getUserByUserEmail(email);
     }
 
 }

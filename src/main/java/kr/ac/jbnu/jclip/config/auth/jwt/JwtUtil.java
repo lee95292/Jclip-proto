@@ -8,6 +8,7 @@ import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -24,9 +25,7 @@ import kr.ac.jbnu.jclip.service.user.UserService;
 import kr.ac.jbnu.jclip.social.SocialService;
 import lombok.RequiredArgsConstructor;
 
-@RequiredArgsConstructor
 @Component
-@Repository
 public class JwtUtil { // JWT 토큰을 생성 및 검증 모듈
 
     @Value("${jwt.secret}")
@@ -34,8 +33,15 @@ public class JwtUtil { // JWT 토큰을 생성 및 검증 모듈
     private byte[] secretByte;
     private final long tokenValidMilisecond = 1000L * 60 * 60; // 1시간만 토큰 유효
     // private final String tokenType = "Bearer ";
-    private final UserService userService;
-    private final SocialService socialService;
+
+    private UserService userService;
+    private SocialService socialService;
+
+    @Lazy // TODO : UserService와의 순환참조. **UTIL은 static으로!!
+    JwtUtil(UserService userService, SocialService socialService) {
+        this.userService = userService;
+        this.socialService = socialService;
+    }
 
     @PostConstruct
     protected void init() {

@@ -23,7 +23,6 @@ import lombok.AllArgsConstructor;
 public class SocialService {
 
     private final UserService userService;
-    private final UserRepository userRepository;
 
     public UsernamePasswordAuthenticationToken doAuthentication(UserConnection userConnection) {
 

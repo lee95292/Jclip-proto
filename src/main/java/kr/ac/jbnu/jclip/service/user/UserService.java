@@ -5,9 +5,11 @@ import java.util.Optional;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Service;
 
+import kr.ac.jbnu.jclip.config.auth.jwt.JwtUtil;
 import kr.ac.jbnu.jclip.model.User;
 import kr.ac.jbnu.jclip.model.UserConnection;
 import kr.ac.jbnu.jclip.repository.KeywordRepository;
@@ -15,11 +17,17 @@ import kr.ac.jbnu.jclip.repository.UserRepository;
 
 @Service
 public class UserService {
-	@Autowired
 	UserRepository userRepository;
 
-	@Autowired
-	KeywordRepository keywordRepository;
+	private KeywordRepository keywordRepository;
+
+	private JwtUtil jwtUtil;
+
+	UserService(UserRepository userRepository, KeywordRepository keywordRepository, JwtUtil jwtUtil) {
+		this.userRepository = userRepository;
+		this.keywordRepository = keywordRepository;
+		this.jwtUtil = jwtUtil;
+	}
 
 	public User signUp(UserConnection userConnection) {
 		final User user = User.signUp(userConnection);
@@ -62,4 +70,12 @@ public class UserService {
 		return userRepository.findUserByUserEmail(userEmail);
 	}
 
+	public User getUserByToken(String token) {
+		String email = jwtUtil.getUserId(token);
+		if (email == null) {
+			return null;
+		}
+
+		return getUserByUserEmail(email);
+	}
 }

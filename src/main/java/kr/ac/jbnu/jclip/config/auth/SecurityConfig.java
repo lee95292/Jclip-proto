@@ -56,8 +56,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 		http.csrf().disable();
-		http.authorizeRequests().antMatchers("/static/**", "/", "/token", "/article", "/bind", "/keyword").permitAll()
-				.requestMatchers(CorsUtils::isPreFlightRequest).permitAll().and().authorizeRequests()
+
+		// TODO - 인증권한 모두 풀려있음.
+		http.authorizeRequests().antMatchers("/static/**", "/", "/token", "/article", "/bind", "/keyword", "/user/**")
+				.permitAll().requestMatchers(CorsUtils::isPreFlightRequest).permitAll().and().authorizeRequests()
 				.antMatchers("/servie/**").authenticated().and()
 				.addFilterBefore(jwtAuthenticationFilter(), BasicAuthenticationFilter.class);
 

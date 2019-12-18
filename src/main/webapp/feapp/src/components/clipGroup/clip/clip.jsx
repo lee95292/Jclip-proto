@@ -4,7 +4,7 @@ import React from "react";
 class Clip extends React.Component {
   render() {
     return (
-      <div>
+      <div className="clip">
         <p>{this.props.order}</p>
         <a href={this.props.link} target="_blank">
           {this.props.title} <button>CLIP!</button>
