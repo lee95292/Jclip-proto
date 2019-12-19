@@ -68,7 +68,7 @@ public class JBNUMainCrawlService implements CrawlService {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return LatestNumber == null ? crawlUnderBound : Integer.parseInt(LatestNumber.text());
+		return LatestNumber == null ? crawlUnderBound : Integer.parseInt(LatestNumber.text()) + 1;
 	}
 
 	// private boolean
@@ -120,7 +120,7 @@ public class JBNUMainCrawlService implements CrawlService {
 
 	@Override
 	public void setLatestArticles(List<Article> latestArticles) {
-		this.latestArticles.addAll(latestArticles);
+		this.latestArticles = latestArticles;
 	}
 
 	@Override

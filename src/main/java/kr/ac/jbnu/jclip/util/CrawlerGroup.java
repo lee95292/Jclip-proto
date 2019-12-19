@@ -28,9 +28,8 @@ public enum CrawlerGroup {
     }
 
     public static void setLatestArticles(String hostName, List<Article> latestArticles) {
-        getCrawlServiceByHostName(hostName).setLatestArticles(latestArticles);
-        if (getCrawlServiceByHostName(hostName) == null || latestArticles == null || latestArticles.size() == 0) {
-        }
+        getCrawlServiceByHostName(hostName).getLatestArticles().addAll(latestArticles);
+
     }
 
     public static List<Article> getLatestArticles(String hostName) {

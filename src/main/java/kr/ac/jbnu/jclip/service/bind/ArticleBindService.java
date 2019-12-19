@@ -3,6 +3,8 @@ package kr.ac.jbnu.jclip.service.bind;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.stereotype.Service;
 
 import kr.ac.jbnu.jclip.model.Article;
@@ -20,6 +22,7 @@ public class ArticleBindService {
         this.keywordRepository = keywordRepository;
     }
 
+    @Transactional
     public void bindAllKeywordAndLatestArticle(List<Article> articles, String hostname) {
         List<Keyword> bindingKeys = keywordRepository.findByHostName(hostname);
 
@@ -33,35 +36,21 @@ public class ArticleBindService {
                 if (content.contains(keyword.getWord())) {
                     System.out.println("ArticleBindService matching debug Keyword:" + keyword.getWord() + "And Article:"
                             + article.getArticleName());
-                    for (User user : keyword.getUsers()) {
-                        user.addArticle(article);
-                    }
+                    keyword.addArticle(article);
                 }
             }
         }
     }
 
+    @Transactional
     public void bindKeywordAndLatestArticle(List<Article> latestArticle, Keyword keyword) {
         System.out.println("bindKeywordAndLatestArticle debug" + latestArticle.size());
         for (Article article : latestArticle) {
             String title = article.getArticleName();
             String content = article.getArticleContent() + title;
             if (content.contains(keyword.getWord())) {
-                for (User user : keyword.getUsers()) {
-                    user.addArticle(article);
-                }
+                keyword.addArticle(article);
             }
-        }
-    }
-
-    public void bindKeywordArtile(Keyword keyword, Article article) {
-        if (!isMatchKeyword(keyword, article)) {
-            return;
-        }
-
-        List<User> users = keyword.getUsers();
-        for (User user : users) {
-            user.addArticle(article);
         }
     }
 

@@ -13,6 +13,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import org.hibernate.annotations.CreationTimestamp;
 
 import lombok.AllArgsConstructor;
@@ -45,21 +47,24 @@ public class Article {
 	@Column(name = "article_name")
 	private String articleName;
 
-	@Column(name = "article_content", length = 1048576)
+	@Column(name = "article_content", length = 5120)
 	private String articleContent;
 
 	@Column(name = "article_href")
 	private String articleHyperlink;
 
 	@Builder.Default
-	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "articles")
-	private List<User> users = new ArrayList<User>();
+	@JsonBackReference
+	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "articles")
+	private List<Keyword> keywords = new ArrayList<Keyword>();
 
-	@Override
-	public String toString() {
+	// @Override
+	// public String toString() {
 
-		return "articleNumber:[" + articleNumber + "] creationTime[" + creationTime + "] hostName[" + hostName
-				+ "] articleName[" + articleName + "] articleContent[" + articleContent + "]";
-	}
+	// return "articleNumber:[" + articleNumber + "] creationTime[" + creationTime +
+	// "] hostName[" + hostName
+	// + "] articleName[" + articleName + "] articleContent[" + articleContent +
+	// "]";
+	// }
 
 }

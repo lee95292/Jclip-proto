@@ -10,9 +10,12 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -42,8 +45,13 @@ public class Keyword {
 	// TODO cascade 위험성 체크하고 refactor 하기. 성능저하 우려
 	@Builder.Default
 	@JsonBackReference
-	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "keywords")
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "keywords")
 	private List<User> users = new ArrayList<User>();
+
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JsonManagedReference
+	@JoinTable(name = "tbl_keyword_article", joinColumns = @JoinColumn(name = "KEYWORD_ID"), inverseJoinColumns = @JoinColumn(name = "ARTICLE_ID"))
+	private List<Article> articles = new ArrayList<Article>();
 
 	@Override
 	public String toString() {
@@ -56,5 +64,11 @@ public class Keyword {
 
 	public void addUser(User user) {
 		this.users.add(user);
+	}
+
+	public void addArticle(Article article) {
+		if (!this.articles.contains(article)) {
+			this.articles.add(article);
+		}
 	}
 }

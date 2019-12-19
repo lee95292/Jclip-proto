@@ -5,11 +5,14 @@ class Article extends React.Component {
   render() {
     return (
       <div className="article">
-        <p>{this.props.order}</p>
+        <p>
+          {this.props.number}_{this.props.hostName}
+          <sub>{this.props.creationTime}</sub>
+        </p>
         <a href={this.props.link} target="_blank">
-          {this.props.title} <button>CLIP!</button>
+          {this.props.articleName} <button>CLIP!</button>
         </a>
-        <div className="class">{this.props.snippet}</div>
+        <div className="class">{this.props.articleContent}</div>
       </div>
     );
   }

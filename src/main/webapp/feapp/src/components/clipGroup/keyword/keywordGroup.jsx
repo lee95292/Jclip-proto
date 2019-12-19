@@ -6,12 +6,23 @@ import Keyword from "./keyword.jsx";
 let keywords = [];
 
 class KeywordGroup extends React.Component {
+  constructor(props) {
+    super(props);
+    keywords = [];
+    this.state = { data: false };
+    this.removeKeyword = this.removeKeyword.bind(this);
+  }
   render() {
     return (
       <div className="keywordGroup">
         {keywords.map(keyword => {
           console.log(keyword);
-          return <Keyword word={keyword.word} hostname={keyword.hostName} />;
+          return (
+            <div>
+              <Keyword word={keyword.word} hostname={keyword.hostName} />
+              <button onClick={this.removeKeyword}>remove</button>
+            </div>
+          );
         })}
         <AddKeyword />
       </div>
@@ -19,24 +30,41 @@ class KeywordGroup extends React.Component {
   }
 
   componentDidMount() {
-    getKeywords();
+    var token = localStorage.getItem("token");
+    var requestURL = "/user/keyword?token=" + token;
+
+    if (!token) {
+      return;
+    }
+
+    axios.get(requestURL).then(res => {
+      console.log("--clipGroup.getKeywords---");
+      console.log(typeof res.data);
+      console.log(res.data);
+      keywords = res.data;
+    });
+    this.setState({ data: true });
+    this.setState({ data: false });
   }
-}
 
-function getKeywords() {
-  var token = localStorage.getItem("token");
-  var requestURL = "/user/keyword?token=" + token;
+  removeKeyword() {
+    var token = localStorage.getItem("token");
+    var requestURL =
+      "/user/removekey?token=" + token + "&hostname=jbnu_main&word=test";
 
-  if (!token) {
-    return;
+    if (!token) {
+      return;
+    }
+
+    axios.get(requestURL).then(res => {
+      console.log("--clipGroup.removeKeywords---");
+      console.log(typeof res.data);
+      console.log(res.data);
+      keywords = res.data;
+    });
+    this.setState({ data: true });
+    this.setState({ data: false });
   }
-
-  axios.get(requestURL).then(res => {
-    console.log("--clipGroup.getKeywords---");
-    console.log(typeof res.data);
-    console.log(res.data);
-    keywords = res.data;
-  });
 }
 
 export default KeywordGroup;

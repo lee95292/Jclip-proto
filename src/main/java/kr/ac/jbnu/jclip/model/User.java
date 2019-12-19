@@ -57,10 +57,11 @@ public class User {
 	@JoinTable(name = "tbl_user_keyword", joinColumns = @JoinColumn(name = "USER_ID"), inverseJoinColumns = @JoinColumn(name = "KEYWORD_ID"))
 	private List<Keyword> keywords = new ArrayList<Keyword>();
 
-	@ManyToMany(fetch = FetchType.LAZY)
-	@JsonManagedReference
-	@JoinTable(name = "tbl_user_article", joinColumns = @JoinColumn(name = "USER_ID"), inverseJoinColumns = @JoinColumn(name = "ARTICLE_ID"))
-	private List<Article> articles = new ArrayList<Article>();
+	// @ManyToMany(fetch = FetchType.LAZY)
+	// @JsonManagedReference
+	// @JoinTable(name = "tbl_user_article", joinColumns = @JoinColumn(name =
+	// "USER_ID"), inverseJoinColumns = @JoinColumn(name = "ARTICLE_ID"))
+	// private List<Article> articles = new ArrayList<Article>();
 
 	@Builder
 	private User(String userEmail, String userName, UserConnection social) {
@@ -87,10 +88,12 @@ public class User {
 		}
 	}
 
-	public void addArticle(Article article) {
-		if (!this.articles.contains(article)) {
-			this.articles.add(article);
+	public List<Article> getArticles() {
+		List<Article> total = new ArrayList<Article>();
+		for (Keyword keyword : this.keywords) {
+			total.addAll(keyword.getArticles());
 		}
+		return total;
 	}
 
 }

@@ -44,6 +44,7 @@ public class CrawlDataLoader {
 		System.out.println("CrawlDataLoader.periodicalDataLoader executed");
 		for (CrawlerGroup unit : CrawlerGroup.values()) {
 			List<Article> latestArticles = unit.getCrawlService().crawlLatestArticles();
+			System.out.println(latestArticles.size());
 			articleRepository.saveAll(latestArticles);
 			CrawlerGroup.setLatestArticles(unit.getHostName(), latestArticles);
 			articleBindService.bindAllKeywordAndLatestArticle(latestArticles, unit.getHostName());
